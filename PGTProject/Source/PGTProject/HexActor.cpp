@@ -10,8 +10,9 @@ AHexActor::AHexActor()
 
 }
 
+
 template <typename Number>
-struct _Hex { // Both storage types, both constructors
+struct _Hex {
 	union {
 		const Number v[3];
 		struct { const Number q, r, s; };
@@ -22,10 +23,20 @@ struct _Hex { // Both storage types, both constructors
 };
 typedef _Hex<int> Hex;
 
+bool operator == (Hex a, Hex b) {
+	return a.q == b.q && a.r == b.r && a.s == b.s;
+}
+
+bool operator != (Hex a, Hex b) {
+	return !(a == b);
+}
+
 // Called when the game starts or when spawned
 void AHexActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Hex hex = Hex(0, 0);
 }
 
 // Called every frame

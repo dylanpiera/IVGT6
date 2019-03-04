@@ -2,10 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-
-#include "assert.h"
-
 #include "GameFramework/Actor.h"
 #include "HexActor.generated.h"
 
@@ -24,7 +20,7 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float deltaTime) override;
 
 	template <typename Number>
 	struct _Hex {
@@ -33,7 +29,7 @@ public:
 			struct { const Number q, r, s; };
 		};
 
-		_Hex(Number q_, Number r_);
-		_Hex(Number q_, Number r_, Number s_);
+		_Hex(Number q, Number r);
+		_Hex(Number q, Number r, Number s);
 	};
 };

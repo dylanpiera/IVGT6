@@ -1,8 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#define _USE_MATH_DEFINES
+
 #include "HexActor.h"
 #include <cassert>
 #include <vector>
+#include <cmath>
 
 // Sets default values
 AHexActor::AHexActor()
@@ -148,7 +151,7 @@ FIntPoint hex_to_pixel(const LayoutHelper::Layout layout, const Hex h)
 	const LayoutHelper::Orientation& m = layout._orientation;
 	const double x = (m._f0 * h.q + m._f1 * h.r) * layout._size.X;
 	const double y = (m._f2 * h.q + m._f3 * h.r) * layout._size.Y;
-	return FIntPoint(layout._origin.X + x, layout._origin.Y + y);
+	return FIntPoint(x + layout._origin.X, y + layout._origin.Y);
 }
 
 FractionalHex pixel_to_hex(const LayoutHelper::Layout layout, const FIntPoint p)
@@ -159,6 +162,24 @@ FractionalHex pixel_to_hex(const LayoutHelper::Layout layout, const FIntPoint p)
 	const double q = m._b0 * pt.X + m._b1 * pt.Y;
 	const double r = m._b2 * pt.X + m._b3 * pt.Y;
 	return { q, r, -q - r };
+}
+
+FIntPoint hex_corner_offset(const LayoutHelper::Layout layout, const int corner) {
+	const FIntPoint size = layout._size;
+	const double angle = 2.0 * M_PI *
+		(layout._orientation._startAngle + corner) / 6;
+	return FIntPoint(size.X * cos(angle), size.Y * sin(angle));
+}
+
+std::vector<FIntPoint> polygon_corners(const LayoutHelper::Layout layout, const Hex h) {
+	std::vector<FIntPoint> corners = {};
+	const FIntPoint center = hex_to_pixel(layout, h);
+	for (int i = 0; i < 6; i++) {
+		const FIntPoint offset = hex_corner_offset(layout, i);
+		corners.emplace_back(center.X + offset.X,
+			center.Y + offset.Y);
+	}
+	return corners;
 }
 
 #pragma endregion Drawing

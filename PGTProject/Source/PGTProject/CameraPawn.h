@@ -32,31 +32,37 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY()
-		USceneComponent* RootScene;
+	USceneComponent* RootScene;
 
 
-		USpringArmComponent* SpringArm;
+	USpringArmComponent* SpringArm;
 
 
-		UCameraComponent* CameraComp;
+	UCameraComponent* CameraComp;
 
 
-		APlayerController* PC;
+	APlayerController* PC;
 
-		float margin = 15;
-
-
-		int32 screenSizeX;
+	float margin = 15;
 
 
-		int32 screenSizeY;
+	int32 screenSizeX;
 
 
-		float camSpeed = 3;
+	int32 screenSizeY;
+
+
+	float camSpeed = 3;
+
+	float mouseAxisValue;
 	
 
 	UFUNCTION()
 	FVector GetCameraPanDirection();
+
+	void CameraZoom(float axisValue);
+
+
 
 	
 	

@@ -19,6 +19,8 @@ ACameraPawn::ACameraPawn()
 	SpringArm->bDoCollisionTest = false;
 	SpringArm->SetRelativeRotation(FRotator(-50, 0, 0));
 
+	SpringArm->TargetArmLength = 200;
+
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComp->SetupAttachment(SpringArm);
 }
@@ -38,7 +40,6 @@ void ACameraPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AddActorWorldOffset(GetCameraPanDirection() * camSpeed);
-
 }
 
 // Called to bind functionality to input
@@ -46,6 +47,8 @@ void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	//MouseWheel input
+	InputComponent->BindAxis("MouseWheelAxis", this, &ACameraPawn::CameraZoom);
 }
 
 FVector ACameraPawn::GetCameraPanDirection()
@@ -83,4 +86,18 @@ FVector ACameraPawn::GetCameraPanDirection()
 
 	return FVector(camDirectionX, camDirectionY, 0);
 }
+
+void ACameraPawn::CameraZoom(float axisValue)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%f"), axisValue);
+
+	//ZoomIn
+	if(axisValue > 0)
+		SpringArm->TargetArmLength -= 25;
+
+	//ZoomOut
+	if (axisValue < 0)
+		SpringArm->TargetArmLength += 25;
+}
+
 

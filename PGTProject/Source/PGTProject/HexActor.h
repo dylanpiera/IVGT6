@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "LayoutHelper.h"
+#include "IntPoint.h"
 #include "GameFramework/Actor.h"
 #include "HexActor.generated.h"
 

@@ -2,14 +2,13 @@
 
 #include "Graph.h"
 
-class AHexActor{};
-
-class Node {
-
-};
-
-Graph::Graph()
+Graph::Graph(vector<AHexActor*> hexTiles)
 {
+	for (auto hexTile : hexTiles) {
+		Node newNode = Node(hexTile);
+		// Add newNodeNeighbours
+		nodes.push_back(newNode);
+	}
 }
 
 Graph::~Graph()

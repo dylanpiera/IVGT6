@@ -41,7 +41,6 @@ void Pathfinding::AStarPathfinding(Node startNode, Node targetNode) {
 			}
 		}
 	}
-
 }
 
 bool Pathfinding::IsShortestPath(Node node, vector<Node> open) {
@@ -120,6 +119,7 @@ int Pathfinding::HCost(Node node, Node targetNode) { // Cost from the end node (
 
 int Pathfinding::FCost(Node node, Node targetNode) { // Total cost
 	return GCost(node) + HCost(node, targetNode);
+
 }
 
 Pathfinding::~Pathfinding()

@@ -5,7 +5,7 @@
 #include "HexActor.h"
 #include <cassert>
 #include <vector>
-#include <math.h>
+#include <math.h>  // NOLINT(modernize-deprecated-headers)
 
 // Sets default values
 AHexActor::AHexActor()

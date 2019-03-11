@@ -43,7 +43,7 @@ public:
 
 	APlayerController* PC;
 
-	float margin = 15;
+	float margin;
 
 
 	int32 screenSizeX;
@@ -55,12 +55,18 @@ public:
 	float camSpeed = 3;
 
 	float mouseAxisValue;
+
+	float rotation;
 	
 
 	UFUNCTION()
-	FVector GetCameraPanDirection();
+	void GetCameraPanDirection();
 
 	void CameraZoom(float axisValue);
+
+	void CameraRotationLeft(float axisValue);
+
+	void CameraRotationRight(float axisValue);
 
 
 

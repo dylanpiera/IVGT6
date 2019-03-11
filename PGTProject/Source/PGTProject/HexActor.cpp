@@ -5,7 +5,7 @@
 #include "HexActor.h"
 #include <cassert>
 #include <vector>
-#include <cmath>
+#include <math.h>
 
 // Sets default values
 AHexActor::AHexActor()

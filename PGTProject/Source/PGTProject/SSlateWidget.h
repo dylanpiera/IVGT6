@@ -1,8 +1,6 @@
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
-#include "Slate.h"
 #include "GameHUD.h"
 
 class PGTPROJECT_API SSlateWidget : public SCompoundWidget
@@ -21,6 +19,6 @@ public:
 
 private:
 
-	//Pointer to parent HUD, Weak allows to control HUD elsewhere
+	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 };

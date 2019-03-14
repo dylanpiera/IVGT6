@@ -4,14 +4,17 @@
 #include "Engine.h"
 #include "Engine/GameViewportClient.h"
 
+/*
+ * Adds SSlateWidget to HUD at start of game
+ */
 void AGameHUD::BeginPlay()
 {
+	//set widget's HUD to current HUD
 	_uiWidget = SNew(SSlateWidget).OwnerHUDArg(this);
 	
-	// Pass our viewport a weak ptr to our widget
-	// Viewport's weak ptr will not give Viewport ownership of Widget
+	// Pass widget to viewport
 	GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(_uiWidget.ToSharedRef()));
 
-	// Set widget's properties as visible (sets child widget's properties recursively)
+	// Set widget visible
 	_uiWidget->SetVisibility(EVisibility::Visible);
 }

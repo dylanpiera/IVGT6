@@ -1,5 +1,4 @@
 #include "SSlateWidget.h"
-#include "PGTProject.h"
 #include "SlateOptMacros.h"
 
 //Needed for location macro LOCTEXT
@@ -7,18 +6,24 @@
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
+/*
+ * Creates elements on the the HUD
+ */
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
-	//Assign argument to local variable
+	//Retrieve argument
 	_ownerHUD = InArgs._OwnerHUDArg;
 
+	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[
+		//Creates new overlay in slot
 		SNew(SOverlay)
 		+ SOverlay::Slot()
 		.VAlign(VAlign_Top)
 		.HAlign(HAlign_Center)
 		[
+			//Text block properties in overlay
 			SNew(STextBlock)
 			.ShadowColorAndOpacity(FLinearColor::Black)
 			.ColorAndOpacity(FLinearColor::Red)

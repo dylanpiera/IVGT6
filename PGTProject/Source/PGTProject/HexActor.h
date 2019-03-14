@@ -42,7 +42,7 @@ public:
 		_Hex(Number q, Number r) : v{ q, r, -q - r } {}
 		_Hex(Number q, Number r, Number s) : v{ q, r, s } {}
 
-#pragma region Operators
+	#pragma region Operators
 		/**
 		 * \brief
 		 * Checks if a hex is equal to another hex based on its coordinates on the hex grid.
@@ -84,9 +84,9 @@ public:
 	};
 
 	/**
- * \brief
- * A Hex with Grid Coordinates
- */
+	 * \brief
+	 * A Hex with Grid Coordinates
+	 */
 	typedef _Hex<int, 1> Hex;
 	typedef _Hex<int, 0> HexDifference;
 	typedef _Hex<double, 1> FractionalHex;

@@ -17,19 +17,16 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[
-		//Creates new overlay in slot
+		//Creates new overlay in slot, each + SOverlay adds a new slot that contains a component
 		SNew(SOverlay)
 		+ SOverlay::Slot()
-		.VAlign(VAlign_Top)
+		.VAlign(VAlign_Center)
 		.HAlign(HAlign_Center)
 		[
-			//Text block properties in overlay
-			SNew(STextBlock)
-			.ShadowColorAndOpacity(FLinearColor::Black)
-			.ColorAndOpacity(FLinearColor::Red)
-			.ShadowOffset(FIntPoint(-1,1))
-			.Font(FSlateFontInfo("Verdana", 16))
-			.Text(LOCTEXT("HelloSlateText", "Hello Slate!"))
+			//Adds button
+			SNew(SButton)
+			.ButtonColorAndOpacity(FLinearColor::Black)
+			.ButtonColorAndOpacity(FLinearColor::Blue)
 		]
 	];
 }

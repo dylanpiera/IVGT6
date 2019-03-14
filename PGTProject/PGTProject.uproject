@@ -7,7 +7,12 @@
 		{
 			"Name": "PGTProject",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"Slate",
+				"SlateCore"
+			]
 		}
 	]
 }

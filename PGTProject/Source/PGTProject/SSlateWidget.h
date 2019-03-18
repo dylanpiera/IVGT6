@@ -17,8 +17,14 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
+	//Declaring button function
+	FReply buttonTest();
+
 private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
+
+	//Declaring button
+	TSharedPtr<SButton> _colourButton;
 };

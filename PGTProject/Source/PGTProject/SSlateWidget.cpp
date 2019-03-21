@@ -20,8 +20,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		SNew(SOverlay)
 		+ SOverlay::Slot()
 		//Vertical and Horizontal alignment of slot
-		.VAlign(VAlign_Center)
-		.HAlign(HAlign_Center)
+		.VAlign(VAlign_Bottom)
+		.HAlign(HAlign_Left)
 		[
 			//Adds button
 			SAssignNew(_colourButton,SButton)

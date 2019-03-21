@@ -6,7 +6,9 @@
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 /*
+ * \brief
  * Creates elements on the the HUD
+ * \params
  */
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
@@ -32,10 +34,13 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		]
 	];
 }
-////Already given upon creation, needs to go immediately after Construct
+//Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-//Test function for the button of type FReply
+/*
+ * \brief
+ * Test function for the button of type FReply
+ */
 FReply SSlateWidget::buttonTest()
 {
 	//Add event here

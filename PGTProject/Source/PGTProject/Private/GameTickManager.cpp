@@ -81,9 +81,10 @@ void AGameTickManager::GameTickHour()
 //Manages the dayly tick
 void AGameTickManager::GameTickDay()
 {
-	dayName = days[dayOfWeek];
 	dayOfWeek++;
 	currentDay++;
+
+	dayName = days[dayOfWeek];
 
 	//keeps track on what day of the week it is
 	if(dayOfWeek > 6)

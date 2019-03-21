@@ -5,6 +5,7 @@
 #include "Engine/GameViewportClient.h"
 
 /*
+ * \brief
  * Adds SSlateWidget to HUD at start of game
  */
 void AGameHUD::BeginPlay()

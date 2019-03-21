@@ -40,6 +40,8 @@ void AGameTickManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	GameTick();
+
+	//logs. could be removed.
 	UE_LOG(LogTemp, Warning, TEXT("%d"), currentHour);
 	UE_LOG(LogTemp, Warning, TEXT("%d"), dayOfWeek);
 	UE_LOG(LogTemp, Warning, TEXT("%d"), currentDay);
@@ -52,6 +54,7 @@ void AGameTickManager::GameTick()
 	GameTickHour();
 }
 
+//managed the hourly tick
 void AGameTickManager::GameTickHour()
 {
 	UINT32 hourNow = currentHour;
@@ -75,17 +78,20 @@ void AGameTickManager::GameTickHour()
 
 
 //This is where the magic should happen!
+//Manages the dayly tick
 void AGameTickManager::GameTickDay()
 {
 	dayName = days[dayOfWeek];
 	dayOfWeek++;
 	currentDay++;
 
+	//keeps track on what day of the week it is
 	if(dayOfWeek > 6)
 	{
 		dayOfWeek = 0;
 	}
 
+	//keeps track of the day in the month and ticks when month is done.
 	if(currentDay > 29)
 	{
 		GameTickMonth();
@@ -99,6 +105,7 @@ void AGameTickManager::GameTickMonth()
 	currentMonth++;
 	monthName = months[currentMonth];
 
+	//keeps track if a year in months has passed.
 	if(currentMonth > 11)
 	{
 		GameTickYear();
@@ -106,6 +113,7 @@ void AGameTickManager::GameTickMonth()
 	}
 }
 
+//add years
 void AGameTickManager::GameTickYear()
 {
 	currentYear++;
@@ -117,10 +125,13 @@ void AGameTickManager::ResetTimer()
 	GetWorldTimerManager().ClearTimer(GameTickTimerHandle);
 }
 
+//set multiplier to 1
 void AGameTickManager::SetSpeedTimeOne() { timeMultiplier = 1; }
 
+//set multiplier to 2
 void AGameTickManager::SetSpeedTimeTwo() { timeMultiplier = 2; }
 
+//set multiplier to 4
 void AGameTickManager::SetSpeedTimeFour() { timeMultiplier = 4; }
 
 

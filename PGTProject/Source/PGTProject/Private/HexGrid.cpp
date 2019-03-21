@@ -35,14 +35,14 @@ void AHexGrid::Tick(float DeltaTime)
  * \brief Generates a Hexagonal grid of Hexes.
  * \param map_radius The radius from the center Hex.
  */
-//void AHexGrid:: GenerateGrid(int map_radius)
-//{
-//	std::unordered_set<AHexActor::Hex> map;
-//	for (int q = -map_radius; q <= map_radius; q++) {
-//		int r1 = FGenericPlatformMath::Max(-map_radius, -q - map_radius);
-//		int r2 = FGenericPlatformMath::Min(map_radius, -q + map_radius);
-//		for (int r = r1; r <= r2; r++) {
-//			map.insert(AHexActor::Hex(q, r, -q - r));
-//		}
-//	}
-//}
+/*void AHexGrid:: GenerateGrid(int map_radius)
+{
+	std::unordered_set<AHexActor::Hex> map;
+	for (int q = -map_radius; q <= map_radius; q++) {
+		int r1 = FGenericPlatformMath::Max(-map_radius, -q - map_radius);
+		int r2 = FGenericPlatformMath::Min(map_radius, -q + map_radius);
+		for (int r = r1; r <= r2; r++) {
+			map.insert(AHexActor::Hex(q, r, -q - r));
+		}
+	}
+}*/

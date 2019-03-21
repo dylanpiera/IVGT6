@@ -65,7 +65,7 @@ void AGameTickManager::GameTickHour()
 
 		//refactor for optimal use. Need buttons for this.
 		//GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, timer / timeMultiplier, false);
-		GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, 0.1f, false);
+		GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, 0.005f, false);
 		currentHour = hourNow;
 
 		if(currentHour > 23)
@@ -84,13 +84,12 @@ void AGameTickManager::GameTickDay()
 	dayOfWeek++;
 	currentDay++;
 
-	dayName = days[dayOfWeek];
-
 	//keeps track on what day of the week it is
 	if(dayOfWeek > 6)
 	{
 		dayOfWeek = 0;
 	}
+	dayName = days[dayOfWeek];
 
 	//keeps track of the day in the month and ticks when month is done.
 	if(currentDay > 29)
@@ -104,7 +103,6 @@ void AGameTickManager::GameTickDay()
 void AGameTickManager::GameTickMonth()
 {
 	currentMonth++;
-	monthName = months[currentMonth];
 
 	//keeps track if a year in months has passed.
 	if(currentMonth > 11)
@@ -112,6 +110,7 @@ void AGameTickManager::GameTickMonth()
 		GameTickYear();
 		currentMonth = 0;
 	}
+	monthName = months[currentMonth];
 }
 
 //add years

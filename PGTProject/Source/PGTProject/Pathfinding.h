@@ -3,25 +3,28 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Graph.h"
 #include "Node.h"
+#include "TestingTile.h"
 
-class PGTPROJECT_API Pathfinding
+class Pathfinding
 {
 private:
-	int GCost(Node node);
-	int HCost(Node node, Node targetNode);
-	int FCost(Node node, Node targetNode);
+	vector<Node*> open;
+	vector<Node*> closed;
+	vector<TestingTile*> path;
 
-	bool EqualNodes(Node current, Node targetNode);
+	int HCost(Node* node, Node* targetNode);
+	int FCost(Node* node);
+
+	bool EqualNodes(Node* current, Node* targetNode);
 	bool IsTransversable();
-	bool IsInClosed(Node node, vector<Node> closed);
-	bool IsInOpen(Node node, vector<Node> open);
-	bool IsShortestPath(Node node, vector<Node> open);
+	bool IsInClosed(Node* node);
+	pair<bool, Node*> IsInOpen(Node* node);
+	bool IsShortestPath(Node* node);
+	Node* GetNodeWithLowestCost();
+	void buildPath(Node* startNode, Node* targetNode);
 public:
 	Pathfinding();
-	void AStarPathfinding(Node startNode, Node targetNode);
-	Node* GetNodeWithLowestCost(vector<Node> open);
-
+	vector<TestingTile*> AStarPathfinding(TestingTile* startNode, TestingTile* targetNode);
 	~Pathfinding();
 };

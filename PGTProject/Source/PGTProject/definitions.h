@@ -3,14 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AIController.h"
+#define gridX 4
+#define gridY 4
 
 /**
  * 
  */
-class PGTPROJECT_API AIControllerTest : public AAIController
+class PGTPROJECT_API definitions
 {
 public:
-	AIControllerTest();
-	~AIControllerTest();
+	definitions();
+	~definitions();
 };

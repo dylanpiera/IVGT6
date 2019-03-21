@@ -2,7 +2,8 @@
 
 #include "Graph.h"
 
-Graph::Graph(vector<AHexActor*> hexTiles)
+/*
+Graph::Graph(vector<ITileObject*> hexTiles)
 {
 	for (auto hexTile : hexTiles) {
 		Node newNode = Node(hexTile);
@@ -10,6 +11,16 @@ Graph::Graph(vector<AHexActor*> hexTiles)
 		nodes.push_back(newNode);
 	}
 }
+*/
+Graph::Graph(vector<TestingTile*> hexTiles)
+{
+	for (auto hexTile : hexTiles) {
+		Node newNode = Node(hexTile);
+		// Add newNodeNeighbours
+		nodes.push_back(newNode);
+	}
+}
+
 
 Graph::~Graph()
 {

@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include <iostream>
 #include <vector>
-#include "HexActor.h"
 #include "Node.h"
+//#include "ITileObject.h"
+#include <TestingTile.h>
 
 using std::vector;
 using std::pair;
@@ -16,6 +17,8 @@ class PGTPROJECT_API Graph
 private:
 	vector<Node> nodes;
 public:
-	Graph(vector<AHexActor*> hexTiles);
+//	Graph(vector<ITileObject*> hexTiles);
+	Graph(vector<TestingTile*> hexTiles);
+
 	~Graph();
 };

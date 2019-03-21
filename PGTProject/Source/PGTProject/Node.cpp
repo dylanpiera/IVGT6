@@ -1,13 +1,25 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "Node.h"
 
-Node::Node(ITileObject* hexTile) {
+Node::Node(TestingTile* hexTile) {
 	node = hexTile;
+	fcost = 0;
+	hcost = 0;
+	gcost = 0;
 }
 
-void Node::AddNeighbour(Node next) {
-	neighbors.push_back(Node(next));
+vector<TestingTile> Node::GetNeighbors()
+{
+	return node->GetNeighbours();
+}
+
+int Node::GetCost()
+{
+	return node->GetCost();
+}
+
+int Node::GetDistanceFrom(Node* target)
+{
+	return node->GetDistanceFrom(target->node);
 }
 
 Node::~Node()

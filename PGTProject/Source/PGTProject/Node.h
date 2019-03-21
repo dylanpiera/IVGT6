@@ -5,20 +5,29 @@
 #include "CoreMinimal.h"
 #include <iostream>
 #include <vector>
-#include "ITileObject.h"
+//#include "ITileObject.h"
+#include "TestingTile.h"
 
 using std::vector;
 using std::pair;
 
-class PGTPROJECT_API Node
+struct Node
 {
 public:
-	ITileObject* node;
-	vector<Node> neighbors;
+	//ITileObject* node;
+	TestingTile* node;
 	int fcost;
+	int hcost;
+	int gcost;
 	Node* parent;
 
-	Node(ITileObject* hexTile);
-	void AddNeighbour(Node next);
+	//Node(ITileObject* hexTile);
+	Node(TestingTile* hexTile);
+
+	vector<TestingTile> GetNeighbors();
+	int GetCost();
+	int GetDistanceFrom(Node* target);
+
 	~Node();
 };
+

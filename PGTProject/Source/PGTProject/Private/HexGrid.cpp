@@ -35,7 +35,7 @@ void AHexGrid::Tick(float DeltaTime)
  * \brief Generates a Hexagonal grid of Hexes.
  * \param map_radius The radius from the center Hex.
  */
-void AHexGrid:: GenerateGrid(int map_radius)
+/*void AHexGrid:: GenerateGrid(int map_radius)
 {
 	std::unordered_set<AHexActor::Hex> map;
 	for (int q = -map_radius; q <= map_radius; q++) {
@@ -45,4 +45,4 @@ void AHexGrid:: GenerateGrid(int map_radius)
 			map.insert(AHexActor::Hex(q, r, -q - r));
 		}
 	}
-}
+}*/

@@ -2,6 +2,8 @@
 
 #include "definitions.h"
 
+// (UPDATE) Test class
+
 definitions::definitions()
 {
 }

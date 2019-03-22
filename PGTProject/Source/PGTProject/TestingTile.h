@@ -7,16 +7,19 @@
 
 using std::vector;
 
+// (UPDATE) Test class
+
 class TestingTile
 {
 public:
-	int posX;
+	int posX;									// Tile position
 	int posY;
-	int GetCost();
-	vector<TestingTile> GetNeighbours();
-	int GetDistanceFrom(TestingTile* other);
+	
+	int GetCost();								// Get cost of visiting this tile
+	vector<TestingTile> GetNeighbours();		// Get tile neighbors
+	int GetDistanceFrom(TestingTile* other);	// Get distance between this tile and a received tile (other)
 
-	TestingTile(int x, int y);
-	~TestingTile();
+	TestingTile(int x, int y);					// Constructor
+	~TestingTile();								// Destructor
 };
 

@@ -3,12 +3,16 @@
 #include "TestingTile.h"
 #include "definitions.h"
 
+// (UPDATE) Test class
+
+// Create tile based on position
 TestingTile::TestingTile(int x, int y)
 {
 	posX = x;
 	posY = y;
 }
 
+// Get tile neighbors
 vector<TestingTile> TestingTile::GetNeighbours()
 {
 	vector<TestingTile> neighbors;

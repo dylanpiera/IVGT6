@@ -23,11 +23,13 @@ public:
 	// Node parent (for backtracing path)
 	Node* parent;
 
-	// Creating a node 
+	// Create a node 
 	Node(TestingTile* hexTile);
-
+	// Get node neighbors
 	vector<TestingTile> GetNeighbors();
+	// Get cost of visiting a node
 	int GetCost();
+	// Get distance from another node
 	int GetDistanceFrom(Node* target);
 
 	~Node();

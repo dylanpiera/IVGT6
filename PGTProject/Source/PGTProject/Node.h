@@ -5,23 +5,25 @@
 #include "CoreMinimal.h"
 #include <iostream>
 #include <vector>
-//#include "ITileObject.h"
 #include "TestingTile.h"
 
 using std::vector;
-using std::pair;
 
 struct Node
 {
 public:
-	//ITileObject* node;
+	// Reference for hextile
 	TestingTile* node;
-	int fcost;
-	int hcost;
-	int gcost;
+
+	// Node costs
+	int fcost;			// Total cost
+	int hcost;			// Cost from the end node
+	int gcost;			// Cost from the start node
+
+	// Node parent (for backtracing path)
 	Node* parent;
 
-	//Node(ITileObject* hexTile);
+	// Creating a node 
 	Node(TestingTile* hexTile);
 
 	vector<TestingTile> GetNeighbors();

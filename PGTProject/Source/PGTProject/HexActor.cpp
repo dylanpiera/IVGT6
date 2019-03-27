@@ -6,10 +6,15 @@
 #include <cassert>
 #include <vector>
 #include <math.h>  // NOLINT(modernize-deprecated-headers)
+#include "HexActorGraphics.h"
+
 
 // Sets default values
 AHexActor::AHexActor()
 {
+	// Create hexagon tile graphics
+	Graphic.CreateHexGraphics(this);
+
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }

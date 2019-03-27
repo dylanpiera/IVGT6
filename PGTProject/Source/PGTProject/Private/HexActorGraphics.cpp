@@ -3,6 +3,7 @@
 #include "HexActorGraphics.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
+#include "Runtime/Engine/Classes/Engine/StaticMesh.h"
 
 HexActorGraphics::HexActorGraphics()
 {
@@ -29,6 +30,14 @@ void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 		USceneComponent* HexActorRootComponent = HexActorRef->GetRootComponent();
 		MeshComponent->SetupAttachment(HexActorRootComponent);
 	}
+}
+
+void HexActorGraphics::GetHeight() {
+	// Get hexagon tile mesh
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
+
+	UStaticMesh* m = HexTileMeshAsset.Object;
+	MeshSize = m->GetBounds().GetBox().GetSize();
 }
 
 HexActorGraphics::~HexActorGraphics()

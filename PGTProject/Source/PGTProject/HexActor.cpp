@@ -8,15 +8,21 @@
 #include <math.h>  // NOLINT(modernize-deprecated-headers)
 #include "HexActorGraphics.h"
 
+HexActorGraphics Graphic;
 
 // Sets default values
 AHexActor::AHexActor()
 {
 	// Create hexagon tile graphics
 	Graphic.CreateHexGraphics(this);
+	Graphic.GetHeight();
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+FVector AHexActor::GetMeshSize() {
+	return Graphic.MeshSize;
 }
 
 #pragma region Location Calculations

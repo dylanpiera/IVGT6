@@ -20,10 +20,18 @@ void ATestingHexMesh::BeginPlay()
 	FRotator Rotation(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
 	AHexActor* a = GetWorld()->SpawnActor<AHexActor>(Location, Rotation, SpawnInfo);
-	FVector Location2(500.0f, 500.0f, 100.0f);
+	
+	FVector c =	a->GetMeshSize();
+	UE_LOG(LogTemp, Warning, TEXT("X = %f"), float(c.X));
+	UE_LOG(LogTemp, Warning, TEXT("Y = %f"), float(c.Y));
+	UE_LOG(LogTemp, Warning, TEXT("Z = %f"), float(c.Z));
+
+	FVector Location2(Location.X + (c.X), Location.Y, Location.Z);
 	FRotator Rotation2(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo2;
 	AHexActor* b = GetWorld()->SpawnActor<AHexActor>(Location2, Rotation2, SpawnInfo2);
+
+
 }
 
 void CreateTiles() {

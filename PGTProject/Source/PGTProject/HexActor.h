@@ -13,10 +13,6 @@ class PGTPROJECT_API AHexActor : public AActor
 {
 	GENERATED_BODY()
 
-private:
-	// Handle graphics
-	HexActorGraphics Graphic;
-
 public:
 	// Sets default values for this actor's properties
 	AHexActor();
@@ -28,6 +24,8 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float deltaTime) override;
+
+	FVector GetMeshSize();
 
 	/**
 	 * \brief

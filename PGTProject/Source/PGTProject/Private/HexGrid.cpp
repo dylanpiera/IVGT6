@@ -2,11 +2,11 @@
 
 #include "HexGrid.h"
 #include "HexActor.h"
-#include <unordered_set>
-//#include <minwindef.h>
-//using namespace std;
+#include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
+#include <EngineGlobals.h>
+#include <Runtime/Engine/Classes/Engine/Engine.h>
 
-//using namespace AHexActor;
 
 // Sets default values
 AHexGrid::AHexGrid()
@@ -20,29 +20,42 @@ AHexGrid::AHexGrid()
 void AHexGrid::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	GenerateGrid();
+	LogGrid();
 }
 
 // Called every frame
 void AHexGrid::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
-
-/**
- * \brief Generates a Hexagonal grid of Hexes.
- * \param map_radius The radius from the center Hex.
- */
-/*void AHexGrid:: GenerateGrid(int map_radius)
+void AHexGrid::GenerateGrid()
 {
-	std::unordered_set<AHexActor::Hex> map;
-	for (int q = -map_radius; q <= map_radius; q++) {
-		int r1 = FGenericPlatformMath::Max(-map_radius, -q - map_radius);
-		int r2 = FGenericPlatformMath::Min(map_radius, -q + map_radius);
-		for (int r = r1; r <= r2; r++) {
-			map.insert(AHexActor::Hex(q, r, -q - r));
+	for (int column = 0; column < mapsize; column++)
+	{
+		for(int row = 0; row < mapsize; row++)
+		{
+			auto* hex = new AHexActor::Hex(column, row);
+			hexes[column][row] = hex;
+
+			//TODO: Spawn AHexObject in World Space
+			
+			FRotator Rotation(0.0f, 0.0f, 0.0f);
+			FActorSpawnParameters SpawnInfo;
+			AHexActor* a = GetWorld()->SpawnActor<AHexActor>(AHexActor::GetScreenSpaceLocation(hex), Rotation, SpawnInfo);
+
 		}
 	}
-}*/
+}
+
+void AHexGrid::LogGrid() const
+{
+	for (int column = 0; column < mapsize; column++)
+	{
+		for (int row = 0; row < mapsize; row++)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("q: %d - r: %d - s: %d"), hexes[column][row]->q, hexes[column][row]->r, hexes[column][row]->s);
+		}
+	}
+}

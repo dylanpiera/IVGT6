@@ -113,6 +113,23 @@ std::vector<FIntPoint> AHexActor::polygon_corners(const LayoutHelper::Layout lay
 	return corners;
 }
 
+FVector AHexActor::GetScreenSpaceLocation(Hex *hex)
+{
+	const float WIDTH_MULTIPLIER = std::sqrt(3) / 2;
+	float radius = 1;
+	float height = radius * 2;
+	float width = WIDTH_MULTIPLIER * height;
+
+	float horiz = width;
+	float vert = height * 0.75f;
+
+	return FVector(
+		horiz * (hex->q + hex->r / 2),
+		0,
+		vert * hex->r
+	);
+}
+
 #pragma endregion Drawing
 
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HexActor.h"
 #include "GameFramework/Actor.h"
 #include "HexGrid.generated.h"
 
@@ -23,6 +24,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void GenerateGrid(int dimention);
+	void GenerateGrid();
+	void LogGrid() const;
+
+	const int mapsize = 32;
+
+	AHexActor::Hex *hexes[32][32];
 
 };

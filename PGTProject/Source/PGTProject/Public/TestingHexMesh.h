@@ -14,6 +14,7 @@ class PGTPROJECT_API ATestingHexMesh : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ATestingHexMesh();
+	FVector Position(float radius, float height, int column, int row);
 
 protected:
 	// Called when the game starts or when spawned

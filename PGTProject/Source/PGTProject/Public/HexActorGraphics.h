@@ -11,6 +11,7 @@ class PGTPROJECT_API HexActorGraphics
 {
 public:
 	FVector MeshSize;
+	float Radius;
 
 	// Create a graphic visualization of an hexagon tile for a HexActor 
 	void CreateHexGraphics(AHexActor* HexActorRef);

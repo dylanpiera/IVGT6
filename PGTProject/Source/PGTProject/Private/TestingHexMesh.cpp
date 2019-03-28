@@ -3,6 +3,8 @@
 #include "TestingHexMesh.h"
 #include "HexActor.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
+#include "math.h"
+#include "HexActorGraphics.h"
 
 // Sets default values
 ATestingHexMesh::ATestingHexMesh()
@@ -15,27 +17,50 @@ ATestingHexMesh::ATestingHexMesh()
 // Called when the game starts or when spawned
 void ATestingHexMesh::BeginPlay()
 {
+	HexActorGraphics graphics;
+
+	graphics.GetHeight();
+	FVector h = graphics.MeshSize;
+	float r = graphics.Radius;
+
 	Super::BeginPlay();
-	FVector Location(0.0f, 0.0f, 100.0f);
+//	FVector loc1 = Position(r, h.Y, 0, 0);
+	FVector loc1(0, 0, 0);
 	FRotator Rotation(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
-	AHexActor* a = GetWorld()->SpawnActor<AHexActor>(Location, Rotation, SpawnInfo);
+	AHexActor* a = GetWorld()->SpawnActor<AHexActor>(loc1, Rotation, SpawnInfo);
 	
+	/*
 	FVector c =	a->GetMeshSize();
 	UE_LOG(LogTemp, Warning, TEXT("X = %f"), float(c.X));
 	UE_LOG(LogTemp, Warning, TEXT("Y = %f"), float(c.Y));
 	UE_LOG(LogTemp, Warning, TEXT("Z = %f"), float(c.Z));
+	*/
 
-	FVector Location2(Location.X + (c.X), Location.Y, Location.Z);
+	//FVector loc2 = Position(r, h.Y, 0, 1);
+	FVector loc2(h.X - h.Y / FMath::Sqrt(12), h.Y / 2.f, 0);
 	FRotator Rotation2(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo2;
-	AHexActor* b = GetWorld()->SpawnActor<AHexActor>(Location2, Rotation2, SpawnInfo2);
-
+	AHexActor* b = GetWorld()->SpawnActor<AHexActor>(loc2, Rotation2, SpawnInfo2);
 
 }
 
-void CreateTiles() {
+FVector ATestingHexMesh::Position(float radius, float height, int column, int row)
+{
+	float WIDTH_MULTIPLIER = FMath::Sqrt(3) / 2;
 
+//	float HEIGHT = radius * 2.f;
+	float HEIGHT = height;
+	float width = WIDTH_MULTIPLIER * HEIGHT;
+
+	float horiz = width;
+	float vert = HEIGHT * 0.75f;
+
+	return FVector(
+		horiz * (column + row / 2.f),
+		vert * row,
+		0
+	);
 }
 
 // Called every frame

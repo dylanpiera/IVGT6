@@ -12,8 +12,8 @@ HexActorGraphics::HexActorGraphics()
 // Create a graphic visualization of an hexagon tile for a HexActor 
 void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 	// Get hexagon tile mesh
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
-
+//	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/BlueHexTile_StaticMesh.BlueHexTile_StaticMesh'"));
 	// If mesh was found apply it to the HexActor 
 	if (HexTileMeshAsset.Object)
 	{
@@ -34,12 +34,16 @@ void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 
 void HexActorGraphics::GetHeight() {
 	// Get hexagon tile mesh
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
+	//static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> HexTileMeshAsset(TEXT("StaticMesh'/Game/Assets/BlueHexTile_StaticMesh.BlueHexTile_StaticMesh'"));
 
 	UStaticMesh* m = HexTileMeshAsset.Object;
 	MeshSize = m->GetBounds().GetBox().GetSize();
+	Radius = m->GetBounds().SphereRadius;
+	UE_LOG(LogTemp, Warning, TEXT("radius = %f"), Radius);
 }
 
 HexActorGraphics::~HexActorGraphics()
 {
 }
+

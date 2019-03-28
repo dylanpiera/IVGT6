@@ -25,6 +25,10 @@ FVector AHexActor::GetMeshSize() {
 	return Graphic.MeshSize;
 }
 
+float AHexActor::GetRadius() {
+	return Graphic.Radius;
+}
+
 #pragma region Location Calculations
 
 /**

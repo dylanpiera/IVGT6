@@ -26,6 +26,7 @@ public:
 	virtual void Tick(float deltaTime) override;
 
 	FVector GetMeshSize();
+	float GetRadius();
 
 	/**
 	 * \brief

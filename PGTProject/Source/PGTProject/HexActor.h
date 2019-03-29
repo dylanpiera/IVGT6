@@ -25,9 +25,6 @@ public:
 	// Called every frame
 	virtual void Tick(float deltaTime) override;
 
-	FVector GetMeshSize();
-	float GetRadius();
-
 	/**
 	 * \brief
 	 * The data structure for a given Hex represented in Hex Coordinates.

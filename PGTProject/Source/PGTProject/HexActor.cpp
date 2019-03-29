@@ -8,6 +8,7 @@
 #include <math.h>  // NOLINT(modernize-deprecated-headers)
 #include "HexActorGraphics.h"
 
+// Graphics controller
 HexActorGraphics Graphic;
 
 // Sets default values
@@ -15,18 +16,9 @@ AHexActor::AHexActor()
 {
 	// Create hexagon tile graphics
 	Graphic.CreateHexGraphics(this);
-	Graphic.GetHeight();
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-}
-
-FVector AHexActor::GetMeshSize() {
-	return Graphic.MeshSize;
-}
-
-float AHexActor::GetRadius() {
-	return Graphic.Radius;
 }
 
 #pragma region Location Calculations
@@ -115,18 +107,17 @@ std::vector<FIntPoint> AHexActor::polygon_corners(const LayoutHelper::Layout lay
 
 FVector AHexActor::GetScreenSpaceLocation(Hex *hex)
 {
-	const float WIDTH_MULTIPLIER = std::sqrt(3) / 2;
-	float radius = 1;
-	float height = radius * 2;
-	float width = WIDTH_MULTIPLIER * height;
+	// Calculate space position for hex based on mesh size
+	float k = (Graphic.MeshSize.X - Graphic.MeshSize.Y / FMath::Sqrt(12));
 
-	float horiz = width;
-	float vert = height * 0.75f;
+	// Gap between tiles for better visualization
+	float gapX = hex->q * 3;
+	float gapY = hex->r * 3;
 
 	return FVector(
-		horiz * (hex->q + hex->r / 2),
-		0,
-		vert * hex->r
+		hex->q * k + gapX,
+		hex->r * Graphic.MeshSize.Y + hex->q * (Graphic.MeshSize.Y / 2.f) + gapY,
+		0
 	);
 }
 

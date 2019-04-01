@@ -43,13 +43,17 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			//Call event with OnClicked(this, &YourClassName::yourFunctionName)
 			.OnClicked(this, &SSlateWidget::buttonTest)
 		]
-		//Resource values
+		/*
+		 * \brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
+		 * \TODO reference to actual variables in the game
+		 */
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))
 		[
 			//Energy
 			SNew(SHorizontalBox)
 			+SHorizontalBox::Slot()
+			//Adjusts width to the element size
 			.AutoWidth()
 			[
 				SNew(STextBlock)
@@ -161,7 +165,10 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Text(FText::AsNumber(gain))
 			]
 		]
-		//Timer
+		/*
+		 * \brief Timer in the upper right corner
+		 * \TODO link Game tick
+		 */
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))
 		.HAlign(HAlign_Right)
@@ -184,6 +191,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(FSlateFontInfo("Arial", 24))
 				.Text(FText::FromString(TEXT(":")))
 			]
+			//Minutes
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[

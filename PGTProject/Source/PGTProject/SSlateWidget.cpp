@@ -1,6 +1,8 @@
 #include "SSlateWidget.h"
 #include "SlateOptMacros.h"
 #include "Engine.h"
+#include "EconomyManager.h"
+#include <string>
 
 //Already given upon creation, needs to surround Construct
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -14,6 +16,14 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
 	_ownerHUD = InArgs._OwnerHUDArg;
+
+	//temporary values
+	int energy = 0;
+	int materials = 0;
+	int money = 0;
+
+	std::string e = std::to_string(energy);
+	FString en = FString::FromInt(energy);
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
@@ -31,6 +41,64 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.ButtonColorAndOpacity(FLinearColor::Blue)
 			//Call event with OnClicked(this, &YourClassName::yourFunctionName)
 			.OnClicked(this, &SSlateWidget::buttonTest)
+		]
+		//Resource values
+		+ SOverlay::Slot()
+		.VAlign((VAlign_Top))
+		.HAlign(HAlign_Left)
+		[
+			//Energy
+			SNew(SHorizontalBox)
+			+SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))			
+			.Text(FText::FromString(TEXT("Ene")))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(energy))
+			]
+			//Materials
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::FromString(TEXT("Mat")))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_materialsValue, STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(materials))
+			]
+			//Money
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::FromString(TEXT("Mon")))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SNew(STextBlock)
+			.Margin(FMargin(10.0f, 0.0f))
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(money))
+			]
 		]
 	];
 }

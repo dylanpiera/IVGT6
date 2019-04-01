@@ -27,4 +27,8 @@ private:
 
 	//Declaring button
 	TSharedPtr<SButton> _colourButton;
+
+	TSharedPtr<STextBlock> _energyValue;
+	TSharedPtr<STextBlock> _materialsValue;
+	TSharedPtr<STextBlock> _moneyValue;
 };

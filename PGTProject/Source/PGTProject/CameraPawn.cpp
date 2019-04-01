@@ -155,13 +155,31 @@ void ACameraPawn::OnClickRayCast()
 	FCollisionQueryParams CollParams;
 	CollParams.AddIgnoredActor(this);
 
-	//Throw out linetrace
+	//Throw out linetrace (second line is the debug line)
 	GetWorld()->LineTraceSingleByChannel(hit, startLocation, endLocation, ECC_Visibility, CollParams);
 	UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
 
-	FString actorName = hit.Actor->GetName();
-	//UE_LOG(LogClass, Log, TEXT("This is %s"), actorName);
+	SelectedActor = SelectingActor(hit);
+
+	if(SelectedActor != NULL)
+	{
+		//TODO: Change destroy to something else. This was for testing purpose.
+		SelectedActor->Destroy();
+	}
 }
+
+AActor* ACameraPawn::SelectingActor(FHitResult h)
+{
+	AActor* Actor;
+
+	if (h.Actor != NULL)
+	{
+		Actor = h.GetActor();
+		return Actor;
+	}
+	else return NULL;
+}
+
 
 
 

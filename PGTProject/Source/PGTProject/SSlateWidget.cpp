@@ -188,6 +188,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
+				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
 				.Text(FText::AsNumber(minute))

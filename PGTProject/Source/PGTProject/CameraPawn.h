@@ -3,7 +3,8 @@
 #pragma once
 
 
-#include "CoreMinimal.h"
+//#include "CoreMinimal.h"
+#include "Engine.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -68,8 +69,6 @@ public:
 
 	void CameraRotationRight(float axisValue);
 
-
-
-	
+	void OnClickRayCast();
 	
 };

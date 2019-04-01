@@ -45,6 +45,8 @@ void ACameraPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//AddActorWorldOffset(GetCameraPanDirection() * camSpeed);
 	GetCameraPanDirection();
+
+	//OnClickRayCast();
 	
 }
 
@@ -52,6 +54,9 @@ void ACameraPawn::Tick(float DeltaTime)
 void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	//LeftCLick
+	InputComponent->BindAction("LeftClick", IE_Pressed, this, &ACameraPawn::OnClickRayCast);
 
 	//MouseWheel input
 	InputComponent->BindAxis("MouseWheelAxis", this, &ACameraPawn::CameraZoom);
@@ -101,8 +106,6 @@ void ACameraPawn::GetCameraPanDirection()
 
 void ACameraPawn::CameraZoom(float axisValue)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%f"), axisValue);
-
 	//ZoomIn
 	if(axisValue > 0)
 		SpringArm->TargetArmLength -= 25;
@@ -131,6 +134,35 @@ void ACameraPawn::CameraRotationRight(float axisValue)
 		RootScene->SetRelativeRotation(newRotation);
 	}
 }
+
+void ACameraPawn::OnClickRayCast() 
+{	
+	//Declared empty Vectors. These will be filled up with converted screenspace values
+	FVector mousePos, mouseDir;
+
+	//Converts the screenspace to world space as it was on the screen. 
+	//Also gets direction.
+	PC->DeprojectMousePositionToWorld(mousePos, mouseDir);
+
+	//Define start and end(direction) location
+	FVector startLocation = mousePos;
+	FVector endLocation = startLocation + (mouseDir * 1000.f);
+
+	//contains the actor that was hit
+	FHitResult hit;
+
+	//paramaters you can add to the specific trace you want to use
+	FCollisionQueryParams CollParams;
+	CollParams.AddIgnoredActor(this);
+
+	//Throw out linetrace
+	GetWorld()->LineTraceSingleByChannel(hit, startLocation, endLocation, ECC_Visibility, CollParams);
+	UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
+
+	FString actorName = hit.Actor->GetName();
+	//UE_LOG(LogClass, Log, TEXT("This is %s"), actorName);
+}
+
 
 
 

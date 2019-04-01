@@ -159,6 +159,7 @@ void ACameraPawn::OnClickRayCast()
 	GetWorld()->LineTraceSingleByChannel(hit, startLocation, endLocation, ECC_Visibility, CollParams);
 	UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
 
+	//Get's actor for selecting purposes
 	SelectedActor = SelectingActor(hit);
 
 	if(SelectedActor != NULL)

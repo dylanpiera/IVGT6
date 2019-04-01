@@ -21,9 +21,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	int energy = 0;
 	int materials = 0;
 	int money = 0;
-
-	std::string e = std::to_string(energy);
-	FString en = FString::FromInt(energy);
+	int population = 0;
+	int gain = 0;
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
@@ -45,59 +44,95 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		//Resource values
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))
-		.HAlign(HAlign_Left)
 		[
 			//Energy
 			SNew(SHorizontalBox)
 			+SHorizontalBox::Slot()
 			[
 			SAssignNew(_energyValue, STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))			
-			.Text(FText::FromString(TEXT("Ene")))
+			.Text(FText::FromString(TEXT("Energy")))
 			]
 			+ SHorizontalBox::Slot()
 			[
 			SAssignNew(_energyValue, STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))
 			.Text(FText::AsNumber(energy))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(gain))
 			]
 			//Materials
 			+ SHorizontalBox::Slot()
 			[
 			SAssignNew(_energyValue, STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))
-			.Text(FText::FromString(TEXT("Mat")))
+			.Text(FText::FromString(TEXT("Materials")))
 			]
 			+ SHorizontalBox::Slot()
 			[
 			SAssignNew(_materialsValue, STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))
-			.Text(FText::AsNumber(materials))
+			.Text(FText::AsNumber(materials))				
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(gain))
 			]
 			//Money
 			+ SHorizontalBox::Slot()
 			[
 			SAssignNew(_energyValue, STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))
-			.Text(FText::FromString(TEXT("Mon")))
+			.Text(FText::FromString(TEXT("Money")))
 			]
 			+ SHorizontalBox::Slot()
 			[
 			SNew(STextBlock)
-			.Margin(FMargin(10.0f, 0.0f))
 			.ColorAndOpacity(FLinearColor::Green)
 			.Font(FSlateFontInfo("Arial", 24))
 			.Text(FText::AsNumber(money))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(gain))
+			]
+			//Population
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::FromString(TEXT("Population")))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SNew(STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(population))
+			]
+			+ SHorizontalBox::Slot()
+			[
+			SAssignNew(_energyValue, STextBlock)
+			.ColorAndOpacity(FLinearColor::Green)
+			.Font(FSlateFontInfo("Arial", 24))
+			.Text(FText::AsNumber(gain))
 			]
 		]
 	];

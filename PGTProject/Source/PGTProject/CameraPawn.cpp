@@ -68,7 +68,7 @@ void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 void ACameraPawn::GetCameraPanDirection()
 {
-	margin = 15;
+	margin = 5;
 	float mousePosX;
 	float mousePosY;
 

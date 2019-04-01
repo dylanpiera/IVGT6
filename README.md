@@ -1,6 +1,8 @@
 # Project Game Technology - Team 6 (SPEK)
 
-One Paragraph of project description goes here
+![logo](img/logo.png)
+
+Project Game Technology Minor Project
 
 ## Getting Started
 
@@ -58,9 +60,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Unreal](https://www.unrealengine.com/) - The game engine
+* [Visual Studio](https://visualstudio.microsoft.com/) - Code Editor
+* [ReSharper C++](https://www.jetbrains.com/resharper-cpp/) - Code Quality Tools
 
 ## Contributing
 
@@ -68,13 +70,15 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [git](https://git-scm.com/) for versioning and [GitKraken](https://www.gitkraken.com/) for it's excellent UI and integrations.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Aleksej Horvat** - *Initial work*
+* **Dylan Piera** - *Initial work*
+* **Gabriella Gutierrez** - *Initial work*
+* **Martijn van der Meer** - *Initial work*
+* **Stefan Djordjevic** - *Initial work*
 
 ## License
 
@@ -82,6 +86,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thanks to Amit from [Red Blob Games](www.redblobgames.com) for his excellent writeup on [Hexagonal Grids](https://www.redblobgames.com/grids/hexagons/).
+* Thanks to Unreal for making our lives just that much _harder_.
+* Thanks to Unity for letting us know that there is a _better way_.

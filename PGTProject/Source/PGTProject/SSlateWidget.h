@@ -31,4 +31,5 @@ private:
 	TSharedPtr<STextBlock> _energyValue;
 	TSharedPtr<STextBlock> _materialsValue;
 	TSharedPtr<STextBlock> _moneyValue;
+	TSharedPtr<STextBlock> _populationValue;
 };

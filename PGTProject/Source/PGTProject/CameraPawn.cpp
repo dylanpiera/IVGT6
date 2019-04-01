@@ -43,11 +43,8 @@ void ACameraPawn::BeginPlay()
 void ACameraPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//AddActorWorldOffset(GetCameraPanDirection() * camSpeed);
-	GetCameraPanDirection();
 
-	//OnClickRayCast();
-	
+	GetCameraPanDirection();
 }
 
 // Called to bind functionality to input

@@ -21,12 +21,12 @@ HexActorGraphics::HexActorGraphics()
 	}
 }
 
-// Create a graphic visualization of an hexagon tile for a HexActor 
+// Create a graphic visualization of an hexagon tile for a HexActor
 void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 	// If mesh was found apply it to the HexActor 
 	if (HexTileMesh)
 	{
-		// Create mesh and add it to the HexActor
+		// Create mesh with material on HexActor
 		UStaticMeshComponent* MeshComponent = HexActorRef->CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyHexTileMesh"));
 		MeshComponent->SetStaticMesh(HexTileMesh);
 		MeshComponent->SetMaterial(0, RockSnowMaterial);

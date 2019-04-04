@@ -169,13 +169,6 @@ void ACameraPawn::OnClickRayCast()
 AActor* ACameraPawn::SelectingActor(FHitResult h)
 {
 	return h.Actor != NULL ? h.GetActor() : NULL;
-
-	if (h.Actor != NULL)
-	{
-		Actor = h.GetActor();
-		return Actor;
-	}
-	else return NULL;
 }
 
 

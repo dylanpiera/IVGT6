@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{6611BB84-6D8F-48D4-923D-5EC6AD1BE0FD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{EEEFEC3E-DF68-476F-8EF1-085256549D6E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{FC6717BD-EA1E-4C55-9C08-CF8628193075}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{2B5DB010-0AED-4AF0-9BC0-7AA036ABC76D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PGTProject", "Intermediate\ProjectFiles\PGTProject.vcxproj", "{728FD7F8-9D94-4ED5-90A0-D8D25CD2D62C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PGTProject", "Intermediate\ProjectFiles\PGTProject.vcxproj", "{69C36B5E-C0D9-4BCC-8FA7-E6A371EAB089}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{64430173-55D1-4EF5-98FD-EE3B3618479F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{243DA72D-A0FC-412C-9F5A-935DB394272F}"
 EndProject

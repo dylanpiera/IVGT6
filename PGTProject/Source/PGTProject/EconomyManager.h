@@ -8,7 +8,7 @@ namespace economy_manager
 	public:
 		/**
 		 * \brief 
-		 * talk about shit here
+		 * Stores the resources the game requires
 		 */
 		struct Resources
 		{

@@ -19,7 +19,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 
 	//temporary values
 	int energy = 0;
-	int materials = 0;
+	int minerals = 0;
 	int money = 0;
 	int population = 0;
 	int gain = 0;
@@ -80,7 +80,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(FSlateFontInfo("Arial", 24))
 				.Text(FText::AsNumber(gain))
 			]
-			//Materials
+			//Minerals
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
@@ -88,7 +88,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Materials")))
+				.Text(FText::FromString(TEXT("Minerals")))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -97,7 +97,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(materials))				
+				.Text(FText::AsNumber(minerals))				
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()

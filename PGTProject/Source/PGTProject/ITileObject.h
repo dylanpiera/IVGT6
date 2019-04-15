@@ -3,7 +3,6 @@
 #include "HexActor.h"
 #include "EconomyManager.h"
 #include <algorithm>
-using namespace economy_manager;
 
 class ITileObject
 {

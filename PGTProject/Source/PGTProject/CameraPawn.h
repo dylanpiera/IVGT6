@@ -3,7 +3,8 @@
 #pragma once
 
 
-#include "CoreMinimal.h"
+//#include "CoreMinimal.h"
+#include "Engine.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -43,6 +44,8 @@ public:
 
 	APlayerController* PC;
 
+	AActor* SelectedActor;
+
 	float margin;
 
 
@@ -68,8 +71,10 @@ public:
 
 	void CameraRotationRight(float axisValue);
 
+	//Creates a Line Trace from screen to world
+	void OnClickRayCast();
 
-
-	
+	//Simple function to get the selected Actor
+	AActor* SelectingActor(FHitResult h);
 	
 };

@@ -6,6 +6,8 @@
 #include "Node.h"
 #include "TestingTile.h" // (UPDATE) Test class
 
+using namespace std;
+
 class Pathfinding
 {
 private:

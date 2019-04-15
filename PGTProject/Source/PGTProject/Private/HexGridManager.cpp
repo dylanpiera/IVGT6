@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "HexGrid.h"
+#include "HexGridManager.h"
 #include "HexActor.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -9,28 +9,29 @@
 
 
 // Sets default values
-AHexGrid::AHexGrid()
+AHexGridManager::AHexGridManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
-void AHexGrid::BeginPlay()
+void AHexGridManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//Testing
 	GenerateGrid();
 	LogGrid();
 }
 
 // Called every frame
-void AHexGrid::Tick(float DeltaTime)
+void AHexGridManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void AHexGrid::GenerateGrid()
+void AHexGridManager::GenerateGrid()
 {
 	for (int column = 0; column < mapsize; column++)
 	{
@@ -49,7 +50,7 @@ void AHexGrid::GenerateGrid()
 	}
 }
 
-void AHexGrid::LogGrid() const
+void AHexGridManager::LogGrid() const
 {
 	for (int column = 0; column < mapsize; column++)
 	{

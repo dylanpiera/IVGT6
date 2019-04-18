@@ -3,17 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HexActor.h"
 #include "GameFramework/Actor.h"
-#include "HexGrid.generated.h"
+#include "HexGridManager.generated.h"
 
 UCLASS()
-class PGTPROJECT_API AHexGrid : public AActor
+class PGTPROJECT_API AHexGridManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AHexGrid();
+	AHexGridManager();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,6 +24,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void GenerateGrid(int dimention);
+	void GenerateGrid();
+	void LogGrid() const;
+
+	const int mapsize = 32;
+
+	AHexActor::Hex *hexes[32][32];
+
+	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
 
 };

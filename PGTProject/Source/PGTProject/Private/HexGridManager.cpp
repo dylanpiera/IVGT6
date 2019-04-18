@@ -20,6 +20,7 @@ void AHexGridManager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//TODO: This makes the the hex grid manager spawn a 32x32 grid. Should be changed later to function how we want it to function.
 	//Testing
 	GenerateGrid();
 	LogGrid();

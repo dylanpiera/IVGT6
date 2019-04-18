@@ -30,4 +30,7 @@ public:
 	const int mapsize = 32;
 
 	AHexActor::Hex *hexes[32][32];
+
+	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
+
 };

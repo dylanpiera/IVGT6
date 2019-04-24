@@ -82,6 +82,9 @@ void AGameTickManager::GameTickHour()
 //Manages the dayly tick
 void AGameTickManager::GameTickDay()
 {
+	// Update Resources
+
+
 	dayOfWeek++;
 	currentDay++;
 

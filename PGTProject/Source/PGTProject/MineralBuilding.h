@@ -5,7 +5,7 @@ class MineralBuilding : public Building {
 
 	int32 MineralProductionValue = 1;
 
-	void BuildingFunction(AEconomyManager& manager) {
-		manager.resources._minerals = MineralProductionValue;
+	void BuildingFunction(Resources& resources) {
+		resources._minerals += MineralProductionValue;
 	}
 };

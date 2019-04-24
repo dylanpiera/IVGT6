@@ -62,11 +62,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			//Adjusts width to the element size
 			.AutoWidth()
 			[
-				/*SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))			
-				.Text(FText::FromString(TEXT("Energy")))*/
 				SNew(SImage)
 				.Image(new FSlateDynamicImageBrush(FName(*energyImagePath), FVector2D(64, 64)))
 			]
@@ -92,11 +87,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				/*SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Minerals")))*/
 				SNew(SImage)
 				.Image(new FSlateDynamicImageBrush(FName(*mineralsImagePath), FVector2D(64, 64)))
 			]
@@ -122,11 +112,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				/*SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Money")))*/
 				SNew(SImage)
 				.Image(new FSlateDynamicImageBrush(FName(*moneyImagePath), FVector2D(64, 64)))
 			]
@@ -152,11 +137,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				/*SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Population")))*/
 				SNew(SImage)
 				.Image(new FSlateDynamicImageBrush(FName(*populationImagePath), FVector2D(64, 64)))
 			]

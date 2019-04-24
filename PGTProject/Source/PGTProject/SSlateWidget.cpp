@@ -19,12 +19,18 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 
 	//temporary values
 	int energy = 0;
-	int materials = 0;
+	int minerals = 0;
 	int money = 0;
 	int population = 0;
 	int gain = 0;
 	int hour = 12;
 	int minute = 36;
+
+	//Location reference to the image
+	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
+	FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
+	FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
+	FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
@@ -56,11 +62,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			//Adjusts width to the element size
 			.AutoWidth()
 			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))			
-				.Text(FText::FromString(TEXT("Energy")))
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*energyImagePath), FVector2D(64, 64)))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -80,15 +83,12 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(FSlateFontInfo("Arial", 24))
 				.Text(FText::AsNumber(gain))
 			]
-			//Materials
+			//Minerals
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Materials")))
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*mineralsImagePath), FVector2D(64, 64)))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -97,7 +97,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(materials))				
+				.Text(FText::AsNumber(minerals))				
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -112,11 +112,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Money")))
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*moneyImagePath), FVector2D(64, 64)))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -140,11 +137,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT("Population")))
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*populationImagePath), FVector2D(64, 64)))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()

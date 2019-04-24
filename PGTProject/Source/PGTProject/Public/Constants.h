@@ -9,6 +9,7 @@ enum class EBuildingType
 	Mineral,
 	Energy,
 	House,
+	Road
 };
 
 enum class EInteractionMode
@@ -20,7 +21,7 @@ enum class EInteractionMode
 };
 
 /**
- *
+ * 
  */
 class PGTPROJECT_API Constants
 {
@@ -28,4 +29,3 @@ public:
 	Constants();
 	~Constants();
 };
-

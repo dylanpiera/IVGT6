@@ -129,7 +129,7 @@ FVector AHexActor::GetScreenSpaceLocation(Hex *hex)
 void AHexActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+		
 	auto hex = Hex(0, 0);
 }
 

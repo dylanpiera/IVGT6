@@ -23,7 +23,7 @@ ACameraPawn::ACameraPawn()
 	SpringArm->bDoCollisionTest = false;
 	SpringArm->SetRelativeRotation(FRotator(-50, 0, 0));
 
-	SpringArm->TargetArmLength = 200;
+	SpringArm->TargetArmLength = CameraArmHeight;
 
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComp->SetupAttachment(SpringArm);
@@ -36,7 +36,6 @@ void ACameraPawn::BeginPlay()
 
 	PC = Cast<APlayerController>(GetController());
 	PC->GetViewportSize(screenSizeX, screenSizeY);
-	
 }
 
 // Called every frame
@@ -105,11 +104,13 @@ void ACameraPawn::CameraZoom(float axisValue)
 {
 	//ZoomIn
 	if(axisValue > 0)
-		SpringArm->TargetArmLength -= 50;
+		CameraArmHeight -= 25;
 
 	//ZoomOut
 	if (axisValue < 0)
-		SpringArm->TargetArmLength += 50;
+		CameraArmHeight += 25;
+
+	SpringArm->TargetArmLength = CameraArmHeight;
 }
 
 void ACameraPawn::CameraRotationLeft(float axisValue)

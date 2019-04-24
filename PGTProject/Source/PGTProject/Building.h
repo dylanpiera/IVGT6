@@ -1,4 +1,5 @@
 #pragma once
+#include "EconomyManager.h"
 
 class Building {
 public:
@@ -6,5 +7,7 @@ public:
 	/*
 	 * override this and implement what the building needs to update
 	*/
-	//virtual void BuildingFunction(AEconomyManager& manager);
+	virtual void BuildingFunction(AEconomyManager& manager) {
+
+	}
 };

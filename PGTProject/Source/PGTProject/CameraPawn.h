@@ -36,6 +36,8 @@ public:
 	UPROPERTY()
 	USceneComponent* RootScene;
 
+	UPROPERTY(EditAnywhere)	
+	int32 CameraArmHeight;
 
 	USpringArmComponent* SpringArm;
 

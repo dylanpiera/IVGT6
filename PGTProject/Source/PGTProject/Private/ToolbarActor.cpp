@@ -2,6 +2,8 @@
 
 #include "ToolbarActor.h"
 #include "EconomyManager.h"
+#include "Engine/World.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
 AToolbarActor::AToolbarActor()
@@ -15,11 +17,14 @@ AToolbarActor::AToolbarActor()
 void AToolbarActor::BeginPlay()
 {
 	Super::BeginPlay();
+
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 		AEconomyManager::StaticClass(),
 		FoundActors);
-	_econ_manager = FoundActors[0];
+	_econ_manager = Cast<AEconomyManager>(FoundActors[0]);
+
+	//testFunc();
 }
 
 // Called every frame
@@ -31,16 +36,21 @@ void AToolbarActor::Tick(float DeltaTime)
 
 int AToolbarActor::getEnergy()
 {
-	return _econ_manager.resources._energy;
+	return _econ_manager->resources._energy;
 }
 
 int AToolbarActor::getMaterials()
 {
-	return _econ_manager.resources._materials;;
+	return _econ_manager->resources._materials;;
 }
 
 int AToolbarActor::getMoney()
 {
-	return _econ_manager.resources._money;
+	return _econ_manager->resources._money;
+}
+
+void AToolbarActor::testFunc()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Energy: %s, Materials: %s, Energy: %s"), getEnergy(), getMaterials(), getMoney());
 }
 

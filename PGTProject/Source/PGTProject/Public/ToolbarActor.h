@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "EconomyManager.h"
 #include "ToolbarActor.generated.h"
+
 
 UCLASS()
 class PGTPROJECT_API AToolbarActor : public AActor
@@ -26,6 +28,8 @@ protected:
 
 private:
 	AEconomyManager* _econ_manager;
+
+	void testFunc();
 
 public:	
 	// Called every frame

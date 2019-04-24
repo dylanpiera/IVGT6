@@ -171,6 +171,8 @@ void ACameraPawn::OnClickRayCast()
 			AHexActor* hex = Cast<AHexActor>(SelectedActor);
 			FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
 			
+			// BuildBuilding (activate or add something to the hex)
+
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
 		}
 		else SelectedActor->Destroy();

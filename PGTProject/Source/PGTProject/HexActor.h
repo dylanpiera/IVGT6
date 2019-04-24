@@ -5,6 +5,7 @@
 #include "LayoutHelper.h"
 #include "IntPoint.h"
 #include <vector>
+#include "MineralBuilding.h"
 #include "GameFramework/Actor.h"
 #include "HexActor.generated.h"
 
@@ -110,4 +111,7 @@ public:
 
 	static FVector GetScreenSpaceLocation(Hex *hex);
 	Hex* hex;
+
+	MineralBuilding* Building;
+	bool buildingBuilt = false;
 };

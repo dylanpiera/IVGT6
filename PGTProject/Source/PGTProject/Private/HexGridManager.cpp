@@ -44,6 +44,7 @@ void AHexGridManager::GenerateGrid()
 			FRotator Rotation(0.0f, 0.0f, 0.0f);
 			FActorSpawnParameters SpawnInfo;
 			AHexActor* a = GetWorld()->SpawnActor<AHexActor>(AHexActor::GetScreenSpaceLocation(hex), Rotation, SpawnInfo);
+			a->hex = hex; // this is for getting grid position
 		}
 	}
 }

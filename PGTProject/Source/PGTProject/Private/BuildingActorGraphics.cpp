@@ -8,8 +8,8 @@
 BuildingActorGraphics::BuildingActorGraphics()
 {
 	// Load building mesh and store it
-	BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
-	BuildingMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/HexTile_Materials/RockSnow_Material.RockSnow_Material'"));
+	BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Assets/Cube.Cube'"));
+	BuildingMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/Lambert1'"));
 	
 	if (BuildingMesh)
 	{
@@ -19,7 +19,7 @@ BuildingActorGraphics::BuildingActorGraphics()
 	}
 }
 
-/*void BuildingActorGraphics::CreateBuildingGraphics(ABuildingActor* BuildingActor)
+/*void BuildingActorGraphics::CreateBuildingGraphics()
 {
 	// Create mesh with material on BuildingActor
 	UStaticMeshComponent* MeshComponent = BuildingActor->CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyHexTileMesh"));

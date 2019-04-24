@@ -18,5 +18,5 @@ public:
 	BuildingActorGraphics();
 	~BuildingActorGraphics();
 
-	//void CreateBuildingGraphics(ABuildingActor* BuildingActor);
+	//void CreateBuildingGraphics();
 };

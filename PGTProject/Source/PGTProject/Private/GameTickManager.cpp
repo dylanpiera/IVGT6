@@ -41,12 +41,13 @@ void AGameTickManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	GameTick();
 
-	//logs. could be removed.
-	UE_LOG(LogTemp, Warning, TEXT("%d"), currentHour);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), dayOfWeek);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), currentDay);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), currentMonth);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), currentYear);
+	if (Debug) {
+		UE_LOG(LogTemp, Warning, TEXT("%d"), currentHour);
+		UE_LOG(LogTemp, Warning, TEXT("%d"), dayOfWeek);
+		UE_LOG(LogTemp, Warning, TEXT("%d"), currentDay);
+		UE_LOG(LogTemp, Warning, TEXT("%d"), currentMonth);
+		UE_LOG(LogTemp, Warning, TEXT("%d"), currentYear);
+	}
 }
 
 void AGameTickManager::GameTick()

@@ -41,7 +41,7 @@ int AToolbarActor::getEnergy()
 
 int AToolbarActor::getMaterials()
 {
-	return _econ_manager->resources._materials;;
+	return _econ_manager->resources._minerals;;
 }
 
 int AToolbarActor::getMoney()

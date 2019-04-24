@@ -23,6 +23,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere)
+	bool Debug = false;
+
 	UPROPERTY()
 	UINT32 currentHour;
 	UINT32 currentDay;

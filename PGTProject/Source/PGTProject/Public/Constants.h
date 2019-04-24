@@ -9,6 +9,7 @@ enum class EBuildingType
 	Mineral,
 	Energy,
 	House,
+	Road
 };
 
 enum class EInteractionMode

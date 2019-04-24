@@ -4,6 +4,7 @@
 
 #include "LayoutHelper.h"
 #include "IntPoint.h"
+#include "BuildingActor.h"
 #include <vector>
 #include "GameFramework/Actor.h"
 #include "HexActor.generated.h"

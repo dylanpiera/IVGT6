@@ -24,7 +24,7 @@ void AToolbarActor::BeginPlay()
 		FoundActors);
 	_econ_manager = Cast<AEconomyManager>(FoundActors[0]);
 
-	//testFunc();
+	testFunc();
 }
 
 // Called every frame
@@ -51,6 +51,7 @@ int AToolbarActor::getMoney()
 
 void AToolbarActor::testFunc()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Energy: %s, Materials: %s, Energy: %s"), getEnergy(), getMaterials(), getMoney());
+	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMaterials(), getMoney());
+	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
 }
 

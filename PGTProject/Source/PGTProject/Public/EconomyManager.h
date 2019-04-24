@@ -14,4 +14,20 @@ class PGTPROJECT_API AEconomyManager : public AActor
 
 public:	
 	Resources resources;
+
+	TArray<Building*> ActiveBuildings;
+
+	/* for testing purposes: */
+	UPROPERTY(EditAnywhere)		
+	int32 MineralBuildings;
+	UPROPERTY(EditAnywhere)
+	int32 EnergyBuildings;
+	UPROPERTY(EditAnywhere)
+	int32 Houses;
+
+	void InitResources();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 };

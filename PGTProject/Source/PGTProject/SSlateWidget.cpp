@@ -10,6 +10,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
  * Creates elements on the the HUD
  * \params
  */
+
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
@@ -31,6 +32,18 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.ButtonColorAndOpacity(FLinearColor::Blue)
 			//Call event with OnClicked(this, &YourClassName::yourFunctionName)
 			.OnClicked(this, &SSlateWidget::buttonTest)
+		]
+		+ SOverlay::Slot()
+		//Vertical and Horizontal alignment of slot
+		.VAlign(VAlign_Bottom)
+		.HAlign(HAlign_Right)
+		[
+			//Adds button
+			SAssignNew(_colourButton, SButton)
+			.ButtonColorAndOpacity(FLinearColor::Black)
+		.ButtonColorAndOpacity(FLinearColor::Red)
+		//Call event with OnClicked(this, &YourClassName::yourFunctionName)
+		.OnClicked(this, &SSlateWidget::buttonTest)
 		]
 	];
 }

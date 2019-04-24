@@ -109,4 +109,5 @@ public:
 	std::vector<FIntPoint> polygon_corners(const LayoutHelper::Layout layout, const Hex h) const;
 
 	static FVector GetScreenSpaceLocation(Hex *hex);
+	Hex* hex;
 };

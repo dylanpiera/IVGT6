@@ -14,6 +14,8 @@ HexActorGraphics Graphic;
 // Sets default values
 AHexActor::AHexActor()
 {
+	hex = new Hex(1, 1);
+
 	// Create hexagon tile graphics
 	Graphic.CreateHexGraphics(this);
 

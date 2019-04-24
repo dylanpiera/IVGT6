@@ -19,7 +19,7 @@ BuildingActorGraphics::BuildingActorGraphics()
 	}
 }
 
-void BuildingActorGraphics::CreateBuildingGraphics(ABuildingActor* BuildingActor)
+/*void BuildingActorGraphics::CreateBuildingGraphics(ABuildingActor* BuildingActor)
 {
 	// Create mesh with material on BuildingActor
 	UStaticMeshComponent* MeshComponent = BuildingActor->CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyHexTileMesh"));
@@ -34,7 +34,7 @@ void BuildingActorGraphics::CreateBuildingGraphics(ABuildingActor* BuildingActor
 	// Attach mesh to the scene
 	USceneComponent* BuildingActorRootComponent = BuildingActor->GetRootComponent();
 	MeshComponent->SetupAttachment(BuildingActorRootComponent);
-}
+}*/
 
 BuildingActorGraphics::~BuildingActorGraphics()
 {

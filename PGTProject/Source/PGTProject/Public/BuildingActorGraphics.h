@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuildingActor.h"
 #include "Runtime/Engine/Classes/Engine/StaticMesh.h"
 
 class PGTPROJECT_API BuildingActorGraphics
@@ -19,5 +18,5 @@ public:
 	BuildingActorGraphics();
 	~BuildingActorGraphics();
 
-	void CreateBuildingGraphics(ABuildingActor* BuildingActor);
+	//void CreateBuildingGraphics(ABuildingActor* BuildingActor);
 };

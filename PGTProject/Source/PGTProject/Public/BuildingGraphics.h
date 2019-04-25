@@ -6,6 +6,8 @@
 #include "MineralBuilding.h"
 #include "Components/BoxComponent.h"
 #include "ConstructorHelpers.h"
+#include "EconomyManager.h"
+#include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "BuildingGraphics.generated.h"
 
@@ -26,7 +28,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
+	UStaticMesh* BuildingMesh;
+	UMaterial* BuildingMaterial;
 
+	MineralBuilding* Building;
+	AEconomyManager* EcoMan;
 
 };

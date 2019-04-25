@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BuildingGraphics.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Building.h"
 
 // Sets default values
 ABuildingGraphics::ABuildingGraphics()
@@ -9,10 +11,21 @@ ABuildingGraphics::ABuildingGraphics()
 	PrimaryActorTick.bCanEverTick = true;
 
 	UStaticMeshComponent* Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-	RootComponent->SetupAttachment(RootComponent);
+	Mesh->SetupAttachment(RootComponent);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> CylinderAsset(TEXT("/Game/StarterContent/Shapes/Shape_Cylinder.Shape_Cylinder"));
+	BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Assets/Cube.Cube'"));
+	BuildingMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/Lambert1.Lambert1'"));
 
+	Mesh->SetStaticMesh(BuildingMesh);
+	Mesh->SetMaterial(0, BuildingMaterial);
+
+	/*TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		AEconomyManager::StaticClass(),
+		FoundActors);
+	EcoMan = Cast<AEconomyManager>(FoundActors[0]);*/
+
+	//EcoMan->ActiveBuildings.Add(dynamic_cast<>(new MineralBuilding()));
 	
 }
 

@@ -97,7 +97,7 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._population = 1;
+	EconomyManager->resources._population = 0;
 	for (Building* building : EconomyManager->ActiveBuildings)
 	{
 		building->BuildingFunction(EconomyManager->resources);

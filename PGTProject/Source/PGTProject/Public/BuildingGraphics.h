@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MineralBuilding.h"
 #include "Components/BoxComponent.h"
+#include "ConstructorHelpers.h"
 #include "GameFramework/Actor.h"
 #include "BuildingGraphics.generated.h"
 
@@ -25,9 +26,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UBoxComponent* BoxComponent;
+	
 
-	UStaticMeshComponent* Mesh;
 
-	MineralBuilding* Building;
 };

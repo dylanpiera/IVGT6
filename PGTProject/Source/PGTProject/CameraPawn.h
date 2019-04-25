@@ -7,6 +7,8 @@
 #include "Engine.h"
 #include "GameFramework/Pawn.h"
 #include "HexActor.h"
+#include "Engine/World.h"
+#include "BuildingGraphics.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -32,6 +34,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+
+	UWorld* WRLD;
 
 	UPROPERTY()
 	USceneComponent* RootScene;

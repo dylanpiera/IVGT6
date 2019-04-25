@@ -27,6 +27,7 @@ ACameraPawn::ACameraPawn()
 
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComp->SetupAttachment(SpringArm);
+	WRLD = GetWorld();
 }
 
 // Called when the game starts or when spawned
@@ -172,6 +173,16 @@ void ACameraPawn::OnClickRayCast()
 			FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
 			
 			// BuildBuilding (activate or add something to the hex)
+
+			
+			FVector location = hex->GetActorLocation();
+			FRotator rotation = hex->GetActorRotation();
+
+			//TSubclassOf<ABuildingGraphics> Building;
+			FActorSpawnParameters SpawnInfo;
+			SpawnInfo.Owner = hex;
+				
+			ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
 		}

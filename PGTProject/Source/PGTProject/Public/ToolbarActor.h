@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "EconomyManager.h"
+#include "GameTickManager.h"
 #include "ToolbarActor.generated.h"
 
 
@@ -17,8 +18,9 @@ public:
 	// Sets default values for this actor's properties
 	AToolbarActor();
 	int getEnergy();
-	int getMaterials();
+	int getMinerals();
 	int getMoney();
+	int getPopulation();
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,11 +31,11 @@ protected:
 private:
 	AEconomyManager* _econ_manager;
 
+public:	
 	void testFunc();
 
-public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-
+	
+	AGameTickManager* GameTickManager;
 };

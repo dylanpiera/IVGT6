@@ -18,11 +18,18 @@ void AToolbarActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TArray<AActor*> FoundActors;
+	TArray<AActor*> FoundEconomyManagers;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 		AEconomyManager::StaticClass(),
-		FoundActors);
-	_econ_manager = Cast<AEconomyManager>(FoundActors[0]);
+		FoundEconomyManagers);
+	_econ_manager = Cast<AEconomyManager>(FoundEconomyManagers[0]);
+
+	TArray<AActor*> FoundGameTickManagers;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		AGameTickManager::StaticClass(),
+		FoundGameTickManagers);
+	GameTickManager = Cast<AGameTickManager>(FoundGameTickManagers[0]);
+
 
 	testFunc();
 }
@@ -39,7 +46,7 @@ int AToolbarActor::getEnergy()
 	return _econ_manager->resources._energy;
 }
 
-int AToolbarActor::getMaterials()
+int AToolbarActor::getMinerals()
 {
 	return _econ_manager->resources._minerals;;
 }
@@ -49,9 +56,14 @@ int AToolbarActor::getMoney()
 	return _econ_manager->resources._money;
 }
 
+int AToolbarActor::getPopulation()
+{
+	return _econ_manager->resources._population;
+}
+
 void AToolbarActor::testFunc()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMaterials(), getMoney());
+	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney());
 	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
 }
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EconomyManager.h"
 #include "GameFramework/Actor.h"
 #include "GameTickManager.generated.h"
 
@@ -43,6 +44,8 @@ public:
 
 	FTimerHandle GameTickTimerHandle;
 	bool bCanTick;
+
+	AEconomyManager* EconomyManager;
 
 	UFUNCTION()
 	void GameTick();

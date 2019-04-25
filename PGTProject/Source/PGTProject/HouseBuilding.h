@@ -4,7 +4,7 @@
 class HouseBuilding : public Building {
 	int32 PopulationHousingValue = 8;
 
-	void BuildingFunction(AEconomyManager& manager) {
-		manager.resources._minerals = PopulationHousingValue;
+	void BuildingFunction(Resources& resource) override {
+		resource._population += PopulationHousingValue;
 	}
 };

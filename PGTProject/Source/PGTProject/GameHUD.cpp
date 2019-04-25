@@ -20,12 +20,6 @@ void AGameHUD::BeginPlay()
 	GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(_toolbarWidget.ToSharedRef()), 0);
 
 	// Set widget visible
-	_uiWidget->SetVisibility(EVisibility::Visible);
-}
-
-float AGameHUD::GetScreenWidth() {
-	FVector2D ViewportSize;
-	GEngine->GameViewport->GetViewportSize(ViewportSize);
-	UE_LOG(LogTemp, Warning, TEXT("viewport size here %f  x %f"), ViewportSize.X, ViewportSize.Y);
-	return ViewportSize.X;
+	//_uiWidget->SetVisibility(EVisibility::Visible);
+	_toolbarWidget->SetVisibility(EVisibility::Visible);
 }

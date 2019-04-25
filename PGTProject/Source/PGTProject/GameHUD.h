@@ -14,11 +14,9 @@ class PGTPROJECT_API AGameHUD : public AHUD
 	GENERATED_BODY()
 	
 	public:
-		//SafePointer to Widget
+		//SafePointer to Widgets
 		TSharedPtr<SSlateWidget> _uiWidget;
 		TSharedPtr<ToolbarGraphics> _toolbarWidget;
 		//Executed once gameplay started, called in .cpp
 		void BeginPlay();
-
-		float GetScreenWidth();
 };

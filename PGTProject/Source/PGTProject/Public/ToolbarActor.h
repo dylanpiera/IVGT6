@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "EconomyManager.h"
+#include "GameTickManager.h"
 #include "ToolbarActor.generated.h"
 
 
@@ -35,6 +36,6 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-
+	
+	AGameTickManager* GameTickManager;
 };

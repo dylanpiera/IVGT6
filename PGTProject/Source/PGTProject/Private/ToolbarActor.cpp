@@ -18,11 +18,18 @@ void AToolbarActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TArray<AActor*> FoundActors;
+	TArray<AActor*> FoundEconomyManagers;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 		AEconomyManager::StaticClass(),
-		FoundActors);
-	_econ_manager = Cast<AEconomyManager>(FoundActors[0]);
+		FoundEconomyManagers);
+	_econ_manager = Cast<AEconomyManager>(FoundEconomyManagers[0]);
+
+	TArray<AActor*> FoundGameTickManagers;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		AGameTickManager::StaticClass(),
+		FoundGameTickManagers);
+	GameTickManager = Cast<AGameTickManager>(FoundGameTickManagers[0]);
+
 
 	testFunc();
 }

@@ -30,28 +30,10 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	int population = _toolbarActor->getPopulation();
 	int gain = 0;
 
-	/*const UWorld * world = GEngine->GetWorld();
-	TArray<AActor*> GameTickManagers;
-	AGameTickManager* GameTickManager = NULL;
-
-	int currentHour;
-	try {
-		UGameplayStatics::GetAllActorsOfClass(world, AGameTickManager::StaticClass(), GameTickManagers);
-
-		if(GameTickManagers[0]->IsA(AGameTickManager::StaticClass()))
-			GameTickManager = Cast<AGameTickManager>(GameTickManagers[0]);
-		currentHour = GameTickManager->currentHour;
-	}
-	catch (std::exception e){
-		currentHour = 0;
-	}*/
-
-	
-
-	int currentHour = 24;
-	int currentDay = 7;
-	int currentMonth = 12;
-	int currentYear = 2100;
+	int currentHour = _toolbarActor->GameTickManager->currentHour;
+	int currentDay = _toolbarActor->GameTickManager->currentDay;
+	int currentMonth = _toolbarActor->GameTickManager->currentMonth;
+	int currentYear = _toolbarActor->GameTickManager->currentYear;
 
 
 	//Location reference to the image
@@ -100,7 +82,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(energy))
+				//.Text(FText::AsNumber(_toolbarActor->getEnergy()))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -125,7 +108,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(minerals))				
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMinerals()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -150,7 +133,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(money))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoney()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -175,7 +158,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(population))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -204,7 +187,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(currentHour))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentHour); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -220,7 +203,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(currentDay))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -228,7 +211,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(currentMonth))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentMonth); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -237,7 +220,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(currentYear))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
 			]
 		]
 	];

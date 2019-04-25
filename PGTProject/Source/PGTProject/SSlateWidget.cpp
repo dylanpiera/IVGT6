@@ -21,13 +21,13 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
 	_ownerHUD = InArgs._OwnerHUDArg;
+	_toolbarActor = InArgs._ToolbarActorArg;
 
 	//temporary values
-	int energy;
-	energy = _toolbarActor->getEnergy();
-	int minerals = 0;
-	int money = 0;
-	int population = 0;
+	int energy = _toolbarActor->getEnergy();
+	int minerals = _toolbarActor->getMinerals();
+	int money = _toolbarActor->getMoney();
+	int population = _toolbarActor->getPopulation();
 	int gain = 0;
 
 	/*const UWorld * world = GEngine->GetWorld();

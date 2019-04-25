@@ -24,6 +24,7 @@ private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
+	TWeakObjectPtr<class AToolbarActor> _toolbarActor;
 
 	//Declare buttons
 	TSharedPtr<SButton> _colourButton;

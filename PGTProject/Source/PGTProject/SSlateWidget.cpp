@@ -2,6 +2,11 @@
 #include "SlateOptMacros.h"
 #include "Engine.h"
 #include "EconomyManager.h"
+#include "ToolbarActor.h"
+#include "GameTickManager.h"
+#include "Engine/World.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Classes/Components/ActorComponent.h"
 #include <string>
 
 //Already given upon creation, needs to surround Construct
@@ -18,13 +23,36 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	_ownerHUD = InArgs._OwnerHUDArg;
 
 	//temporary values
-	int energy = 0;
+	int energy;
+	energy = _toolbarActor->getEnergy();
 	int minerals = 0;
 	int money = 0;
 	int population = 0;
 	int gain = 0;
-	int hour = 12;
-	int minute = 36;
+
+	/*const UWorld * world = GEngine->GetWorld();
+	TArray<AActor*> GameTickManagers;
+	AGameTickManager* GameTickManager = NULL;
+
+	int currentHour;
+	try {
+		UGameplayStatics::GetAllActorsOfClass(world, AGameTickManager::StaticClass(), GameTickManagers);
+
+		if(GameTickManagers[0]->IsA(AGameTickManager::StaticClass()))
+			GameTickManager = Cast<AGameTickManager>(GameTickManagers[0]);
+		currentHour = GameTickManager->currentHour;
+	}
+	catch (std::exception e){
+		currentHour = 0;
+	}*/
+
+	
+
+	int currentHour = 24;
+	int currentDay = 7;
+	int currentMonth = 12;
+	int currentYear = 2100;
+
 
 	//Location reference to the image
 	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
@@ -159,6 +187,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Text(FText::AsNumber(gain))
 			]
 		]
+
 		/*
 		 * \brief Timer in the upper right corner
 		 * \TODO link Game tick
@@ -175,7 +204,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(hour))
+				.Text(FText::AsNumber(currentHour))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -183,9 +212,24 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT(":")))
+				.Text(FText::FromString(TEXT("h")))
 			]
-			//Minutes
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::Green)
+				.Font(FSlateFontInfo("Arial", 24))
+				.Text(FText::AsNumber(currentDay))
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::Green)
+				.Font(FSlateFontInfo("Arial", 24))
+				.Text(FText::AsNumber(currentMonth))
+			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
@@ -193,7 +237,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(minute))
+				.Text(FText::AsNumber(currentYear))
 			]
 		]
 	];
@@ -215,3 +259,23 @@ FReply SSlateWidget::buttonTest()
 	//Return Handled() to basically break, use Unhandled() if it needs to continue
 	return FReply::Handled();
 }
+
+//FReply SSlateWidget::energyCall()
+//{
+//	GEngine->GameViewport->AddViewportWidgetContent(
+//		SNew(SVerticalBox)
+//		+ SVerticalBox::Slot()
+//		.HAlign(HAlign_Center)
+//		.VAlign(VAlign_Top)
+//		[
+//			SNew(SBox)
+//			.WidthOverride(500)
+//		.HeightOverride(40)
+//		[
+//			
+//		]
+//		]
+//	);
+//
+//	return FReply::Handled();
+//}

@@ -6,10 +6,17 @@
 #include <cassert>
 #include <vector>
 #include <math.h>  // NOLINT(modernize-deprecated-headers)
+#include "HexActorGraphics.h"
+
+// Graphics controller
+HexActorGraphics Graphic;
 
 // Sets default values
 AHexActor::AHexActor()
 {
+	// Create hexagon tile graphics
+	Graphic.CreateHexGraphics(this);
+
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -98,6 +105,22 @@ std::vector<FIntPoint> AHexActor::polygon_corners(const LayoutHelper::Layout lay
 	return corners;
 }
 
+FVector AHexActor::GetScreenSpaceLocation(Hex *hex)
+{
+	// Calculate space position for hex based on mesh size
+	float k = (Graphic.MeshSize.X - Graphic.MeshSize.Y / FMath::Sqrt(12));
+
+	// Gap between tiles for better visualization
+	float gapX = hex->q * 3;
+	float gapY = hex->r * 3;
+
+	return FVector(
+		hex->q * k + gapX,
+		hex->r * Graphic.MeshSize.Y + hex->q * (Graphic.MeshSize.Y / 2.f) + gapY,
+		0
+	);
+}
+
 #pragma endregion Drawing
 
 
@@ -105,7 +128,7 @@ std::vector<FIntPoint> AHexActor::polygon_corners(const LayoutHelper::Layout lay
 void AHexActor::BeginPlay()
 {
 	Super::BeginPlay();
-
+		
 	auto hex = Hex(0, 0);
 }
 

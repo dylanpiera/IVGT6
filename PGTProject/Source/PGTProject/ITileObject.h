@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HexActor.h"
+#include "EconomyManager.h"
 #include <algorithm>
 
 class ITileObject
@@ -41,24 +42,14 @@ public:
 	}
 
 	#pragma region Resources
-	//TODO: Move this to a economy (manager) file??
-	struct Resources
-	{
-		UINT32 _energy;
-		UINT32 _materials;
-		UINT32 _money;
-
-		explicit Resources(const UINT32 energy = 0, const UINT32 materials = 0, const UINT32 money = 0) : _energy(energy), _materials(materials), _money(money) { }
-	};
-
-	Resources _resources;
+	EconomyManager::Resources _resources;
 
 	/**
 	 * \brief
 	 * Updates the supplied parameter with the resource output from this tile.
 	 * \param resources
 	 */
-	virtual void UpdateResources(Resources &resources)
+	virtual void UpdateResources(EconomyManager::Resources &resources)
 	{
 		resources._energy += this->_resources._energy;
 		resources._materials += this->_resources._materials;

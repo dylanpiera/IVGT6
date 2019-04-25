@@ -4,25 +4,36 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "HexGrid.generated.h"
+#include "EconomyManager.h"
+#include "ToolbarActor.generated.h"
+
 
 UCLASS()
-class PGTPROJECT_API AHexGrid : public AActor
+class PGTPROJECT_API AToolbarActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AHexGrid();
+	AToolbarActor();
+	int getEnergy();
+	int getMaterials();
+	int getMoney();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	int currentTool;
+	int currentMode;
+
+private:
+	AEconomyManager* _econ_manager;
+
+	void testFunc();
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void GenerateGrid(int dimention);
 
 };

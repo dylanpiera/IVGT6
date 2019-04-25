@@ -52,7 +52,7 @@ public:
 	virtual void UpdateResources(EconomyManager::Resources &resources)
 	{
 		resources._energy += this->_resources._energy;
-		resources._materials += this->_resources._materials;
+		resources._minerals += this->_resources._minerals;
 		resources._money += this->_resources._money;
 	}
 #pragma endregion

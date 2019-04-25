@@ -6,7 +6,7 @@
 ACameraPawn::ACameraPawn()
 {
 	margin = 15;
-	camSpeed = 3;
+	camSpeed = 15;
 	rotation = 0;
 
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -144,7 +144,7 @@ void ACameraPawn::OnClickRayCast()
 
 	//Define start and end(direction) location
 	FVector startLocation = mousePos;
-	FVector endLocation = startLocation + (mouseDir * 1000.f);
+	FVector endLocation = startLocation + (mouseDir * 15000.f);
 
 	//contains the actor that was hit
 	FHitResult hit;
@@ -163,7 +163,17 @@ void ACameraPawn::OnClickRayCast()
 	if(SelectedActor != NULL)
 	{
 		//TODO: Change destroy to something else. This was for testing purpose.
-		SelectedActor->Destroy();
+		//SelectedActor->Destroy();
+
+		if (SelectedActor->IsA(AHexActor::StaticClass()))
+		{
+			//FVector hexPos = SelectedActor->GetActorLocation();
+			AHexActor* hex = Cast<AHexActor>(SelectedActor);
+			FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
+			
+			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
+		}
+		else SelectedActor->Destroy();
 	}
 }
 

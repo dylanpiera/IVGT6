@@ -6,10 +6,10 @@
 #include "Widgets/SCompoundWidget.h"
 #include "GameHUD.h"
 #include "vector"
-#include "string"
+#include "map"
 
 using std::vector;
-using std::string;
+using std::map;
 
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 {
@@ -30,25 +30,49 @@ private:
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 
 	// Toolbar Components
+	enum ToolbarSections { RoadsSection, BuildingsSection };
+	enum OptionSections { RoughRoad, EnergyBuilding, MineralsBuilding, MoneyBuilding };
+
 	FSlateFontInfo ArialFont;
-	mutable int SectionIndex; // Mutable index to be updated inside "const" functions
-	vector<string> SectionNames = { "Roads", "Buildings" };
+	mutable ToolbarSections CurrentSection; // Mutable to be updated inside "const" functions
+	mutable bool IsOpenToolbarViewPanel;
+
+	mutable map<ToolbarSections, FString> SectionsTitles = {
+		{RoadsSection, "Roads" },
+		{BuildingsSection, "Buildings" }
+	};
+
+	mutable map<OptionSections, FString> OptionsTitles = {
+		{ RoughRoad, "Rough Road" },
+		{ EnergyBuilding, "Power Plancat"},
+		{ MineralsBuilding, "Minerawr Extractor"},
+		{ MoneyBuilding, "Intergalatic Mint"}
+	};
+
+	map<ToolbarSections, vector<OptionSections>> Sections = {
+		{ RoadsSection, { RoughRoad } },
+		{ BuildingsSection, { EnergyBuilding, MineralsBuilding, MoneyBuilding } }
+	};
 
 	// First Section Components
-	TSharedPtr<STextBlock> InfoText_1;
-	TSharedPtr<SButton> _RoadsSectionButton;
 
 	// Second Section Components
-	TSharedPtr<STextBlock> InfoText_2;
-	TSharedPtr<SButton> _BuildingsSectionButton;
 
-	// Get section name based on index
-	FText GetSectionName(int Index) const;
+	// Get section title
+	FText GetSectionTitle(ToolbarSections Index) const;
 	// Change which section is selected
-	FReply ChangeSection(int Index);
+	FReply ChangeSection(ToolbarSections Index);
 	// Update which section should be visible
-	EVisibility GetSectionVisibility(int Index) const;	
+	EVisibility GetSectionVisibility(ToolbarSections Index) const;
+	// Toolbar view options panel visibility
+	EVisibility GetToolbarViewVisibility() const;
 	// Basic text function (FIXME: create content for sections, instead of just a text)
 	FText GetInfoText() const;
+	// Select road based on index
+	FReply SelectRoad(OptionSections Index);
+	// Select building based on index
+	FReply SelectBuilding(OptionSections Index);
 
+	FText GetOptionTitle(OptionSections OptionIndex) const;
 };
+

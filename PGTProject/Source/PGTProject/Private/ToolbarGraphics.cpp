@@ -224,7 +224,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					+ SOverlay::Slot()
 					[
 						SNew(SButton)
-						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
+						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
 						.OnClicked(this, &ToolbarGraphics::ChangeSection, RoadsSection)
 					]
 				]
@@ -240,7 +240,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					+ SOverlay::Slot()
 					[
 						SNew(SButton)
-						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
+						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
 						.OnClicked(this, &ToolbarGraphics::ChangeSection, BuildingsSection)
 					]
 				]

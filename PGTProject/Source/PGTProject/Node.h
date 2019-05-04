@@ -13,15 +13,15 @@ struct Node
 {
 public:
 	// Reference for hextile
-	TestingTile* node;
+	TestingTile* HexTile;
 
 	// Node costs
-	int fcost;			// Total cost
-	int hcost;			// Cost from the end node
-	int gcost;			// Cost from the start node
+	int FCost;			// Total cost
+	int HCost;			// Cost from the end node
+	int GCost;			// Cost from the start node
 
 	// Node parent (for backtracing path)
-	Node* parent;
+	Node* Parent;
 
 	// Create a node 
 	Node(TestingTile* hexTile);

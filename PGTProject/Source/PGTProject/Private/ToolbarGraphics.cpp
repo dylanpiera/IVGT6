@@ -251,13 +251,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-// Basic text function (FIXME: create content for sections, instead of just a text)
-FText ToolbarGraphics::GetInfoText() const
-{
-	FString Result = TEXT("Content");
-	return FText::FromString(Result);
-}
-
 FText ToolbarGraphics::GetOptionTitle(OptionSections OptionIndex) const
 {
 	FString OptionName = OptionsTitles[OptionIndex];

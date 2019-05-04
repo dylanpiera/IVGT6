@@ -12,30 +12,10 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 	// Retrieve arguments
 	_ownerHUD = InArgs._OwnerHUDArg;
 
-	// Define text font
-	FString ArialFontPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Fonts/Arial.ttf";
-	ArialFont = FSlateFontInfo(ArialFontPath, 20);
+	// Set style (fonts, images, icons...)
+	StyleSettings();
 
-	// Define text style for button components
-	FTextBlockStyle StyleRef;
-	StyleRef.SetFont(FSlateFontInfo(ArialFontPath, 16));
-	StyleRef.ColorAndOpacity = FLinearColor::White;
-
-	// Get background image for toolbar
-	FString BackgroundImagePath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/BlackBackground.png";
-
-	// Get icons
-	FString Road_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Road_Icon.png";
-	FString Building_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Building_Icon.png";
-
-	FString Road1_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Road_Icon_1.png";
-	FString Building1_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Building_Icon_1.png";
-	FString Building2_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Building_Icon_2.png";
-	FString Building3_IconPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Building_Icon_3.png";
-
-	FString ImageFramePath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Images/Image_Frame.png";
-
-	// Close toolbar view panel
+	// Close toolbar view options panel
 	IsOpenToolbarViewPanel = false;
 
 	// Interface
@@ -50,7 +30,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 		.HAlign(HAlign_Center)
 		.Padding(FMargin(0, 0, 0, 10))
 		[
-			// Toolbar View Box
+			// Toolbar View Options Panel
 			SNew(SBox)
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
@@ -59,7 +39,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 				// Background Image
 				SNew(SBorder)
 				.BorderBackgroundColor(FLinearColor(56, 56, 56, 0.7f))
-				.BorderImage(new FSlateDynamicImageBrush(FName(*BackgroundImagePath), FVector2D(10, 10)))
+				.BorderImage(new FSlateDynamicImageBrush(FName(*ImagePaths[BackgroundImagePath]), FVector2D(10, 10)))
 				[
 					SNew(SHorizontalBox)
 					// Roads Section
@@ -80,7 +60,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*Road1_IconPath), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Road1_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[
@@ -118,7 +98,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*Building1_IconPath), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building1_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[
@@ -147,7 +127,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*Building2_IconPath), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building2_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[
@@ -176,7 +156,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*Building3_IconPath), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building3_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[
@@ -205,7 +185,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 		.AutoHeight()
 		.Padding(FMargin(0, 0, 0, 10))
 		[
-			// Toolbar Box
+			// Toolbar Sections Panel
 			SNew(SBox)
 			.VAlign(VAlign_Bottom)
 			.HAlign(HAlign_Center)
@@ -219,7 +199,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					+ SOverlay::Slot()
 					[
 						SNew(SImage)
-						.Image(new FSlateDynamicImageBrush(FName(*Road_IconPath), FVector2D(100, 100)))
+						.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Road_IconPath]), FVector2D(100, 100)))
 					]
 					+ SOverlay::Slot()
 					[
@@ -235,7 +215,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					+ SOverlay::Slot()
 					[
 						SNew(SImage)
-						.Image(new FSlateDynamicImageBrush(FName(*Building_IconPath), FVector2D(100, 100)))
+						.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building_IconPath]), FVector2D(100, 100)))
 					]
 					+ SOverlay::Slot()
 					[
@@ -251,22 +231,27 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
+// Get option title for section
 FText ToolbarGraphics::GetOptionTitle(OptionSections OptionIndex) const
 {
 	FString OptionName = OptionsTitles[OptionIndex];
 	return FText::FromString(OptionName);
 }
 
-FReply ToolbarGraphics::SelectRoad(OptionSections Index) {
-
+// Select road option
+FReply ToolbarGraphics::SelectRoad(OptionSections Index) const
+{
+	// TODO: Make function select and place down a road
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Selecting road"));
 	UE_LOG(LogTemp, Warning, TEXT("Selecting road: %d"), Index);
 
 	return FReply::Handled();
 }
 
-FReply ToolbarGraphics::SelectBuilding(OptionSections Index) {
-
+// Select building option
+FReply ToolbarGraphics::SelectBuilding(OptionSections Index) const
+{
+	// TODO: Make function select and place down a building
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Selecting building"));
 	UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), Index);
 
@@ -274,7 +259,7 @@ FReply ToolbarGraphics::SelectBuilding(OptionSections Index) {
 }
 
 // Change which section is selected
-FReply ToolbarGraphics::ChangeSection(ToolbarSections Index)
+FReply ToolbarGraphics::ChangeSection(ToolbarSections Index) const
 {
 	if(CurrentSection == Index && IsOpenToolbarViewPanel) // If section is opened, close it
 	{
@@ -292,33 +277,44 @@ FReply ToolbarGraphics::ChangeSection(ToolbarSections Index)
 EVisibility ToolbarGraphics::GetSectionVisibility(ToolbarSections Index) const
 {
 	bool SectionVisibility = false;
-	if (Index == CurrentSection) {
+	if (Index == CurrentSection) { // If section is current section then display, otherwise collapse section options
 		SectionVisibility = true;
 	}
 	
 	return SectionVisibility ? EVisibility::Visible : EVisibility::Collapsed;
 }
 
-// Get toolbar view panel visibility
+// Get toolbar view options panel visibility
 EVisibility ToolbarGraphics::GetToolbarViewVisibility() const
 {
 	return IsOpenToolbarViewPanel ? EVisibility::Visible : EVisibility::Hidden;
 }
 
-// Get section name based on index (section names are predefined on header)
+// Get section name to be displayed on interface (section names are predefined on header)
 FText ToolbarGraphics::GetSectionTitle(ToolbarSections Index) const
 {
 	FString SectionName = SectionsTitles[Index];
 	return FText::FromString(SectionName);
 }
 
-/*
-SAssignNew(InfoText_1, STextBlock)
-.Font(ArialFont)
-.Justification(ETextJustify::Left)
-.Text(this, &ToolbarGraphics::GetInfoText)
-.ColorAndOpacity(FLinearColor::Blue)
-.Visibility(this, &ToolbarGraphics::GetSectionVisibility, 0)
+void ToolbarGraphics::StyleSettings()
+{
+	// Define text font
+	FString ArialFontPath = FString(FPaths::ProjectContentDir()) + "Assets/UI/Fonts/Arial.ttf";
+	ArialFont = FSlateFontInfo(ArialFontPath, 20);
 
+	FString ProjectDir = FString(FPaths::ProjectContentDir());
 
-*/
+	// Toolbar view options panel background image
+	ImagePaths.insert(pair<ImageTypes, FString>(BackgroundImagePath, ProjectDir + "Assets/UI/Images/BlackBackground.png"));
+
+	// Sections Icons
+	ImagePaths.insert(pair<ImageTypes, FString>(Road_IconPath, ProjectDir + "Assets/UI/Images/Road_Icon.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon.png"));
+
+	// Options Icons
+	ImagePaths.insert(pair<ImageTypes, FString>(Road1_IconPath, ProjectDir + "Assets/UI/Images/Road_Icon_1.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building1_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_1.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building2_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_2.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building3_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_3.png"));
+}

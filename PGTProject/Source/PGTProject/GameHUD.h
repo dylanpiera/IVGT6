@@ -7,6 +7,7 @@
 // Predeclaration of SlateWidget
 class SSlateWidget;
 class ToolbarGraphics;
+class MainGraphics;
 
 UCLASS()
 class PGTPROJECT_API AGameHUD : public AHUD
@@ -17,6 +18,7 @@ class PGTPROJECT_API AGameHUD : public AHUD
 		//SafePointer to Widgets
 		TSharedPtr<SSlateWidget> _uiWidget;
 		TSharedPtr<ToolbarGraphics> _toolbarWidget;
+		TSharedPtr<MainGraphics> _mainWidget;
 		//Executed once gameplay started, called in .cpp
 		void BeginPlay();
 };

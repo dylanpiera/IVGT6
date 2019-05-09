@@ -15,13 +15,13 @@ void MainGraphics::Construct(const FArguments& InArgs)
 	.HAlign(HAlign_Fill)
 	.VAlign(VAlign_Fill)
 	[
-		SNew(SHorizontalBox)
-		+ SHorizontalBox::Slot()
+		SNew(SVerticalBox)
+		+ SVerticalBox::Slot()
 		[
 			SAssignNew(_ownerEconomyBar, SSlateWidget)
 			.OwnerHUDArg(_ownerHUD)
 		]
-		+ SHorizontalBox::Slot()
+		+ SVerticalBox::Slot()
 		[
 			SAssignNew(_ownerToolbar, ToolbarGraphics)
 			.OwnerHUDArg(_ownerHUD)

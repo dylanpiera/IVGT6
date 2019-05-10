@@ -3,39 +3,35 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "MineralBuilding.h"
+#include "Components/BoxComponent.h"
+#include "ConstructorHelpers.h"
 #include "EconomyManager.h"
-#include "GameTickManager.h"
-#include "ToolbarActor.generated.h"
-
+#include "Engine/World.h"
+#include "GameFramework/Actor.h"
+#include "BuildingGraphics.generated.h"
 
 UCLASS()
-class PGTPROJECT_API AToolbarActor : public AActor
+class PGTPROJECT_API ABuildingGraphics : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AToolbarActor();
-	int getEnergy();
-	int getMinerals();
-	int getMoney();
-	int getPopulation();
+	ABuildingGraphics();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	int currentTool;
-	int currentMode;
-
-private:
-	AEconomyManager* _econ_manager;
 
 public:	
-	void testFunc();
-
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
-	AGameTickManager* GameTickManager;
+
+	UStaticMesh* BuildingMesh;
+	UMaterial* BuildingMaterial;
+
+	MineralBuilding* Building;
+	AEconomyManager* EcoMan;
+
 };

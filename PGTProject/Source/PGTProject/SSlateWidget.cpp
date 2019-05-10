@@ -24,17 +24,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	_toolbarActor = InArgs._ToolbarActorArg;
 
 	//temporary values
-	int energy = _toolbarActor->getEnergy();
-	int minerals = _toolbarActor->getMinerals();
-	int money = _toolbarActor->getMoney();
-	int population = _toolbarActor->getPopulation();
 	int gain = 0;
-
-	int currentHour = _toolbarActor->GameTickManager->currentHour;
-	int currentDay = _toolbarActor->GameTickManager->currentDay;
-	int currentMonth = _toolbarActor->GameTickManager->currentMonth;
-	int currentYear = _toolbarActor->GameTickManager->currentYear;
-
 
 	//Location reference to the image
 	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
@@ -81,8 +71,9 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SAssignNew(_energyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				//.Text(FText::AsNumber(_toolbarActor->getEnergy()))
+				//.Font(FSlateFontInfo("Raleway-Bold", 24))
+				//.Font(FSlateFontInfo(font.FontMaterial, font.Size))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -91,7 +82,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
 			//Minerals
@@ -107,7 +98,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SAssignNew(_materialsValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMinerals()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -116,7 +107,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
 			//Money
@@ -132,7 +123,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SAssignNew(_moneyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoney()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -141,7 +132,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
 			//Population
@@ -157,7 +148,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SAssignNew(_populationValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -166,7 +157,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
 		]
@@ -186,7 +177,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentHour); })
 			]
 			+ SHorizontalBox::Slot()
@@ -194,23 +185,25 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::FromString(TEXT("h")))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentMonth); })
 			]
 			+ SHorizontalBox::Slot()
@@ -219,7 +212,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
 			]
 		]

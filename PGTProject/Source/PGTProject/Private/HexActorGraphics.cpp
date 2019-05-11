@@ -8,10 +8,10 @@
 HexActorGraphics::HexActorGraphics()
 {
 	// Load hexagon tile mesh and store it
-	HexTileMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Assets/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
+	HexTileMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Assets/HexTile/HexTileMesh_StaticMesh.HexTileMesh_StaticMesh'"));
 	
 	// Load RockSnow Material
-	RockSnowMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/HexTile_Materials/RockSnow_Material.RockSnow_Material'"));
+	RockSnowMaterial = LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/HexTile/TerrainMat.TerrainMat'"));
 	
 	if (HexTileMesh) {
 

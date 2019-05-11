@@ -37,10 +37,10 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 
 
 	//Location reference to the image
-	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
-	FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
-	FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
-	FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
+	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/UI/Images/energyIcon.png");
+	FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/UI/Images/mineralIcon.png");
+	FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/UI/Images/moneyIcon.png");
+	FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/UI/Images/populationIcon.png");
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)

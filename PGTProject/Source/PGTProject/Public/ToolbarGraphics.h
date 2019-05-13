@@ -47,15 +47,12 @@ private:
 		{ MineralsBuilding, "Minerawr Extractor"},
 		{ MoneyBuilding, "Intergalatic Mint"}
 	};
-	map<ToolbarSections, vector<OptionSections>> Sections = { // Sections Structure
-		{ RoadsSection, { RoughRoad } },
-		{ BuildingsSection, { EnergyBuilding, MineralsBuilding, MoneyBuilding } }
-	};
 
 	// Style Components
 	FSlateFontInfo ArialFont;
 	enum ImageTypes { BackgroundImagePath, Road_IconPath, Building_IconPath, Road1_IconPath, Building1_IconPath,
-		Building2_IconPath, Building3_IconPath };
+		Building2_IconPath, Building3_IconPath, Destroy_IconPath
+	};
 	map<ImageTypes, FString> ImagePaths;
 
 	// Get section name to be displayed on interface
@@ -74,6 +71,7 @@ private:
 	FReply SelectBuilding(OptionSections Index) const;
 	// Define style settings
 	void StyleSettings();
-
+	// Destroy building/road
+	FReply Destroy() const;
 };
 

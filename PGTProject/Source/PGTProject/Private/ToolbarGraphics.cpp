@@ -224,6 +224,22 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 						.OnClicked(this, &ToolbarGraphics::ChangeSection, BuildingsSection)
 					]
 				]
+				// Destroy
+				+ SUniformGridPanel::Slot(2, 0)
+				[
+					SNew(SOverlay)
+					+ SOverlay::Slot()
+					[
+						SNew(SImage)
+						.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Destroy_IconPath]), FVector2D(100, 100)))
+					]
+					+ SOverlay::Slot()
+					[
+						SNew(SButton)
+						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
+						.OnClicked(this, &ToolbarGraphics::Destroy)
+					]
+				]
 			]
 		]
 	];
@@ -297,6 +313,15 @@ FText ToolbarGraphics::GetSectionTitle(ToolbarSections Index) const
 	return FText::FromString(SectionName);
 }
 
+// Destroy building/road
+FReply ToolbarGraphics::Destroy() const
+{
+	// TODO: Make function destroy building/road
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Destroy"));
+
+	return FReply::Handled();
+}
+
 void ToolbarGraphics::StyleSettings()
 {
 	// Define text font
@@ -311,6 +336,7 @@ void ToolbarGraphics::StyleSettings()
 	// Sections Icons
 	ImagePaths.insert(pair<ImageTypes, FString>(Road_IconPath, ProjectDir + "Assets/UI/Images/Road_Icon.png"));
 	ImagePaths.insert(pair<ImageTypes, FString>(Building_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Destroy_IconPath, ProjectDir + "Assets/UI/Images/Destroy_Icon.png"));
 
 	// Options Icons
 	ImagePaths.insert(pair<ImageTypes, FString>(Road1_IconPath, ProjectDir + "Assets/UI/Images/Road_Icon_1.png"));

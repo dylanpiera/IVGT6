@@ -27,9 +27,9 @@ public:
 	void GenerateGrid();
 	void LogGrid() const;
 
-	const int mapsize = 10;
+	const int mapsize = 32;
 
-	AHexActor::Hex *hexes[10][10];
+	AHexActor::Hex *hexes[32][32];
 
 	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
 

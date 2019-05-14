@@ -9,19 +9,19 @@
 
 using namespace std;
 
+// Avaiable resources
 enum MineralResources { Catanium, NightGems };
 
 class PGTPROJECT_API HexActorGraphics
 {
 private:
-	USceneComponent* scene;
-
 	UStaticMesh* HexTileMesh;		// Mesh storage
 	UMaterial* TerrainMaterial;		// Terrain Material
 
 	UStaticMesh* MineralMesh;		// Minerals Mesh storage
-	map<MineralResources, UMaterial*> MineralResourceMaterials;
+	map<MineralResources, UMaterial*> MineralResourceMaterials; // Store resources materials
 
+	// Check if material exists
 	bool IfMaterialExists(MineralResources resource);
 
 public:
@@ -33,6 +33,8 @@ public:
 
 	// Create a graphic visualization of an hexagon tile for a HexActor 
 	void CreateHexGraphics(AHexActor* HexActorRef);
-
+	// Create a graphic visualization of the resources for a HexActor
 	void AddResourceGraphics(MineralResources resource, AHexActor* HexActorRef);
+	// Remove graphic visualization of resources from HexActor
+	void RemoveResourceGraphics(AHexActor* HexActorRef);
 };

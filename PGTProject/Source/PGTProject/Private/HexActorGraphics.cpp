@@ -24,7 +24,6 @@ HexActorGraphics::HexActorGraphics()
 		Radius = HexTileMesh->GetBounds().SphereRadius;
 	}
 
-	scene = NULL; // Reset scene
 }
 
 // Create a graphic visualization of an hexagon tile for a HexActor
@@ -37,9 +36,9 @@ void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 		MeshComponent->SetStaticMesh(HexTileMesh);
 		MeshComponent->SetMaterial(0, TerrainMaterial);
 
-		// Define HexActor RootComponent as the scene
-		if (scene == NULL) {
-			scene = HexActorRef->CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
+		// If HexActor doesn't have RootComponent, create it
+		if (HexActorRef->GetRootComponent() == NULL) {
+			USceneComponent* scene = HexActorRef->CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
 			HexActorRef->SetRootComponent(scene);
 		}
 
@@ -49,32 +48,55 @@ void HexActorGraphics::CreateHexGraphics(AHexActor* HexActorRef) {
 	}
 }
 
+// Create a graphic visualization of the resources for a HexActor
 void HexActorGraphics::AddResourceGraphics(MineralResources resource, AHexActor* HexActorRef)
 {
 	// If hex and mineral meshes exist, add minerals to the HexActor
 	if (HexTileMesh && MineralMesh && IfMaterialExists(resource))
 	{
-		// Add mesh with material to HexActor
-		UStaticMeshComponent* ResourceMeshComponent = HexActorRef->CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyResourceMesh"));
-		ResourceMeshComponent->SetStaticMesh(MineralMesh);
-		ResourceMeshComponent->SetMaterial(0, MineralResourceMaterials.at(resource));
+		// If resource component does not exist, create one
+		UStaticMeshComponent* ResourceMeshComponent = (UStaticMeshComponent*)HexActorRef->GetDefaultSubobjectByName("MyResourceMesh");
+		if (ResourceMeshComponent == NULL) {
+			ResourceMeshComponent = HexActorRef->CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MyResourceMesh"));
+			// Adjust component position relative to tile mesh
+			ResourceMeshComponent->AddRelativeLocation(FVector(113, 100, -13));
+			// Define mesh and material
+			ResourceMeshComponent->SetStaticMesh(MineralMesh);
+			ResourceMeshComponent->SetMaterial(0, MineralResourceMaterials.at(resource));
+			// Register component
+			ResourceMeshComponent->RegisterComponent();
 
-		// Define HexActor RootComponent as the scene
-		if (scene == NULL) {
-			scene = HexActorRef->CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
-			HexActorRef->SetRootComponent(scene);
+			// If HexActor doesn't have RootComponent, create it
+			if (HexActorRef->GetRootComponent() == NULL) {
+				USceneComponent* scene = HexActorRef->CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
+				HexActorRef->SetRootComponent(scene);
+			}
+
+			// Attach resource mesh to the scene
+			USceneComponent* HexActorRootComponent = HexActorRef->GetRootComponent();
+			ResourceMeshComponent->AttachToComponent(HexActorRootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 		}
-
-		// Attach resource mesh to the scene
-		USceneComponent* HexActorRootComponent = HexActorRef->GetRootComponent();
-		ResourceMeshComponent->SetupAttachment(HexActorRootComponent);
+		else // If resource component exists update it
+		{
+			// Redefine material
+			ResourceMeshComponent->SetMaterial(0, MineralResourceMaterials.at(resource));
+			// Register component
+			ResourceMeshComponent->RegisterComponent();
+		}
 	}
+}
+
+// Remove graphic visualization of resources from HexActor
+void HexActorGraphics::RemoveResourceGraphics(AHexActor* HexActorRef)
+{
+	UStaticMeshComponent* ResourceComponent = (UStaticMeshComponent*) HexActorRef->GetDefaultSubobjectByName("MyResourceMesh");
+	ResourceComponent->UnregisterComponent();
 }
 
 // Check if material exists
 bool HexActorGraphics::IfMaterialExists(MineralResources resource)
 {
-	// If searched for resource material and the list didn't end, then found it
+	// If searched for resource material and the list didn't end, material was found
 	if (MineralResourceMaterials.find(resource) != MineralResourceMaterials.end())
 	{
 		return true;

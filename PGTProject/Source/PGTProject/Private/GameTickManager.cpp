@@ -19,10 +19,9 @@ AGameTickManager::AGameTickManager()
 	timer = 4.0f;
 	timeMultiplier = 1;
 
-	days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+	days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
-	months = { "January", "February", "March", "April", "May", "June",
-				"July", "August", "September", "October", "November", "December" };
+	months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
 	dayName = days[currentDay];
 	monthName = months[currentMonth];

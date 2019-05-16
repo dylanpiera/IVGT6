@@ -101,6 +101,7 @@ void AGameTickManager::GameTickDay()
 	EconomyManager->resources._energy = 0;
 	for (Building* building : EconomyManager->ActiveBuildings)
 	{
+		// Zoek naar states ipv buildings zelf
 		building->BuildingFunction(EconomyManager->resources);
 	}
 	EconomyManager->resources._money += 10 * EconomyManager->resources._population;

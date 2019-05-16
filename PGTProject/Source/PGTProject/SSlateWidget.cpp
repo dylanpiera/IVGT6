@@ -73,7 +73,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_energyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
@@ -82,7 +82,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
@@ -98,7 +98,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_materialsValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMinerals()); })
 			]
@@ -107,7 +107,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
@@ -123,7 +123,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_moneyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoney()); })
 			]
@@ -132,7 +132,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
@@ -148,7 +148,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_populationValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
@@ -157,7 +157,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::AsNumber(gain))
 			]
@@ -177,7 +177,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentHour); })
 			]
@@ -185,7 +185,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text(FText::FromString(TEXT("h")))
 			]
@@ -194,25 +194,34 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay); })
+				.Text_Lambda([this]()->FText {return FText::FromString(_toolbarActor->GameTickManager->dayName); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentMonth); })
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay + 1); })
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
+				.Text_Lambda([this]()->FText {return FText::FromString(_toolbarActor->GameTickManager->monthName); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
+				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
 			]

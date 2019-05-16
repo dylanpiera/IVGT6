@@ -72,13 +72,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		.VAlign((VAlign_Top))
 		[
 			SNew(SHorizontalBox)
-			/*+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				SNew(SColorBlock)
-				.Color(FLinearColor::Red)
-				.Size(FVector2D::Size())
-			]*/
 			//Energy
 			+SHorizontalBox::Slot()
 			//Adjusts width to the element size
@@ -240,38 +233,3 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 }
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
-
-/*
- * \brief
- * Test function for the button of type FReply
- */
-FReply SSlateWidget::buttonTest()
-{
-	//Add event here
-
-	//Test event that shows debug message in-game
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Button Clicked"));
-
-	//Return Handled() to basically break, use Unhandled() if it needs to continue
-	return FReply::Handled();
-}
-
-//FReply SSlateWidget::energyCall()
-//{
-//	GEngine->GameViewport->AddViewportWidgetContent(
-//		SNew(SVerticalBox)
-//		+ SVerticalBox::Slot()
-//		.HAlign(HAlign_Center)
-//		.VAlign(VAlign_Top)
-//		[
-//			SNew(SBox)
-//			.WidthOverride(500)
-//		.HeightOverride(40)
-//		[
-//			
-//		]
-//		]
-//	);
-//
-//	return FReply::Handled();
-//}

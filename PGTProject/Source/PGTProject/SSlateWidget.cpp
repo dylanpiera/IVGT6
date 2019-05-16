@@ -60,13 +60,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		.VAlign((VAlign_Top))
 		[
 			SNew(SHorizontalBox)
-			/*+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				SNew(SColorBlock)
-				.Color(FLinearColor::Red)
-				.Size(FVector2D::Size())
-			]*/
 			//Energy
 			+SHorizontalBox::Slot()
 			//Adjusts width to the element size

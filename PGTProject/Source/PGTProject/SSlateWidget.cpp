@@ -51,13 +51,35 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		]
 		/*
 		 * \brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
-		 * \TODO reference to actual variables in the game
+		 * 
 		 */
+
+		+SOverlay::Slot()
+		.VAlign((VAlign_Top))
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(SColorBlock)
+				.Color(FLinearColor::Black)
+				.Size(FVector2D(2560, 72))
+			]
+		]
+
+
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))
 		[
-			//Energy
 			SNew(SHorizontalBox)
+			/*+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(SColorBlock)
+				.Color(FLinearColor::Red)
+				.Size(FVector2D::Size())
+			]*/
+			//Energy
 			+SHorizontalBox::Slot()
 			//Adjusts width to the element size
 			.AutoWidth()
@@ -71,8 +93,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SAssignNew(_energyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
-				//.Font(FSlateFontInfo("Raleway-Bold", 24))
-				//.Font(FSlateFontInfo(font.FontMaterial, font.Size))
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]

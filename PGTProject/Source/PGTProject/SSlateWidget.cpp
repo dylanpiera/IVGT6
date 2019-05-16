@@ -37,18 +37,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	[
 		//Creates new overlay in slot, each + SOverlay adds a new slot that contains a component
 		SNew(SOverlay)
-		+ SOverlay::Slot()
-		//Vertical and Horizontal alignment of slot
-		.VAlign(VAlign_Bottom)
-		.HAlign(HAlign_Left)
-		[
-			//Adds button
-			SAssignNew(_colourButton,SButton)
-			.ButtonColorAndOpacity(FLinearColor::Black)
-			.ButtonColorAndOpacity(FLinearColor::Blue)
-			//Call event with OnClicked(this, &YourClassName::yourFunctionName)
-			.OnClicked(this, &SSlateWidget::buttonTest)
-		]
 		/*
 		 * \brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
 		 * 
@@ -240,38 +228,3 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 }
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
-
-/*
- * \brief
- * Test function for the button of type FReply
- */
-FReply SSlateWidget::buttonTest()
-{
-	//Add event here
-
-	//Test event that shows debug message in-game
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Button Clicked"));
-
-	//Return Handled() to basically break, use Unhandled() if it needs to continue
-	return FReply::Handled();
-}
-
-//FReply SSlateWidget::energyCall()
-//{
-//	GEngine->GameViewport->AddViewportWidgetContent(
-//		SNew(SVerticalBox)
-//		+ SVerticalBox::Slot()
-//		.HAlign(HAlign_Center)
-//		.VAlign(VAlign_Top)
-//		[
-//			SNew(SBox)
-//			.WidthOverride(500)
-//		.HeightOverride(40)
-//		[
-//			
-//		]
-//		]
-//	);
-//
-//	return FReply::Handled();
-//}

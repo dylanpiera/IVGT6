@@ -1,9 +1,9 @@
-#ifndef Building_Header
-#define Building_Header
-#include "BuildingState.h"
+#ifndef BuildingObject_Header
+#define BuildingObject_Header
+//#include "BuildingState.h"
 #include "Resources.h"
 
-class Building {
+class BuildingObject {
 public:
 	
 	/*
@@ -23,7 +23,7 @@ public:
 
 	//void SetState(BuildingState* state);
 
-	virtual ~Building();
+	virtual ~BuildingObject();
 
 private:
 

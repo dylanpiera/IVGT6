@@ -11,12 +11,20 @@ ConstructionState::~ConstructionState()
 {
 }
 
-void ConstructionState::BuildingActive(Building * building)
+void ConstructionState::BuildingActive(BuildingObject * building)
 {
-	building->SetState(new ActiveState());
+	//building->SetState(dynamic_cast<BuildingState*>(new ActiveState()));
 }
 
-void ConstructionState::BuildingDestruction(Building * building)
+void ConstructionState::BuildingDestruction(BuildingObject * building)
 {
-	building->SetState(new DestructionState());
+	//building->SetState(dynamic_cast<BuildingState*>(new DestructionState()));
+}
+
+void ConstructionState::BuildingInactive(BuildingObject* building) {
+	return;
+}
+
+void ConstructionState::BuildingConstruction(BuildingObject* building) {
+	return;
 }

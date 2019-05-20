@@ -1,20 +1,22 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#pragma once
-#include "Building.h"
+#ifndef BuildingState_Header
+#define BuildingState_Header
+#include "BuildingObject.h"
 #include "CoreMinimal.h"
 
 /**
  * 
  */
-class PGTPROJECT_API BuildingState
+class BuildingState
 {
 public:
 	BuildingState();
-	~BuildingState();
+	virtual ~BuildingState();
 
-	virtual void BuildingActive(Building* building);
-	virtual void BuildingInactive(Building* building);
-	virtual void BuildingConstruction(Building* building);
-	virtual void BuildingDestruction(Building* building);
+	virtual void BuildingActive(BuildingObject* building) = 0;
+	virtual void BuildingInactive(BuildingObject* building) = 0;
+	virtual void BuildingConstruction(BuildingObject* building) = 0;
+	virtual void BuildingDestruction(BuildingObject* building) = 0;
 };
+#endif

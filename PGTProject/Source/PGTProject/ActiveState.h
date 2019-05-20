@@ -6,7 +6,9 @@ public:
 	ActiveState();
 	~ActiveState();
 
-	virtual void BuildingInactive(Building* building);
-	virtual void BuildingDestruction(Building* building);
+	void BuildingActive(BuildingObject* building);
+	void BuildingInactive(BuildingObject* building);
+	void BuildingConstruction(BuildingObject* building);
+	void BuildingDestruction(BuildingObject* building);
 };
 

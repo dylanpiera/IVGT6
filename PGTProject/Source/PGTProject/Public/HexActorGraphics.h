@@ -6,23 +6,21 @@
 #include "HexActor.h"
 #include "Runtime/Engine/Classes/Engine/StaticMesh.h"
 #include "map"
+#include "Constants.h"
 
 using namespace std;
-
-// Avaiable resources
-enum MineralResources { Catanium, NightGems };
 
 class PGTPROJECT_API HexActorGraphics
 {
 private:
-	UStaticMesh* HexTileMesh;		// Mesh storage
-	UMaterial* TerrainMaterial;		// Terrain Material
+	UStaticMesh* _hexTileMesh;		// Mesh storage
+	UMaterial* _terrainMaterial;		// Terrain Material
 
-	UStaticMesh* MineralMesh;		// Minerals Mesh storage
-	map<MineralResources, UMaterial*> MineralResourceMaterials; // Store resources materials
+	UStaticMesh* _mineralMesh;		// Minerals Mesh storage
+	map<EMineralResources, UMaterial*> _mineralResourceMaterials; // Store resources materials
 
 	// Check if material exists
-	bool IfMaterialExists(MineralResources resource);
+	bool IfMaterialExists(EMineralResources resource);
 
 public:
 	FVector MeshSize;				// Mesh size
@@ -34,7 +32,7 @@ public:
 	// Create a graphic visualization of an hexagon tile for a HexActor 
 	void CreateHexGraphics(AHexActor* HexActorRef);
 	// Create a graphic visualization of the resources for a HexActor
-	void AddResourceGraphics(MineralResources resource, AHexActor* HexActorRef);
+	void AddResourceGraphics(EMineralResources resource, AHexActor* HexActorRef);
 	// Remove graphic visualization of resources from HexActor
 	void RemoveResourceGraphics(AHexActor* HexActorRef);
 };

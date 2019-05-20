@@ -13,12 +13,12 @@ InactiveState::~InactiveState()
 
 void InactiveState::BuildingActive(BuildingObject* building)
 {
-	building->SetState(new ActiveState());
+	building->SetState(dynamic_cast<BuildingState*>(new ActiveState()));
 }
 
 void InactiveState::BuildingDestruction(BuildingObject* building)
 {
-	building->SetState(new DestructionState());
+	building->SetState(dynamic_cast<BuildingState*>(new DestructionState()));
 }
 
 void InactiveState::BuildingInactive(BuildingObject* building)

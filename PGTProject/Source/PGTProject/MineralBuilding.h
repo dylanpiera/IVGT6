@@ -1,7 +1,7 @@
 #pragma once
-#include "Building.h"
+#include "BuildingObject.h"
 
-class MineralBuilding : public Building {
+class MineralBuilding : public BuildingObject {
 
 	int32 MineralProductionValue = 1;
 

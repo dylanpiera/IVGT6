@@ -2,6 +2,7 @@
 
 #include "GameTickManager.h"
 #include "Engine/World.h"
+#include "ActiveState.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -99,7 +100,7 @@ void AGameTickManager::GameTickDay()
 	// Update Resources
 	EconomyManager->resources._population = 0;
 	EconomyManager->resources._energy = 0;
-	for (Building* building : EconomyManager->ActiveBuildings)
+	for (BuildingObject* building : EconomyManager->ActiveBuildings)
 	{
 		// Zoek naar states ipv buildings zelf
 		building->BuildingFunction(EconomyManager->resources);

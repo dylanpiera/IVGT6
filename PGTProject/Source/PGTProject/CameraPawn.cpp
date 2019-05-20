@@ -45,6 +45,7 @@ void ACameraPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	GetCameraPanDirection();
+	PC->GetViewportSize(screenSizeX, screenSizeY);
 }
 
 // Called to bind functionality to input

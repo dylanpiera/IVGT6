@@ -1,5 +1,6 @@
 #pragma once
 #include "BuildingState.h"
+
 class ActiveState : public BuildingState
 {
 public:

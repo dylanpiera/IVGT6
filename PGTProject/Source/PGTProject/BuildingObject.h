@@ -3,8 +3,12 @@
 //#include "BuildingState.h"
 #include "Resources.h"
 
+class BuildingState;
+
 class BuildingObject {
 public:
+
+	BuildingObject();
 	
 	/*
 	 * override this and implement what the building needs to update
@@ -21,12 +25,14 @@ public:
 
 	virtual void BuildingDestruction();
 
-	//void SetState(BuildingState* state);
+	void SetState(BuildingState* state);
+
+	BuildingState* GetState();
 
 	virtual ~BuildingObject();
 
 private:
 
-	//BuildingState *_bState;
+	BuildingState *_bState;
 };
 #endif

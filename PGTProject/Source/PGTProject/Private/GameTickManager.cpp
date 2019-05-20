@@ -145,7 +145,7 @@ void AGameTickManager::GameTickYear()
 	if (currentYearSecond > 999)
 	{
 		currentYearFirst++;
-		currentYearSecond = 100;
+		currentYearSecond = 000;
 	}
 }
 

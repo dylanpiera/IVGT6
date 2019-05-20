@@ -34,7 +34,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	const FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
 	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42);
 
-
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[

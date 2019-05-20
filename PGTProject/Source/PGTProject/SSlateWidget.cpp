@@ -2,6 +2,11 @@
 #include "SlateOptMacros.h"
 #include "Engine.h"
 #include "EconomyManager.h"
+#include "ToolbarActor.h"
+#include "GameTickManager.h"
+#include "Engine/World.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Classes/Components/ActorComponent.h"
 #include <string>
 
 //Already given upon creation, needs to surround Construct
@@ -17,15 +22,20 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
 	_ownerHUD = InArgs._OwnerHUDArg;
+	_toolbarActor = InArgs._ToolbarActorArg;
 
 	//temporary values
-	int energy = 0;
-	int minerals = 0;
-	int money = 0;
-	int population = 0;
+	int energy = _toolbarActor->getEnergy();
+	int minerals = _toolbarActor->getMinerals();
+	int money = _toolbarActor->getMoney();
+	int population = _toolbarActor->getPopulation();
 	int gain = 0;
-	int hour = 12;
-	int minute = 36;
+
+	int currentHour = _toolbarActor->GameTickManager->currentHour;
+	int currentDay = _toolbarActor->GameTickManager->currentDay;
+	int currentMonth = _toolbarActor->GameTickManager->currentMonth;
+	int currentYear = _toolbarActor->GameTickManager->currentYear;
+
 
 	//Location reference to the image
 	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
@@ -73,7 +83,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(energy))
+				//.Text(FText::AsNumber(_toolbarActor->getEnergy()))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -98,7 +109,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(minerals))				
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMinerals()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -123,7 +134,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(money))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoney()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -148,7 +159,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(population))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -160,6 +171,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Text(FText::AsNumber(gain))
 			]
 		]
+
 		/*
 		 * \brief Timer in the upper right corner
 		 * \TODO link Game tick
@@ -176,7 +188,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(hour))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentHour); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -184,9 +196,24 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				SNew(STextBlock)
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::FromString(TEXT(":")))
+				.Text(FText::FromString(TEXT("h")))
 			]
-			//Minutes
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::Green)
+				.Font(FSlateFontInfo("Arial", 24))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay); })
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::Green)
+				.Font(FSlateFontInfo("Arial", 24))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentMonth); })
+			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
@@ -194,7 +221,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::Green)
 				.Font(FSlateFontInfo("Arial", 24))
-				.Text(FText::AsNumber(minute))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
 			]
 		]
 	];

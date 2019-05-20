@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TestingTile.h"
-#include "definitions.h"
 
 // (UPDATE) Test class
 
@@ -17,17 +16,17 @@ vector<TestingTile> TestingTile::GetNeighbours()
 {
 	vector<TestingTile> neighbors;
 
-	if (posX + 1 < gridX)
+	if (posX + 1 < 32)
 	{
 		TestingTile n = TestingTile(posX + 1, posY);
 		neighbors.push_back(n);
 	}
-	if (posY + 1 < gridY)
+	if (posY + 1 < 32)
 	{
 		TestingTile n = TestingTile(posX, posY + 1);
 		neighbors.push_back(n);
 	}
-	if (posX + 1 < gridX && posY + 1 < gridY)
+	if (posX + 1 < 32 && posY + 1 < 32)
 	{
 		TestingTile n = TestingTile(posX + 1, posY + 1);
 		neighbors.push_back(n);

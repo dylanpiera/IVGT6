@@ -4,6 +4,7 @@
 #include "GameHUD.h"
 #include "SSlateWidget.h"
 #include "ToolbarGraphics.h"
+#include "ToolbarActor.h"
 
 class PGTPROJECT_API MainGraphics : public SCompoundWidget
 {
@@ -12,6 +13,7 @@ public:
 
 	// Add new argument called OwnerHUDArg
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
+	SLATE_ARGUMENT(TWeakObjectPtr<AToolbarActor>, ToolbarActorArg);
 
 	SLATE_END_ARGS()
 
@@ -22,6 +24,8 @@ private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
+	TWeakObjectPtr<class AToolbarActor> _toolbarActor;
+
 	TSharedPtr<ToolbarGraphics> _ownerToolbar;
 	TSharedPtr<SSlateWidget> _ownerEconomyBar;
 };

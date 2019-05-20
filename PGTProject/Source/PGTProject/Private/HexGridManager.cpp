@@ -20,7 +20,6 @@ void AHexGridManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//TODO: This makes the the hex grid manager spawn a 32x32 grid. Should be changed later to function how we want it to function.
 	//Testing
 	GenerateGrid();
 	LogGrid();
@@ -40,10 +39,11 @@ void AHexGridManager::GenerateGrid()
 		{
 			auto* hex = new AHexActor::Hex(column, row);
 			hexes[column][row] = hex;
-						
+			
 			FRotator Rotation(0.0f, 0.0f, 0.0f);
 			FActorSpawnParameters SpawnInfo;
 			AHexActor* a = GetWorld()->SpawnActor<AHexActor>(AHexActor::GetScreenSpaceLocation(hex), Rotation, SpawnInfo);
+			a->hex = hex; // this is for getting grid position
 		}
 	}
 }

@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "GameTickManager.h"
+#include "Engine/World.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
 AGameTickManager::AGameTickManager()
@@ -33,6 +35,13 @@ void AGameTickManager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		AEconomyManager::StaticClass(),
+		FoundActors);
+	EconomyManager = Cast<AEconomyManager>(FoundActors[0]);
+
+	EconomyManager->InitResources();
 }
 	
 // Called every frame
@@ -53,6 +62,11 @@ void AGameTickManager::Tick(float DeltaTime)
 void AGameTickManager::GameTick()
 {
 	GameTickHour();
+	
+	UE_LOG(LogTemp, Warning, TEXT("Energy: %d"), EconomyManager->resources._energy);
+	UE_LOG(LogTemp, Warning, TEXT("Minerals: %d"), EconomyManager->resources._minerals);
+	UE_LOG(LogTemp, Warning, TEXT("Money: %d"), EconomyManager->resources._money);
+	UE_LOG(LogTemp, Warning, TEXT("Population: %d"), EconomyManager->resources._population);
 }
 
 //managed the hourly tick
@@ -82,6 +96,15 @@ void AGameTickManager::GameTickHour()
 //Manages the dayly tick
 void AGameTickManager::GameTickDay()
 {
+	// Update Resources
+	EconomyManager->resources._population = 0;
+	EconomyManager->resources._energy = 0;
+	for (Building* building : EconomyManager->ActiveBuildings)
+	{
+		building->BuildingFunction(EconomyManager->resources);
+	}
+	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
+
 	dayOfWeek++;
 	currentDay++;
 

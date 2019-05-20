@@ -9,6 +9,7 @@ void MainGraphics::Construct(const FArguments& InArgs)
 {
 	// Retrieve arguments
 	_ownerHUD = InArgs._OwnerHUDArg;
+	_toolbarActor = InArgs._ToolbarActorArg;
 
 	// Interface
 	ChildSlot
@@ -20,6 +21,7 @@ void MainGraphics::Construct(const FArguments& InArgs)
 		[
 			SAssignNew(_ownerEconomyBar, SSlateWidget)
 			.OwnerHUDArg(_ownerHUD)
+			.ToolbarActorArg(_toolbarActor)
 		]
 		+ SVerticalBox::Slot()
 		[

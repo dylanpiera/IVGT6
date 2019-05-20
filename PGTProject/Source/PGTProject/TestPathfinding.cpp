@@ -3,7 +3,6 @@
 
 #include "Pathfinding.h"	// Pathfinding system
 #include "TestingTile.h"	// (UPDATE) Testing class
-#include "definitions.h"	// (UPDATE) Testing class
 
 ATestPathfinding::ATestPathfinding()
 {
@@ -20,8 +19,8 @@ void ATestPathfinding::BeginPlay()
 
 	// Based on grid space create testing tiles
 	vector<TestingTile> allTiles;
-	for (int x = 0; x < gridX; x++) {
-		for (int y = 0; y < gridY; y++) {
+	for (int x = 0; x < 32; x++) {
+		for (int y = 0; y < 32; y++) {
 			allTiles.push_back(TestingTile(x, y));
 		}
 	}

@@ -4,8 +4,7 @@
 #include "SlateBasics.h"
 #include "GameHUD.generated.h"
 
-// Predeclaration of SlateWidget
-class SSlateWidget;
+class MainGraphics;
 
 UCLASS()
 class PGTPROJECT_API AGameHUD : public AHUD
@@ -13,8 +12,8 @@ class PGTPROJECT_API AGameHUD : public AHUD
 	GENERATED_BODY()
 	
 	public:
-		//SafePointer to Widget
-		TSharedPtr<SSlateWidget> _uiWidget;
+		//SafePointer to Widgets
+		TSharedPtr<MainGraphics> _mainWidget;
 		//Executed once gameplay started, called in .cpp
 		void BeginPlay();
 };

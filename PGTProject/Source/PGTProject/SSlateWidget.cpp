@@ -17,6 +17,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
  * Creates elements on the the HUD
  * \params
  */
+
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
@@ -242,23 +243,3 @@ FReply SSlateWidget::buttonTest()
 	//Return Handled() to basically break, use Unhandled() if it needs to continue
 	return FReply::Handled();
 }
-
-//FReply SSlateWidget::energyCall()
-//{
-//	GEngine->GameViewport->AddViewportWidgetContent(
-//		SNew(SVerticalBox)
-//		+ SVerticalBox::Slot()
-//		.HAlign(HAlign_Center)
-//		.VAlign(VAlign_Top)
-//		[
-//			SNew(SBox)
-//			.WidthOverride(500)
-//		.HeightOverride(40)
-//		[
-//			
-//		]
-//		]
-//	);
-//
-//	return FReply::Handled();
-//}

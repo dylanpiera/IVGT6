@@ -11,9 +11,9 @@ using namespace std;
 class Pathfinding
 {
 private:
-	vector<Node*> open;										// Open nodes list
-	vector<Node*> closed;									// Closed nodes list
-	vector<TestingTile*> path;								// Nodes path list
+	vector<Node*> Open;										// Open nodes list
+	vector<Node*> Closed;									// Closed nodes list
+	vector<TestingTile*> Path;								// Nodes path list
 
 	int HCost(Node* node, Node* targetNode);				// Cost from the end node
 	int FCost(Node* node);									// Total cost for a node

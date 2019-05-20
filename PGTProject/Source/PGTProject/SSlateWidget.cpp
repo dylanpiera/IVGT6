@@ -216,6 +216,14 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
 				.Text_Lambda([this]()->FText {return FText::FromString(_toolbarActor->GameTickManager->monthName); })
 			]
+			+SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYearFirst); })
+			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
@@ -223,7 +231,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYearSecond); })
 			]
 		]
 	];

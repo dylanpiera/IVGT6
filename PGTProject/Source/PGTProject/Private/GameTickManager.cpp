@@ -15,6 +15,8 @@ AGameTickManager::AGameTickManager()
 	dayOfWeek = 0;
 	currentMonth = 0;
 	currentYear = 2100;
+	currentYearFirst = 2;
+	currentYearSecond = 100;
 
 	timer = 4.0f;
 	timeMultiplier = 1;
@@ -139,7 +141,12 @@ void AGameTickManager::GameTickMonth()
 //add years
 void AGameTickManager::GameTickYear()
 {
-	currentYear++;
+	currentYearSecond++;
+	if (currentYearSecond > 999)
+	{
+		currentYearFirst++;
+		currentYearSecond = 100;
+	}
 }
 
 void AGameTickManager::ResetTimer()

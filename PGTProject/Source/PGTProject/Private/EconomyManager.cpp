@@ -2,6 +2,7 @@
 #include "MineralBuilding.h"
 #include "EnergyBuilding.h"
 #include "HouseBuilding.h"
+#include "WarehouseBuilding.h"
 
 void AEconomyManager::InitResources()
 {
@@ -28,4 +29,5 @@ void AEconomyManager::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Creating Home"));
 		ActiveBuildings.Add(dynamic_cast<Building*>(new HouseBuilding()));
 	}
+	ActiveBuildings.Add(dynamic_cast<Building*>(new WarehouseBuilding()));
 }

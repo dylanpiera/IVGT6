@@ -22,6 +22,9 @@ public:
 	int getMoney();
 	int getPopulation();
 
+	int getMineralsGain();
+	int getMoneyGain();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

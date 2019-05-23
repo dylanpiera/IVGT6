@@ -51,9 +51,19 @@ int AToolbarActor::getMinerals()
 	return _econ_manager->resources._minerals;;
 }
 
+int AToolbarActor::getMineralsGain()
+{
+	return _econ_manager->MineralBuildings;
+}
+
 int AToolbarActor::getMoney()
 {
 	return _econ_manager->resources._money;
+}
+
+int AToolbarActor::getMoneyGain()
+{
+	return _econ_manager->resources._population;
 }
 
 int AToolbarActor::getPopulation()
@@ -66,4 +76,3 @@ void AToolbarActor::testFunc()
 	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney());
 	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
 }
-

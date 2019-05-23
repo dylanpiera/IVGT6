@@ -79,15 +79,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::White)
-				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
-			]
+
 			//Minerals
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -111,8 +103,18 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
+				.Text(FText::FromString(_toolbarActor->getMineralsGain() >= 0 ? "+" : ""))
 			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMineralsGain()); })
+			]
+
 			//Money
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -136,8 +138,18 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
+				.Text(FText::FromString(_toolbarActor->getMoneyGain() >= 0 ? "+" : ""))
 			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoneyGain()); })
+			]
+
 			//Population
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -154,20 +166,11 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::White)
-				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
-			]
 		]
 
 		/*
 		 * \brief Timer in the upper right corner
-		 * \TODO link Game tick
+		 * 
 		 */
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))

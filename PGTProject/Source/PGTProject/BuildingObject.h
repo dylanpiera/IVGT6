@@ -14,18 +14,39 @@ public:
 	*/
 	virtual void BuildingActive(Resources &resource, Resources &maintenance);
 
+	/**
+	 * 
+	*/
 	virtual void BuildingFunction(Resources &resource);
 
+	/**
+	 *
+	*/
 	virtual void BuildingUpkeep(Resources &resource);
 
+	/**
+	 *
+	*/
 	virtual void BuildingInactive();
 
+	/**
+	 *
+	*/
 	virtual void BuildingConstruction(float buildTime);
 
+	/**
+	 *
+	*/
 	virtual void BuildingDestruction();
 
+	/**
+	 *
+	*/
 	void SetState(BuildingState* state);
 
+	/**
+	 *
+	*/
 	BuildingState* GetState();
 
 	virtual ~BuildingObject();

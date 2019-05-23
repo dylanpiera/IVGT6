@@ -6,9 +6,24 @@ class ActiveState : public BuildingState
 public:
 	~ActiveState();
 
+	/**
+	 *
+	*/
 	void BuildingActive(BuildingObject* building);
+
+	/**
+	 *
+	*/
 	void BuildingInactive(BuildingObject* building);
+
+	/**
+	 *
+	*/
 	void BuildingConstruction(BuildingObject* building);
+
+	/**
+	 *
+	*/
 	void BuildingDestruction(BuildingObject* building);
 };
 

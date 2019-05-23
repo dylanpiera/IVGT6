@@ -106,12 +106,9 @@ void AGameTickManager::GameTickDay()
 	EconomyManager->resources._energy = 0;
 	for (BuildingObject* building : EconomyManager->ActiveBuildings)
 	{
-		
-		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState()))
-		{
+		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);
 		}
-		
 	}
 	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
 

@@ -1,9 +1,10 @@
 #include "BuildingObject.h"
 #include "ConstructionState.h"
+#include "ActiveState.h"
 
 BuildingObject::BuildingObject()
 {
-	_bState = new ConstructionState();
+	_bState = new ActiveState();
 }
 
 void BuildingObject::BuildingActive(Resources &resource, Resources &maintenance)
@@ -46,3 +47,4 @@ BuildingState * BuildingObject::GetState()
 BuildingObject::~BuildingObject()
 {
 }
+

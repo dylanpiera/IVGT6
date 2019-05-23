@@ -3,6 +3,7 @@
 #ifndef BuildingState_Header
 #define BuildingState_Header
 #include "BuildingObject.h"
+#include <typeinfo>
 #include "CoreMinimal.h"
 
 /**
@@ -18,5 +19,6 @@ public:
 	virtual void BuildingInactive(BuildingObject* building) = 0;
 	virtual void BuildingConstruction(BuildingObject* building) = 0;
 	virtual void BuildingDestruction(BuildingObject* building) = 0;
+
 };
 #endif

@@ -3,11 +3,6 @@
 #include "DestructionState.h"
 
 
-ActiveState::ActiveState()
-{
-}
-
-
 ActiveState::~ActiveState()
 {
 }

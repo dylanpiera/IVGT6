@@ -1,6 +1,5 @@
 #ifndef BuildingObject_Header
 #define BuildingObject_Header
-//#include "BuildingState.h"
 #include "Resources.h"
 
 class BuildingState;
@@ -9,7 +8,7 @@ class BuildingObject {
 public:
 
 	BuildingObject();
-	
+
 	/*
 	 * override this and implement what the building needs to update
 	*/
@@ -30,6 +29,8 @@ public:
 	BuildingState* GetState();
 
 	virtual ~BuildingObject();
+
+	
 
 private:
 

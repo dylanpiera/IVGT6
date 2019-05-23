@@ -4,7 +4,6 @@
 class ActiveState : public BuildingState
 {
 public:
-	ActiveState();
 	~ActiveState();
 
 	void BuildingActive(BuildingObject* building);

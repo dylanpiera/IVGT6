@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-//#include "GameTickManager.h"
+#include "Engine.h"
+#include "Building.h"
 #include "GameFramework/Actor.h"
 #include "ConstructionTimerActor.generated.h"
 
@@ -28,12 +29,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY()
-	FTimerHandle ConstructionHandle;
+	//UPROPERTY(EditAnywhere)
+	//FTimerHandle ConstructionHandle;
 
-	UFUNCTION()
-	void StartConstruction(int TimeInHours);
-	void FinishConstruction();
+	void StartConstruction(Building* building, int TimeInHours);
+	void FinishConstruction(Building* building);
 	void test();
 
 	//AGameTickManager* GameTickManager;

@@ -1,12 +1,17 @@
 #pragma once
 #include "Resources.h"
-#include "ConstructionTimerActor.h"
+//#include "ConstructionTimerActor.h"
+
+class AConstructionTimerActor;
 
 class Building {
 private:
 	//ConstructionState _State;
-public:
 	AConstructionTimerActor* _constructionTimer;
+	
+	void GetConstructionTimer();
+public:
+	//AConstructionManager* _constructionManager;
 
 	// Constructor
 	Building();

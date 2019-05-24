@@ -1,11 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TestingConstructionTimer.h"
-#include "MineralBuilding.h"
-#include "ConstructionTimerActor.h"
+#include "ConstructionManager.h"
 
 // Sets default values
-ATestingConstructionTimer::ATestingConstructionTimer()
+AConstructionManager::AConstructionManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -13,22 +11,19 @@ ATestingConstructionTimer::ATestingConstructionTimer()
 }
 
 // Called when the game starts or when spawned
-void ATestingConstructionTimer::BeginPlay()
+void AConstructionManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	MineralBuilding a;
-	a.BeginConstruction(5);
-
 	TArray<AActor*> FoundActors;
-	UGameplayStatics::GetAllActorsOfClass(GWorld,
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 		AConstructionTimerActor::StaticClass(),
 		FoundActors);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Number of actors: %d"), FoundActors.Num()));
+	_mainConstructionTimer = Cast<AConstructionTimerActor>(FoundActors[0]);
 }
 
 // Called every frame
-void ATestingConstructionTimer::Tick(float DeltaTime)
+void AConstructionManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 

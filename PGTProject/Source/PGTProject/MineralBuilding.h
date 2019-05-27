@@ -2,14 +2,16 @@
 #include "Building.h"
 
 class MineralBuilding : public Building {
-
 	int32 MineralProductionValue = 5;
 	int EnergyUpkeep = 20;
 	int MoneyUpkeep = 10;
 
-	void BuildingFunction(Resources& resources) override {
-		resources._minerals += MineralProductionValue;
-		resources._energy -= EnergyUpkeep;
-		resources._money -= MoneyUpkeep;
+	void BuildingFunction(Resources& resource) override {
+		if (resource._energy != 0)
+		{
+			resource._minerals += MineralProductionValue;
+			resource._energy -= EnergyUpkeep;
+			resource._money -= MoneyUpkeep;
+		}
 	}
 };

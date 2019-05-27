@@ -102,6 +102,22 @@ void AGameTickManager::GameTickDay()
 	{
 		building->BuildingFunction(EconomyManager->resources);
 	}
+	if (EconomyManager->resources._energy < 0)
+	{
+		EconomyManager->resources._energy = 0;
+	}
+	if (EconomyManager->resources._population < 0)
+	{
+		EconomyManager->resources._population = 0;
+	}
+	if (EconomyManager->resources._food < 0)
+	{
+		EconomyManager->resources._food = 0;
+	}
+	if (EconomyManager->resources._money < 0)
+	{
+		EconomyManager->resources._money = 0;
+	}
 
 	dayOfWeek++;
 	currentDay++;

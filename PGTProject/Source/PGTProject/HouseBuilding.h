@@ -6,7 +6,6 @@ class HouseBuilding : public Building {
 	int EnergyUpkeep = 10;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._population += PopulationHousingValue;
 		resource._energy -= EnergyUpkeep;
 	}
 };

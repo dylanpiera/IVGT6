@@ -98,13 +98,10 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._population = 0;
-	EconomyManager->resources._energy = 0;
 	for (Building* building : EconomyManager->ActiveBuildings)
 	{
 		building->BuildingFunction(EconomyManager->resources);
 	}
-	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
 
 	dayOfWeek++;
 	currentDay++;

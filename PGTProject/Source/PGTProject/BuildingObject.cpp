@@ -26,7 +26,7 @@ void BuildingObject::BuildingInactive()
 {
 }
 
-void BuildingObject::BuildingConstruction(float timeRequired)
+void BuildingObject::BuildingConstruction(float buildTime)
 {
 }
 

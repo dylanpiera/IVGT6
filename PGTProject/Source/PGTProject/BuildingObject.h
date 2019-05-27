@@ -14,9 +14,7 @@ public:
 	*/
 	virtual void BuildingActive(Resources &resource, Resources &maintenance);
 
-	/**
-	 * 
-	*/
+	
 	virtual void BuildingFunction(Resources &resource);
 
 	/**

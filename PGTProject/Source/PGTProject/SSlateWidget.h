@@ -29,4 +29,5 @@ private:
 	TSharedPtr<STextBlock> _materialsValue;
 	TSharedPtr<STextBlock> _moneyValue;
 	TSharedPtr<STextBlock> _populationValue;
+	TSharedPtr<STextBlock> _foodValue;
 };

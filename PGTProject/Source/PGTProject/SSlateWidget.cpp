@@ -31,6 +31,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	const FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
 	const FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
 	const FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
+	const FString foodImagePath = FPaths::ProjectContentDir() / TEXT("Assets/foodIcon.png");
 	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42);
 
 
@@ -165,6 +166,32 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
+			]
+
+			//Food
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*foodImagePath), FVector2D(64, 64)))
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SAssignNew(_foodValue, STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getFood()); })
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getFoodGain()); })
 			]
 		]
 

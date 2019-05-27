@@ -2,6 +2,7 @@
 #include "MineralBuilding.h"
 #include "EnergyBuilding.h"
 #include "HouseBuilding.h"
+#include "FoodBuilding.h"
 
 void AEconomyManager::InitResources()
 {
@@ -9,6 +10,7 @@ void AEconomyManager::InitResources()
 	resources._minerals = 100 + MineralBuildings;
 	resources._population = 8 + Houses;
 	resources._money = 200 * resources._population;
+	resources._food = 100 + FoodBuildings - resources._population;
 }
 
 void AEconomyManager::BeginPlay()
@@ -27,5 +29,10 @@ void AEconomyManager::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creating Home"));
 		ActiveBuildings.Add(dynamic_cast<Building*>(new HouseBuilding()));
+	}
+	for (int i = 0; i < FoodBuildings; i++)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Creating Food Building"));
+		ActiveBuildings.Add(dynamic_cast<Building*>(new FoodBuilding()));
 	}
 }

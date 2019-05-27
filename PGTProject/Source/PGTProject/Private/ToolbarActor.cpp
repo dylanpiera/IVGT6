@@ -71,6 +71,16 @@ int AToolbarActor::getPopulation()
 	return _econ_manager->resources._population;
 }
 
+int AToolbarActor::getFood()
+{
+	return _econ_manager->resources._food;
+}
+
+int AToolbarActor::getFoodGain()
+{
+	return _econ_manager->FoodBuildings;
+}
+
 void AToolbarActor::testFunc()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney());

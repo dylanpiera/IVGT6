@@ -2,6 +2,11 @@
 
 #include "GameTickManager.h"
 #include "Engine/World.h"
+#include "ActiveState.h"
+#include "BuildingState.h"
+#include <typeinfo>
+#include <iostream>
+#include "Utility.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -15,14 +20,15 @@ AGameTickManager::AGameTickManager()
 	dayOfWeek = 0;
 	currentMonth = 0;
 	currentYear = 2100;
+	currentYearFirst = 2;
+	currentYearSecond = 100;
 
 	timer = 4.0f;
 	timeMultiplier = 1;
 
-	days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+	days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
-	months = { "January", "February", "March", "April", "May", "June",
-				"July", "August", "September", "October", "November", "December" };
+	months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
 	dayName = days[currentDay];
 	monthName = months[currentMonth];
@@ -101,7 +107,9 @@ void AGameTickManager::GameTickDay()
 	EconomyManager->resources._energy = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
-		building->BuildingFunction(EconomyManager->resources);
+		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
+			building->BuildingFunction(EconomyManager->resources);
+		}
 	}
 	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
 
@@ -140,7 +148,12 @@ void AGameTickManager::GameTickMonth()
 //add years
 void AGameTickManager::GameTickYear()
 {
-	currentYear++;
+	currentYearSecond++;
+	if (currentYearSecond > 999)
+	{
+		currentYearFirst++;
+		currentYearSecond = 000;
+	}
 }
 
 void AGameTickManager::ResetTimer()

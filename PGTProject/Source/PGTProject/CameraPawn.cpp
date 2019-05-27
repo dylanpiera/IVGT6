@@ -45,6 +45,7 @@ void ACameraPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	GetCameraPanDirection();
+	PC->GetViewportSize(screenSizeX, screenSizeY);
 }
 
 // Called to bind functionality to input
@@ -185,7 +186,7 @@ void ACameraPawn::OnClickRayCast()
 			// Create building
 			MineralBuilding* building = NewObject<MineralBuilding>(MineralBuilding::StaticClass());
 			// Start building construction (its gonna spawn the mesh automatically)
-			building->BeginConstruction(location, rotation, SpawnInfo);
+			building->BuildingConstruction(location, rotation, SpawnInfo);
 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
 		}

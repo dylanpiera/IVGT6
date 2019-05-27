@@ -20,11 +20,11 @@ enum class EInteractionMode
 	Delete
 };
 
-enum class EConstructionState
+// Avaiable resources
+enum class EMineralResources
 {
-	Created,
-	Constructing,
-	Done
+	Catanium,
+	NightGems
 };
 
 /**

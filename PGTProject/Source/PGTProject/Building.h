@@ -1,6 +1,7 @@
+//#ifndef BuildingObject_Header
+//#define BuildingObject_Header
 #pragma once
 #include "Resources.h"
-#include "Constants.h"
 #include "Runtime/Core/Public/Math/Vector.h"
 #include "Engine/World.h"
 #include "UObject/NoExportTypes.h"
@@ -8,6 +9,7 @@
 
 class AConstructionTimerActor;
 class ABuildingGraphics;
+class BuildingState;
 
 UCLASS()
 class PGTPROJECT_API UBuilding : public UObject {
@@ -23,31 +25,57 @@ private:
 	AConstructionTimerActor* _constructionTimer;
 	void GetConstructionTimer();
 
-protected:
 	// Current construction phase to control building functionality
-	EConstructionState _constructionState;
+	BuildingState *_bState;
+protected:
 	// Total time to construct the building
 	float _timeInHours;
 public:
 	UBuilding();
 	virtual ~UBuilding();
 
-	/*
-	 * override this and implement what the building needs to update
-	*/
-	virtual void BuildingFunction(Resources& resource) { 
-		// Block building from producing while it's not done constructing
-		if(_constructionState == EConstructionState::Done) {
-			resource._money -= 100;
-		}
-	}
-
 	// Create building graphics
 	void CreateBuilding();
 
 	// Start construction timer
-	void BeginConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo);
+	void BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo);
 
 	// Function called when time is over
 	void WhenConstructionFinishes();
+
+	/*
+	 * override this and implement what the building needs to update
+	*/
+	virtual void BuildingActive(Resources &resource, Resources &maintenance);
+
+	
+	virtual void BuildingFunction(Resources &resource);
+
+	/**
+	 *
+	*/
+	virtual void BuildingUpkeep(Resources &resource);
+
+	/**
+	 *
+	*/
+	virtual void BuildingInactive();
+
+	/**
+	 *
+	*/
+	virtual void BuildingDestruction();
+
+	/**
+	 *
+	*/
+	void SetState(BuildingState* state);
+
+	/**
+	 *
+	*/
+	BuildingState* GetState();
+
+
 };
+//#endif

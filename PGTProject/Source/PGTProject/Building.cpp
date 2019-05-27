@@ -1,6 +1,8 @@
 #include "Building.h"
 #include "ConstructionTimerActor.h"
 #include "BuildingGraphics.h"
+#include "ConstructionState.h"
+#include "ActiveState.h"
 
 // Constructor
 UBuilding::UBuilding()
@@ -10,7 +12,7 @@ UBuilding::UBuilding()
 	// Find construction timer
 	GetConstructionTimer();	
 	// Set initial construction state
-	_constructionState = EConstructionState::Created;
+	SetState(new ConstructionState());
 }
 
 void UBuilding::GetConstructionTimer() {
@@ -34,24 +36,56 @@ UBuilding::~UBuilding()
 void UBuilding::WhenConstructionFinishes()
 {
 	// Change construction state
-	_constructionState = EConstructionState::Done;
+	SetState(new ActiveState());
 	// Spawn building
 	CreateBuilding();
 }
 
-void UBuilding::BeginConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo)
+void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo)
 {
 	// Set graphics info
 	_location = FVector(location.X, location.Y, location.Z);
 	_rotation = rotation;
 	_spawnInfo = spawnInfo;
 
-	// Change construction state
-	_constructionState = EConstructionState::Constructing;
+	// Start timer
 	_constructionTimer->StartConstruction(this, _timeInHours);
 }
 
 void UBuilding::CreateBuilding() {
 	// Create building mesh
 	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+}
+
+void UBuilding::BuildingFunction(Resources &resource)
+{
+	resource._money -= 100;
+}
+
+void UBuilding::BuildingActive(Resources &resource, Resources &maintenance)
+{
+	BuildingFunction(resource);
+	BuildingUpkeep(maintenance);
+}
+
+void UBuilding::BuildingUpkeep(Resources &resource)
+{
+}
+
+void UBuilding::BuildingInactive()
+{
+}
+
+void UBuilding::BuildingDestruction()
+{
+}
+
+void UBuilding::SetState(BuildingState * state)
+{
+	_bState = state;
+}
+
+BuildingState * UBuilding::GetState()
+{
+	return _bState;
 }

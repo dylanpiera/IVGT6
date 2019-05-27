@@ -17,6 +17,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
  * Creates elements on the the HUD
  * \params
  */
+
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
@@ -24,50 +25,44 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	_toolbarActor = InArgs._ToolbarActorArg;
 
 	//temporary values
-	int energy = _toolbarActor->getEnergy();
-	int minerals = _toolbarActor->getMinerals();
-	int money = _toolbarActor->getMoney();
-	int population = _toolbarActor->getPopulation();
 	int gain = 0;
 
-	int currentHour = _toolbarActor->GameTickManager->currentHour;
-	int currentDay = _toolbarActor->GameTickManager->currentDay;
-	int currentMonth = _toolbarActor->GameTickManager->currentMonth;
-	int currentYear = _toolbarActor->GameTickManager->currentYear;
-
-
-	//Location reference to the image
-	FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
-	FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
-	FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
-	FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
+	//Location reference to project files
+	const FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
+	const FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
+	const FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
+	const FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
+	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42);
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
 	[
 		//Creates new overlay in slot, each + SOverlay adds a new slot that contains a component
 		SNew(SOverlay)
-		+ SOverlay::Slot()
-		//Vertical and Horizontal alignment of slot
-		.VAlign(VAlign_Bottom)
-		.HAlign(HAlign_Left)
-		[
-			//Adds button
-			SAssignNew(_colourButton,SButton)
-			.ButtonColorAndOpacity(FLinearColor::Black)
-			.ButtonColorAndOpacity(FLinearColor::Blue)
-			//Call event with OnClicked(this, &YourClassName::yourFunctionName)
-			.OnClicked(this, &SSlateWidget::buttonTest)
-		]
 		/*
 		 * \brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
-		 * \TODO reference to actual variables in the game
+		 * 
 		 */
+
+		+SOverlay::Slot()
+		.VAlign((VAlign_Top))
+		[
+			SNew(SHorizontalBox)
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(SColorBlock)
+				.Color(FLinearColor::Black)
+				.Size(FVector2D(2560, 72))
+			]
+		]
+
+
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))
 		[
-			//Energy
 			SNew(SHorizontalBox)
+			//Energy
 			+SHorizontalBox::Slot()
 			//Adjusts width to the element size
 			.AutoWidth()
@@ -80,9 +75,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_energyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				//.Text(FText::AsNumber(_toolbarActor->getEnergy()))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -90,8 +84,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text(FText::AsNumber(gain))
 			]
 			//Minerals
@@ -106,8 +100,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_materialsValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMinerals()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -115,8 +109,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text(FText::AsNumber(gain))
 			]
 			//Money
@@ -131,8 +125,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_moneyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoney()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -140,8 +134,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text(FText::AsNumber(gain))
 			]
 			//Population
@@ -156,8 +150,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SAssignNew(_populationValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
 			]
 			+ SHorizontalBox::Slot()
@@ -165,8 +159,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text(FText::AsNumber(gain))
 			]
 		]
@@ -185,80 +179,64 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentHour); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
 				.Text(FText::FromString(TEXT("h")))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay); })
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::FromString(_toolbarActor->GameTickManager->dayName); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentMonth); })
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentDay + 1); })
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::FromString(_toolbarActor->GameTickManager->monthName); })
+			]
+			+SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYearFirst); })
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
 				SNew(STextBlock)
 				.Margin(FMargin(0.0f, 0.0f, 10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::Green)
-				.Font(FSlateFontInfo("Arial", 24))
-				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYear); })
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->GameTickManager->currentYearSecond); })
 			]
 		]
 	];
 }
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
-
-/*
- * \brief
- * Test function for the button of type FReply
- */
-FReply SSlateWidget::buttonTest()
-{
-	//Add event here
-
-	//Test event that shows debug message in-game
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Button Clicked"));
-
-	//Return Handled() to basically break, use Unhandled() if it needs to continue
-	return FReply::Handled();
-}
-
-//FReply SSlateWidget::energyCall()
-//{
-//	GEngine->GameViewport->AddViewportWidgetContent(
-//		SNew(SVerticalBox)
-//		+ SVerticalBox::Slot()
-//		.HAlign(HAlign_Center)
-//		.VAlign(VAlign_Top)
-//		[
-//			SNew(SBox)
-//			.WidthOverride(500)
-//		.HeightOverride(40)
-//		[
-//			
-//		]
-//		]
-//	);
-//
-//	return FReply::Handled();
-//}

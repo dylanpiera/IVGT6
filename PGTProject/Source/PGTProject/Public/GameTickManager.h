@@ -33,6 +33,8 @@ public:
 	UINT32 dayOfWeek;
 	UINT32 currentMonth;
 	UINT32 currentYear;
+	UINT32 currentYearFirst;
+	UINT32 currentYearSecond;
 
 	UINT32 timeMultiplier;
 	float timer;

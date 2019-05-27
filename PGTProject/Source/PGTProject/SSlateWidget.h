@@ -19,17 +19,11 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
-	//Declaring button function
-	FReply buttonTest();
-
 private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 	TWeakObjectPtr<class AToolbarActor> _toolbarActor;
-
-	//Declare buttons
-	TSharedPtr<SButton> _colourButton;
 
 	TSharedPtr<STextBlock> _energyValue;
 	TSharedPtr<STextBlock> _materialsValue;

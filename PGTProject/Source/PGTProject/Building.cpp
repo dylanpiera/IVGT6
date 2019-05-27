@@ -1,22 +1,25 @@
 #include "Building.h"
-#include "Engine/World.h"
 #include "ConstructionTimerActor.h"
+#include "BuildingGraphics.h"
 
 // Constructor
-Building::Building()
+UBuilding::UBuilding()
 {
-	GetConstructionTimer();
-	
-	//_constructionTimer->OnConstruction.AddDynamic(this, &Building::WhenConstructionFinishes);
+	// Set total construction time
+	_timeInHours = 5.0f;
+	// Find construction timer
+	GetConstructionTimer();	
+	// Set initial construction state
+	_constructionState = EConstructionState::Created;
 }
 
-void Building::GetConstructionTimer() {
+void UBuilding::GetConstructionTimer() {
 	// Find ConstructionTimerActor instance
 	TArray<AActor*> FoundActors;
 		UGameplayStatics::GetAllActorsOfClass(GWorld,
 			AConstructionTimerActor::StaticClass(),
 			FoundActors);
-	// If
+	// Check number of instances for construction timer
 	if(FoundActors.Num() == 1) {
 		_constructionTimer = Cast<AConstructionTimerActor>(FoundActors[0]);
 	} else {
@@ -24,17 +27,31 @@ void Building::GetConstructionTimer() {
 	}
 }
 
-Building::~Building()
+UBuilding::~UBuilding()
 {
 }
 
-void Building::WhenConstructionFinishes()
+void UBuilding::WhenConstructionFinishes()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Construction finished! AAA"));
+	// Change construction state
+	_constructionState = EConstructionState::Done;
+	// Spawn building
+	CreateBuilding();
 }
 
-void Building::BeginConstruction(int TimeInHours)
+void UBuilding::BeginConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo)
 {
-	_constructionTimer->StartConstruction(this, TimeInHours);
+	// Set graphics info
+	_location = FVector(location.X, location.Y, location.Z);
+	_rotation = rotation;
+	_spawnInfo = spawnInfo;
+
+	// Change construction state
+	_constructionState = EConstructionState::Constructing;
+	_constructionTimer->StartConstruction(this, _timeInHours);
 }
 
+void UBuilding::CreateBuilding() {
+	// Create building mesh
+	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+}

@@ -16,16 +16,16 @@ void AEconomyManager::BeginPlay()
 	for (int i = 0; i < MineralBuildings; i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creating Mineral Building"));
-		ActiveBuildings.Add(dynamic_cast<Building*>(new MineralBuilding()));
+		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<MineralBuilding>(MineralBuilding::StaticClass())));
 	}
 	for (int i = 0; i < EnergyBuildings; i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creating Energy Building"));
-		ActiveBuildings.Add(dynamic_cast<Building*>(new EnergyBuilding()));
+		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<EnergyBuilding>(EnergyBuilding::StaticClass())));
 	}
 	for (int i = 0; i < Houses; i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creating Home"));
-		ActiveBuildings.Add(dynamic_cast<Building*>(new HouseBuilding()));
+		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<HouseBuilding>(HouseBuilding::StaticClass())));
 	}
 }

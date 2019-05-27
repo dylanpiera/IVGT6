@@ -21,49 +21,24 @@ void AConstructionTimerActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AConstructionTimerActor::StartConstruction(Building* building, int TimeInHours)
+void AConstructionTimerActor::StartConstruction(UBuilding* building, float TimeInHours)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Construction starts!"));
-
+	// Check if world is available
 	UWorld* World = GetWorld();
 	if (World)
 	{
+		// Set timer
 		FTimerHandle ConstructionHandle;
-		// If the timer has expired or does not exist, start it  
-		if ((ConstructionHandle.IsValid() == false))
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Valid handle : SetTimer()"));
-			FTimerDelegate TimerDel = FTimerDelegate::CreateUObject(this, &AConstructionTimerActor::FinishConstruction, building);
-			//TimerDel.BindUFunction(this, &AConstructionTimerActor::FinishConstruction, building);
-			GetWorldTimerManager().SetTimer(ConstructionHandle, TimerDel, 1.f, false);
-			//GetWorldTimerManager().SetTimer(ConstructionHandle, this, &AConstructionTimerActor::FinishConstruction, 1.0f, false);
-		}
-		else
-		{
-			if (World->GetTimerManager().IsTimerPaused(ConstructionHandle) == true)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Unpause Timer"));
-				World->GetTimerManager().UnPauseTimer(ConstructionHandle);
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Pause Timer"));
-				World->GetTimerManager().PauseTimer(ConstructionHandle);
-			}
-		}
+		FTimerDelegate ConstructionDelegate = FTimerDelegate::CreateUObject(this, &AConstructionTimerActor::FinishConstruction, building);
+		GetWorldTimerManager().SetTimer(ConstructionHandle, ConstructionDelegate, TimeInHours, false);
 	} else
 	{
 		UE_LOG(LogTemp, Error, TEXT("Construction Timer not in scene. 'UWorld' is NULL."));
 	}
 }
 
-void AConstructionTimerActor::FinishConstruction(Building* building)
+void AConstructionTimerActor::FinishConstruction(UBuilding* building)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Time's Up! Finishing construction!"));
+	// Warn building the time is over
 	building->WhenConstructionFinishes();
-}
-
-void AConstructionTimerActor::test()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("TESTING Construction..."));
 }

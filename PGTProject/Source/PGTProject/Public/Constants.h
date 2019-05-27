@@ -20,6 +20,13 @@ enum class EInteractionMode
 	Delete
 };
 
+enum class EConstructionState
+{
+	Created,
+	Constructing,
+	Done
+};
+
 /**
  * 
  */

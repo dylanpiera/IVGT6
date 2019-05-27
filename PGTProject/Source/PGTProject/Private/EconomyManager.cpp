@@ -6,11 +6,11 @@
 
 void AEconomyManager::InitResources()
 {
-	resources._energy = 100 + EnergyBuildings;
-	resources._minerals = 100 + MineralBuildings;
-	resources._population = 8 + Houses;
+	resources._energy = 100;
+	resources._minerals = 100;
+	resources._population = 8;
 	resources._money = 200 * resources._population;
-	resources._food = 100 + FoodBuildings - resources._population;
+	resources._food = 100;
 }
 
 void AEconomyManager::BeginPlay()

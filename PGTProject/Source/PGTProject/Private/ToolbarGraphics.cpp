@@ -247,6 +247,17 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
+void ToolbarGraphics::SetBuilding(OptionSections option)
+{
+	_building = option;
+}
+
+OptionSections ToolbarGraphics::GetBuilding()
+{
+	return _building;
+}
+
+
 // Get option title for section
 FText ToolbarGraphics::GetOptionTitle(OptionSections OptionIndex) const
 {
@@ -265,12 +276,14 @@ FReply ToolbarGraphics::SelectRoad(OptionSections Index) const
 }
 
 // Select building option
-FReply ToolbarGraphics::SelectBuilding(OptionSections Index) const
+FReply ToolbarGraphics::SelectBuilding(OptionSections Index)
 {
 	// TODO: Make function select and place down a building
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Selecting building"));
-	UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), Index);
-
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, FString::Printf(TEXT("Selecting building %d"), _building));
+	
+	SetBuilding(Index);
+	UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), _building);
+	
 	return FReply::Handled();
 }
 

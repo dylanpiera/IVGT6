@@ -11,6 +11,11 @@
 
 using namespace std;
 
+
+// Toolbar structure definitions
+enum ToolbarSections { RoadsSection, BuildingsSection };
+enum OptionSections { RoughRoad, EnergyBuilding, MineralsBuilding, MoneyBuilding };
+
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 {
 public:
@@ -23,16 +28,16 @@ public:
 
 	// Constructs this widget with InArgs
 	void Construct(const FArguments& InArgs);
+
+	void SetBuilding(OptionSections option);
+	OptionSections GetBuilding();
 	
 private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 
-	// Toolbar structure definitions
-	enum ToolbarSections { RoadsSection, BuildingsSection };
-	enum OptionSections { RoughRoad, EnergyBuilding, MineralsBuilding, MoneyBuilding };
-
+	OptionSections _building;
 	/* "mutable" variables are so they be updated inside "const" functions */
 
 	mutable ToolbarSections CurrentSection; // Holds current toolbar section
@@ -68,7 +73,7 @@ private:
 	// Select road option
 	FReply SelectRoad(OptionSections Index) const;
 	// Select building option
-	FReply SelectBuilding(OptionSections Index) const;
+	FReply SelectBuilding(OptionSections Index);
 	// Define style settings
 	void StyleSettings();
 	// Destroy building/road

@@ -162,7 +162,7 @@ void ACameraPawn::OnClickRayCast()
 	//Get's actor for selecting purposes
 	SelectedActor = SelectingActor(hit);
 
-	if(SelectedActor != NULL)
+	if(SelectedActor != NULL )
 	{
 		//TODO: Change destroy to something else. This was for testing purpose.
 		//SelectedActor->Destroy();

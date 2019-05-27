@@ -3,12 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MineralBuilding.h"
-#include "Components/BoxComponent.h"
-#include "ConstructorHelpers.h"
-#include "EconomyManager.h"
-#include "Engine/World.h"
 #include "GameFramework/Actor.h"
+#include "ToolbarGraphics.h"
 #include "BuildingGraphics.generated.h"
 
 UCLASS()
@@ -28,10 +24,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UStaticMesh* BuildingMesh;
-	UMaterial* BuildingMaterial;
+	void SetBuildingGraphics(OptionSections building);
 
-	MineralBuilding* Building;
-	AEconomyManager* EcoMan;
+	UStaticMesh* BuildingMesh;
 
 };

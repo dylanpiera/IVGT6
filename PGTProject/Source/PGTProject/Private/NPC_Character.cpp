@@ -50,18 +50,18 @@ void ANPC_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 void ANPC_Character::LoadMesh()
 {
 	// Find and load skeletal mesh
-	MeshContainer = LoadObject<USkeletalMesh>(nullptr, TEXT("SkeletalMesh'/Game/Assets/NPC/Cyborg.Cyborg'"));
+	MeshContainer = LoadObject<USkeletalMesh>(nullptr, TEXT("SkeletalMesh'/Game/AnimStarterPack/UE4_Mannequin/Mesh/SK_Mannequin.SK_Mannequin'"));
 	// If mesh was found apply it to this character
 	if (MeshContainer) {
 		CharacterMesh = GetMesh();
-		CharacterMesh->AddRelativeLocation(FVector(0, 2, -60));
+//		CharacterMesh->AddRelativeLocation(FVector(0, 2, -60));
 		CharacterMesh->SetSkeletalMesh(MeshContainer);
-		FVector MeshScale = FVector(10, 10, 10);
+		FVector MeshScale = FVector(0.5f, 0.5f, 0.5f);
 		CharacterMesh->SetWorldScale3D(MeshScale);
 
 		CharacterCapsule = GetCapsuleComponent();
-		CharacterCapsule->SetCapsuleHalfHeight(60.0f, false);
-		CharacterCapsule->SetCapsuleRadius(22.0f, false);
+//		CharacterCapsule->SetCapsuleHalfHeight(60.0f, false);
+//		CharacterCapsule->SetCapsuleRadius(22.0f, false);
 	}
 }
 

@@ -38,7 +38,10 @@ public:
 	class USkeletalMeshComponent* CharacterMesh;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "MoveCharacterEvent")
-	void MoveToLocation(const FVector &newLocation);
+	void MoveToLocation(const FVector& newLocation);
+
+	UFUNCTION(BlueprintNativeEvent)
+	void TEST();
 private:
 	// Load character mesh and attach to this character
 	void LoadMesh();

@@ -2,6 +2,7 @@
 
 #include "NPC_Character.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "OutputDeviceNull.h"
 
 // Sets default values
 ANPC_Character::ANPC_Character()
@@ -20,15 +21,23 @@ void ANPC_Character::BeginPlay()
 	Super::BeginPlay();
 	//FOutputDeviceNull ar;
 	//this->CallFunctionByNameWithArguments(TEXT("Move"), ar, NULL, true);
-	FVector tile = FVector(0, 0, 0);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("MOVE BABY!"));
+
+	TEST();
+	FVector tile = FVector(4000, 4000, 0);
 	MoveToLocation(tile);
+}
+
+void ANPC_Character::TEST_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Default..."));
+    // Logic needed when blueprints don't implement the event. Can be empty.
 }
 
 // Called every frame
 void ANPC_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input

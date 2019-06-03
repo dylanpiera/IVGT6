@@ -26,6 +26,14 @@ enum class EMineralResources
 	Catanium, NightGems
 };
 
+// Builders Availability Status
+enum class EWorkState
+{
+	Free,
+	Walking,
+	Working
+};
+
 /**
  * 
  */

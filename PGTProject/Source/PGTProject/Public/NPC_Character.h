@@ -3,9 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CharacterController.h"
-#include "Runtime/Engine/Classes/Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
+#include "Constants.h"
 #include "NPC_Character.generated.h"
 
 UCLASS()
@@ -21,29 +20,51 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(VisibleAnywhere)
-	class UCapsuleComponent* CharacterCapsule;
-
+	// Acess own mesh component
 	UPROPERTY(VisibleAnywhere, Category = SkeletalMesh)
 	class USkeletalMesh* MeshContainer;
-
 	UPROPERTY(VisibleAnywhere, Category = SkeletalMesh)
 	class USkeletalMeshComponent* CharacterMesh;
 
+	// Move character to a specific world location
 	UFUNCTION(BlueprintImplementableEvent, Category = "MoveCharacterEvent")
 	void MoveToLocation(const FVector& newLocation);
 
-	UFUNCTION(BlueprintNativeEvent)
-	void TEST();
+	// Get builder working state
+	EWorkState GetBuilderState();
+
+	// Assing a task to builder
+	void AssignTask(FVector buildingLocation);
+
 private:
+	// Working state
+	EWorkState _state;
+
+	// Next building location
+	FVector _buildingLocation;
+
+	// Next tile to move to
+	FVector _goalLocation;
+
+	// Modify working state
+	void SetBuilderState(EWorkState newState);
+
 	// Load character mesh and attach to this character
 	void LoadMesh();
-	void MoveTo(FVector place);
+
+	// Check if builder reached next goal location
+	bool ReachedLocation();
+
+	// Check if builder reached final building location
+	bool ReachedBuilding();
+
+	// Make builder start work
+	void StartWorking();
 };

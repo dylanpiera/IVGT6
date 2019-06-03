@@ -2,6 +2,11 @@
 
 #include "GameTickManager.h"
 #include "Engine/World.h"
+#include "ActiveState.h"
+#include "BuildingState.h"
+#include <typeinfo>
+#include <iostream>
+#include "Utility.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -100,7 +105,9 @@ void AGameTickManager::GameTickDay()
 	// Update Resources
 	for (Building* building : EconomyManager->ActiveBuildings)
 	{
-		building->BuildingFunction(EconomyManager->resources);
+		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
+			building->BuildingFunction(EconomyManager->resources);
+		}
 	}
 	if (EconomyManager->resources._energy < 0)
 	{

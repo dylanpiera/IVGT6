@@ -17,6 +17,7 @@ BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
  * Creates elements on the the HUD
  * \params
  */
+
 void SSlateWidget::Construct(const FArguments& InArgs)
 {
 	//Retrieve argument
@@ -33,7 +34,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	const FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
 	const FString foodImagePath = FPaths::ProjectContentDir() / TEXT("Assets/foodIcon.png");
 	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42);
-
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)

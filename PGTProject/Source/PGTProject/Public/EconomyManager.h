@@ -15,7 +15,7 @@ class PGTPROJECT_API AEconomyManager : public AActor
 public:	
 	Resources resources;
 
-	TArray<Building*> ActiveBuildings;
+	TArray<UBuilding*> ActiveBuildings;
 
 	/* for testing purposes: */
 	UPROPERTY(EditAnywhere)		

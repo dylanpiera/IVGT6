@@ -5,12 +5,22 @@
 #include "CoreMinimal.h"
 #include "HexActor.h"
 #include "Runtime/Engine/Classes/Engine/StaticMesh.h"
+#include "map"
+#include "Constants.h"
+
+using namespace std;
 
 class PGTPROJECT_API HexActorGraphics
 {
 private:
-	UStaticMesh* HexTileMesh;		// Mesh storage
-	UMaterial* RockSnowMaterial;	// Rock Snow Material
+	UStaticMesh* _hexTileMesh;		// Mesh storage
+	UMaterial* _terrainMaterial;		// Terrain Material
+
+	UStaticMesh* _mineralMesh;		// Minerals Mesh storage
+	map<EMineralResources, UMaterial*> _mineralResourceMaterials; // Store resources materials
+
+	// Check if material exists
+	bool IfMaterialExists(EMineralResources resource);
 
 public:
 	FVector MeshSize;				// Mesh size
@@ -21,4 +31,8 @@ public:
 
 	// Create a graphic visualization of an hexagon tile for a HexActor 
 	void CreateHexGraphics(AHexActor* HexActorRef);
+	// Create a graphic visualization of the resources for a HexActor
+	void AddResourceGraphics(EMineralResources resource, AHexActor* HexActorRef);
+	// Remove graphic visualization of resources from HexActor
+	void RemoveResourceGraphics(AHexActor* HexActorRef);
 };

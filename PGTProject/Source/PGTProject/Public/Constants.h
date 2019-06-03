@@ -20,6 +20,13 @@ enum class EInteractionMode
 	Delete
 };
 
+// Avaiable resources
+enum class EMineralResources
+{
+	Catanium,
+	NightGems
+};
+
 /**
  * 
  */

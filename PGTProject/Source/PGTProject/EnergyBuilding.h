@@ -2,7 +2,7 @@
 #include "Building.h"
 #include "EconomyManager.h"
 
-class EnergyBuilding : public Building {
+class EnergyBuilding : public UBuilding {
 	int32 EnergyProductionValue = 50;
 	int MoneyUpkeep = 25;
 

@@ -103,7 +103,7 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	for (Building* building : EconomyManager->ActiveBuildings)
+	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);

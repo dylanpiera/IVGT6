@@ -1,7 +1,7 @@
 #pragma once
 #include "Building.h"
 
-class FoodBuilding : public Building {
+class FoodBuilding : public UBuilding {
 	int32 FoodProductionValue = 15;
 	int EnergyUpkeep = 5;
 

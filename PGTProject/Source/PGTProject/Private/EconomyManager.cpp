@@ -35,6 +35,6 @@ void AEconomyManager::BeginPlay()
 	for (int i = 0; i < FoodBuildings; i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creating Food Building"));
-		ActiveBuildings.Add(dynamic_cast<Building*>(new FoodBuilding()));
+		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<FoodBuilding>(FoodBuilding::StaticClass())));
 	}
 }

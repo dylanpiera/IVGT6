@@ -25,7 +25,7 @@ void UBuilding::GetConstructionTimer() {
 	if(FoundActors.Num() == 1) {
 		_constructionTimer = Cast<AConstructionTimerActor>(FoundActors[0]);
 	} else {
-		UE_LOG(LogTemp, Error, TEXT("Number of ConstructionTimerActors inconsistent on Building."));
+		UE_LOG(LogTemp, Warning, TEXT("Number of ConstructionTimerActors inconsistent on Building."));
 	}
 }
 

@@ -2,7 +2,7 @@
 
 #include "BuildingGraphics.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
-#include "BuildingObject.h"
+#include "Building.h"
 
 // Sets default values
 ABuildingGraphics::ABuildingGraphics()

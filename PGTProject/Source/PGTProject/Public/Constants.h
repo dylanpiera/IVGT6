@@ -23,7 +23,8 @@ enum class EInteractionMode
 // Avaiable resources
 enum class EMineralResources
 {
-	Catanium, NightGems
+	Catanium,
+	NightGems
 };
 
 // Builders Availability Status

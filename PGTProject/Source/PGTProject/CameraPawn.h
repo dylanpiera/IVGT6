@@ -8,7 +8,7 @@
 #include "GameFramework/Pawn.h"
 #include "HexActor.h"
 #include "Engine/World.h"
-#include "BuildingGraphics.h"
+#include "MineralBuilding.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"

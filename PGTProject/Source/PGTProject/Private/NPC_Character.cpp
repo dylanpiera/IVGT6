@@ -79,7 +79,11 @@ bool ANPC_Character::ReachedLocation()
 	FVector currentLocation = GetActorLocation();
 	FVector goal = _goalLocation;
 
-	// Check if reached next tile
+	// Ignore height comparison
+	currentLocation.Z = 0;
+	goal.Z = 0;
+	
+	// Check if reached next tile (with a distance tolerance)
 	if(currentLocation.Equals(goal, 100.0f))
 	{
 		return true;
@@ -93,7 +97,11 @@ bool ANPC_Character::ReachedBuilding()
 	FVector currentLocation = GetActorLocation();
 	FVector building = _buildingLocation;
 
-	// Check if reached final goal: building tile
+	// Ignore height comparison
+	currentLocation.Z = 0;
+	building.Z = 0;
+
+	// Check if reached final goal: building tile (with a distance tolerance)
 	if(currentLocation.Equals(building, 100.0f))
 	{
 		return true;

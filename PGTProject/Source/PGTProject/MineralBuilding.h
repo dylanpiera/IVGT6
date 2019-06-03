@@ -1,11 +1,11 @@
 #pragma once
-#include "BuildingObject.h"
+#include "Building.h"
 
-class MineralBuilding : public BuildingObject {
+class MineralBuilding : public UBuilding {
 
 	int32 MineralProductionValue = 1;
 
-	void BuildingFunction(Resources& resources) override {
-		resources._minerals += MineralProductionValue;
+	void BuildingFunction(Resources& resource) override {
+		resource._minerals += MineralProductionValue;
 	}
 };

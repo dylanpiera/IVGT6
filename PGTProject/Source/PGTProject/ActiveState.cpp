@@ -7,22 +7,22 @@ ActiveState::~ActiveState()
 {
 }
 
-void ActiveState::BuildingInactive(BuildingObject* building)
+void ActiveState::BuildingInactive(UBuilding* building)
 {
 	building->SetState(dynamic_cast<BuildingState*>(new InactiveState()));
 }
 
-void ActiveState::BuildingDestruction(BuildingObject* building)
+void ActiveState::BuildingDestruction(UBuilding* building)
 {
 	building->SetState(dynamic_cast<BuildingState*>(new DestructionState()));
 }
 
-void ActiveState::BuildingActive(BuildingObject* building)
+void ActiveState::BuildingActive(UBuilding* building)
 {
 	return;
 }
 
-void ActiveState::BuildingConstruction(BuildingObject* building)
+void ActiveState::BuildingConstruction(UBuilding* building)
 {
 	return;
 }

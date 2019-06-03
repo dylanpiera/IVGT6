@@ -2,7 +2,7 @@
 
 #ifndef BuildingState_Header
 #define BuildingState_Header
-#include "BuildingObject.h"
+#include "Building.h"
 #include <typeinfo>
 #include "CoreMinimal.h"
 
@@ -20,25 +20,25 @@ public:
 	* Called whenever a building shoud change states to the Active State
 	* The current state of the building decides how and if it obeys this call.
 	*/
-	virtual void BuildingActive(BuildingObject* building) = 0;
+	virtual void BuildingActive(UBuilding* building) = 0;
 
 	/**
 	* Called whenever a building shoud change states to the Inactive State
 	* The current state of the building decides how and if it obeys this call.
 	*/
-	virtual void BuildingInactive(BuildingObject* building) = 0;
+	virtual void BuildingInactive(UBuilding* building) = 0;
 
 	/**
 	* Called whenever a building shoud change states to the Construction State
 	* The current state of the building decides how and if it obeys this call.
 	*/
-	virtual void BuildingConstruction(BuildingObject* building) = 0;
+	virtual void BuildingConstruction(UBuilding* building) = 0;
 
 	/**
 	* Called whenever a building shoud change states to the Destruction State
 	* The current state of the building decides how and if it obeys this call.
 	*/
-	virtual void BuildingDestruction(BuildingObject* building) = 0;
+	virtual void BuildingDestruction(UBuilding* building) = 0;
 
 };
 #endif

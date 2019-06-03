@@ -9,21 +9,21 @@ public:
 	/**
 	 * See: BuildingState.h - Line 20
 	*/
-	void BuildingActive(BuildingObject* building);
+	void BuildingActive(UBuilding* building);
 
 	/**
 	 * See: BuildingState.h - Line 26
 	*/
-	void BuildingInactive(BuildingObject* building);
+	void BuildingInactive(UBuilding* building);
 
 	/**
 	 * See: BuildingState.h - Line 32
 	*/
-	void BuildingConstruction(BuildingObject* building);
+	void BuildingConstruction(UBuilding* building);
 
 	/**
 	 * See: BuildingState.h - Line 38
 	*/
-	void BuildingDestruction(BuildingObject* building);
+	void BuildingDestruction(UBuilding* building);
 };
 

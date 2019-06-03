@@ -1,7 +1,7 @@
 #pragma once
-#include "BuildingObject.h"
+#include "Building.h"
 
-class EnergyBuilding : public BuildingObject {
+class EnergyBuilding : public UBuilding {
 	int32 EnergyProductionValue = 10;
 
 	void BuildingFunction(Resources& resource) override {

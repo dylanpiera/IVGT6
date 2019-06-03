@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BuildingObject.h"
+#include "Building.h"
 #include "GameFramework/Actor.h"
 #include "EconomyManager.generated.h"
 
@@ -15,7 +15,7 @@ class PGTPROJECT_API AEconomyManager : public AActor
 public:	
 	Resources resources;
 
-	TArray<BuildingObject*> ActiveBuildings;
+	TArray<UBuilding*> ActiveBuildings;
 
 	/* for testing purposes: */
 	UPROPERTY(EditAnywhere)		

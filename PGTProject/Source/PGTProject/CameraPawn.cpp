@@ -183,7 +183,10 @@ void ACameraPawn::OnClickRayCast()
 			FActorSpawnParameters SpawnInfo;
 			SpawnInfo.Owner = hex;
 				
-			ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
+			// Create building
+			MineralBuilding* building = NewObject<MineralBuilding>(MineralBuilding::StaticClass());
+			// Start building construction (its gonna spawn the mesh automatically)
+			building->BuildingConstruction(location, rotation, SpawnInfo);
 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
 		}

@@ -5,16 +5,15 @@
 #include "CoreMinimal.h"
 #include "Widgets/SCompoundWidget.h"
 #include "GameHUD.h"
-#include "vector"
 #include "map"
 #include <utility>
+#include "Constants.h"
+#include "DataHolder.h"
 
 using namespace std;
 
 
-// Toolbar structure definitions
-enum ToolbarSections { RoadsSection, BuildingsSection };
-enum OptionSections { RoughRoad, EnergyBuilding, MineralsBuilding, MoneyBuilding };
+
 
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 {
@@ -23,21 +22,25 @@ public:
 
 	// Add new argument called OwnerHUDArg
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
+	SLATE_ARGUMENT(TWeakObjectPtr<class ADataHolder>, DataHolderArgs);
 
 	SLATE_END_ARGS()
 
+	
 	// Constructs this widget with InArgs
+
 	void Construct(const FArguments& InArgs);
 
-	void SetBuilding(OptionSections option);
-	OptionSections GetBuilding();
+	/*void SetBuilding(OptionSections option);
+	OptionSections GetBuilding();*/
 	
 private:
 
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
-
-	OptionSections _building;
+	TWeakObjectPtr<class ADataHolder> _dataHolder;
+	
+	//OptionSections _building;
 	/* "mutable" variables are so they be updated inside "const" functions */
 
 	mutable ToolbarSections CurrentSection; // Holds current toolbar section

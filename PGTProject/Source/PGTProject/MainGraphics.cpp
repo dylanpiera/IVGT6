@@ -10,6 +10,7 @@ void MainGraphics::Construct(const FArguments& InArgs)
 	// Retrieve arguments
 	_ownerHUD = InArgs._OwnerHUDArg;
 	_toolbarActor = InArgs._ToolbarActorArg;
+	_dataHolder = InArgs._DataHolderArgs;
 
 	// Interface
 	ChildSlot
@@ -27,6 +28,7 @@ void MainGraphics::Construct(const FArguments& InArgs)
 		[
 			SAssignNew(_ownerToolbar, ToolbarGraphics)
 			.OwnerHUDArg(_ownerHUD)
+			.DataHolderArgs(_dataHolder)
 		]
 	];
 }

@@ -4,23 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ToolbarGraphics.h"
-#include "BuildingGraphics.generated.h"
+#include "Constants.h"
+#include "DataHolder.generated.h"
 
 UCLASS()
-class PGTPROJECT_API ABuildingGraphics : public AActor
+class PGTPROJECT_API ADataHolder : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABuildingGraphics();
+	ADataHolder();
 
-	ADataHolder* holder;
+	OptionSections abuilding;
 
-	UStaticMeshComponent* Mesh;
+	void SetBuilding(OptionSections building);
 
-	UStaticMesh* BuildingMesh;
+	OptionSections GetBuilding();
+
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,5 +32,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
+
 };

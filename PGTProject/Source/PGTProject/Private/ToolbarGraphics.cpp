@@ -11,13 +11,13 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 {
 	// Retrieve arguments
 	_ownerHUD = InArgs._OwnerHUDArg;
+	_dataHolder = InArgs._DataHolderArgs;
 
 	// Set style (fonts, images, icons...)
 	StyleSettings();
 
 	// Close toolbar view options panel
 	IsOpenToolbarViewPanel = false;
-
 	// Interface
 	ChildSlot
 		.HAlign(HAlign_Fill)
@@ -247,15 +247,15 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-void ToolbarGraphics::SetBuilding(OptionSections option)
-{
-	_building = option;
-}
-
-OptionSections ToolbarGraphics::GetBuilding()
-{
-	return _building;
-}
+//void ToolbarGraphics::SetBuilding(OptionSections option)
+//{
+//	_building = option;
+//}
+//
+//OptionSections ToolbarGraphics::GetBuilding()
+//{
+//	return _building;
+//}
 
 
 // Get option title for section
@@ -279,10 +279,11 @@ FReply ToolbarGraphics::SelectRoad(OptionSections Index) const
 FReply ToolbarGraphics::SelectBuilding(OptionSections Index)
 {
 	// TODO: Make function select and place down a building
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, FString::Printf(TEXT("Selecting building %d"), _building));
+	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, FString::Printf(TEXT("Selecting building %d"), _building));
 	
-	SetBuilding(Index);
-	UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), _building);
+	_dataHolder->SetBuilding(Index);
+
+	//UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), _building);
 	
 	return FReply::Handled();
 }

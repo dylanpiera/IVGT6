@@ -20,6 +20,21 @@ enum class EInteractionMode
 	Delete
 };
 
+enum OptionSections
+{
+	RoughRoad,
+	EnergyBuilding,
+	MineralsBuilding,
+	MoneyBuilding
+};
+
+// Toolbar structure definitions
+enum ToolbarSections
+{
+	RoadsSection,
+	BuildingsSection
+};
+
 // Avaiable resources
 enum class EMineralResources
 {
@@ -27,7 +42,7 @@ enum class EMineralResources
 };
 
 /**
- * 
+ *
  */
 class PGTPROJECT_API Constants
 {

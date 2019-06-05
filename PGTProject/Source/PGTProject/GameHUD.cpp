@@ -17,7 +17,13 @@ void AGameHUD::BeginPlay()
 	TWeakObjectPtr<AToolbarActor> toolbar = Cast<AToolbarActor>(FoundActors[0]);
 	toolbar->testFunc();
 
-	_mainWidget = SNew(MainGraphics).OwnerHUDArg(this).ToolbarActorArg(toolbar);
+	TArray<AActor*> Found;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		ADataHolder::StaticClass(),
+		Found);
+	TWeakObjectPtr<ADataHolder> dataHolder = Cast<ADataHolder>(Found[0]);
+
+	_mainWidget = SNew(MainGraphics).OwnerHUDArg(this).ToolbarActorArg(toolbar).DataHolderArgs(dataHolder);
 	GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(_mainWidget.ToSharedRef()), 0);
 	_mainWidget->SetVisibility(EVisibility::Visible);
 

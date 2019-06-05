@@ -4,7 +4,6 @@
 #include "Engine/World.h"
 #include "ActiveState.h"
 #include "BuildingState.h"
-#include <typeinfo>
 #include <iostream>
 #include "Utility.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"

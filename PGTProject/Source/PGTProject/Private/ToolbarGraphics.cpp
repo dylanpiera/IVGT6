@@ -175,6 +175,35 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
+						// Building 4
+						+ SUniformGridPanel::Slot(3, 0)
+							[
+								SNew(SVerticalBox)
+								+ SVerticalBox::Slot()
+							[
+								SNew(SOverlay)
+								+ SOverlay::Slot()
+							[
+								SNew(SImage)
+								.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building4_IconPath]), FVector2D(100, 100)))
+							]
+						+ SOverlay::Slot()
+							[
+								SNew(SButton)
+								.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
+							.OnClicked(this, &ToolbarGraphics::SelectBuilding, FoodBuilding)
+							.DesiredSizeScale(FVector2D(60, 60))
+							]
+							]
+						+ SVerticalBox::Slot()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+							.Justification(ETextJustify::Center)
+							.Text(this, &ToolbarGraphics::GetOptionTitle, FoodBuilding)
+							.ColorAndOpacity(FLinearColor::White)
+							]
+						]
 					]
 				]
 			]

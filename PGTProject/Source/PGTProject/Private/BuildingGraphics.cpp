@@ -71,6 +71,13 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 			meshComp->SetWorldScale3D(FVector(50, 50, 50));
 			break;
 		}
+		case FoodBuilding:
+		{
+			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/Cone.Cone'")); 
+			meshComp->SetStaticMesh(BuildingMesh);
+			meshComp->SetWorldScale3D(FVector(2, 2, 2));
+			break;
+		}
 	}
 }
 

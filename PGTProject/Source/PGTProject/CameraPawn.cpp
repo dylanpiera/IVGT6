@@ -252,21 +252,28 @@ void ACameraPawn::OnClickRayCast()
 		}
 		else
 		{
+			TArray<AActor*> FActors;
+			UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+				ADataHolder::StaticClass(),
+				FActors);
+			ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
+			OptionSections buildingMesh = holder->GetBuilding();
+			if (buildingMesh == DestroyTool) {
+				auto parent = SelectedActor->GetOwner();
+				if (parent->IsA(AHexActor::StaticClass()))
+				{
+					//FVector hexPos = SelectedActor->GetActorLocation();
+					AHexActor* hex = Cast<AHexActor>(parent);
+					*hex->Building->x -= 1;
+					hex->buildingBuilt = false;
+					EconomyManager->ActiveBuildings.Remove(hex->Building);
 
-			auto parent = SelectedActor->GetOwner();
-			if (parent->IsA(AHexActor::StaticClass()))
-			{
-				//FVector hexPos = SelectedActor->GetActorLocation();
-				AHexActor* hex = Cast<AHexActor>(parent);
-				*hex->Building->x -= 1;
-				hex->buildingBuilt = false;
-				EconomyManager->ActiveBuildings.Remove(hex->Building);
-
-				SelectedActor->Destroy();
-			}
-			else 
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("No hex found."));
+					SelectedActor->Destroy();
+				}
+				else
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("No hex found."));
+				}
 			}
 		}
 	}

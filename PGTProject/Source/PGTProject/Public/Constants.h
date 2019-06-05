@@ -25,7 +25,8 @@ enum OptionSections
 	RoughRoad,
 	EnergyBuilding,
 	MineralsBuilding,
-	MoneyBuilding
+	MoneyBuilding,
+	DestroyTool
 };
 
 // Toolbar structure definitions

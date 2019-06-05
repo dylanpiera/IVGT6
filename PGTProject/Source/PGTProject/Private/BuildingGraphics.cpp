@@ -28,7 +28,7 @@ void ABuildingGraphics::BeginPlay()
 	holder = Cast<ADataHolder>(FActors[0]);
 	OptionSections building = holder->GetBuilding();
 
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("Selecting building %d"), building));
+	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("Selecting building %d"), building));
 	
 	//SetBuildingGraphics(building, Mesh);
 }

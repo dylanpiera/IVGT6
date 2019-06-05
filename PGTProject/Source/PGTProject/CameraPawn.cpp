@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CameraPawn.h"
+#include "Constants.h"
+#include "EconomyManager.h"
 #include "BuildingGraphics.h"
 
 // Sets default values
@@ -191,13 +193,48 @@ void ACameraPawn::OnClickRayCast()
 			ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
 			OptionSections buildingMesh = holder->GetBuilding();
 
+			//Ecoman
+			TArray<AActor*> FoundActors;
+			UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+				AEconomyManager::StaticClass(),
+				FoundActors);
+			 AEconomyManager* EconomyManager = Cast<AEconomyManager>(FoundActors[0]);
+
 			//ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
 				
 			// Create building
-			UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
+			 switch (buildingMesh)
+			 {
+				case MineralsBuilding:
+				{
+					UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass(), FName("MineralBuilding"));
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					break;
+				}
+				case EnergyBuilding:
+				{
+					UEnergyBuilding* building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass(), FName("EnergyBuilding"));
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					break;
+				}
+				case MoneyBuilding:
+				{
+					UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass(), FName("HouseBuilding"));
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					break;
+				}
+			 }
+
 			// Start building construction (its gonna spawn the mesh automatically)
-			building->SetMesh(buildingMesh);
-			building->BuildingConstruction(location, rotation, SpawnInfo);
+			
+
+			
 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
 		}

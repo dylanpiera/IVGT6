@@ -57,10 +57,7 @@ void UBuilding::CreateBuilding() {
 	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
 }
 
-void UBuilding::BuildingFunction(Resources &resource)
-{
-	resource._money -= 100;
-}
+void UBuilding::BuildingFunction(Resources &resource){}
 
 void UBuilding::BuildingActive(Resources &resource, Resources &maintenance)
 {

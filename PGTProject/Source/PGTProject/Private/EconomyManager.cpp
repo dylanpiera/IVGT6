@@ -2,30 +2,45 @@
 #include "MineralBuilding.h"
 #include "EnergyBuilding.h"
 #include "HouseBuilding.h"
+#include "FoodBuilding.h"
+#include <ActiveState.h>
 
 void AEconomyManager::InitResources()
 {
-	resources._energy = 100 + EnergyBuildings;
-	resources._minerals = 100 + MineralBuildings;
-	resources._population = 8 + Houses;
-	resources._money = 200 * resources._population;
+	resources._energy = 0;
+	resources._minerals = 0;
+	resources._population = 0;
+	resources._money = 200;
+	resources._food = 0;
+
+	resources._mine = MineralBuildings;
 }
 
 void AEconomyManager::BeginPlay()
 {
 	for (int i = 0; i < MineralBuildings; i++)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Creating Mineral Building"));
-		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<MineralBuilding>(MineralBuilding::StaticClass())));
+		auto building = Cast<UBuilding>(NewObject<UMineralBuilding>(UMineralBuilding::StaticClass()));
+		building->SetState(new ActiveState());
+		ActiveBuildings.Add(building);
+		ActiveBuildings[0]->BuildingFunction(resources);
 	}
 	for (int i = 0; i < EnergyBuildings; i++)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Creating Energy Building"));
-		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<EnergyBuilding>(EnergyBuilding::StaticClass())));
+		auto building = Cast<UBuilding>(NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass()));
+		building->SetState(new ActiveState());
+		ActiveBuildings.Add(building);
 	}
 	for (int i = 0; i < Houses; i++)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Creating Home"));
-		ActiveBuildings.Add(dynamic_cast<UBuilding*>(NewObject<HouseBuilding>(HouseBuilding::StaticClass())));
+		auto building = Cast<UBuilding>(NewObject<UHouseBuilding>(UHouseBuilding::StaticClass()));
+		building->SetState(new ActiveState());
+		ActiveBuildings.Add(building);
+	}
+	for (int i = 0; i < FoodBuildings; i++)
+	{
+		auto building = Cast<UBuilding>(NewObject<UFoodBuilding>(UFoodBuilding::StaticClass()));
+		building->SetState(new ActiveState());
+		ActiveBuildings.Add(building);
 	}
 }

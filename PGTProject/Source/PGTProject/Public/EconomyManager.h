@@ -24,6 +24,8 @@ public:
 	int32 EnergyBuildings;
 	UPROPERTY(EditAnywhere)
 	int32 Houses;
+	UPROPERTY(EditAnywhere)
+	int32 FoodBuildings;
 
 	void InitResources();
 

@@ -184,7 +184,7 @@ void ACameraPawn::OnClickRayCast()
 			SpawnInfo.Owner = hex;
 				
 			// Create building
-			MineralBuilding* building = NewObject<MineralBuilding>(MineralBuilding::StaticClass());
+			UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
 			// Start building construction (its gonna spawn the mesh automatically)
 			building->BuildingConstruction(location, rotation, SpawnInfo);
 

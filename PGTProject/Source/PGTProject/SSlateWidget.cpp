@@ -32,7 +32,8 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	const FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
 	const FString moneyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/moneyIcon.png");
 	const FString populationImagePath = FPaths::ProjectContentDir() / TEXT("Assets/populationIcon.png");
-	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Slate/Fonts/Raleway-Bold.ttf"), 42);
+	const FString foodImagePath = FPaths::ProjectContentDir() / TEXT("Assets/foodIcon.png");
+	const FSlateFontInfo Raleway = FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42);
 
 	//Fill screen with slot which allows to to add different things to the HUD
 	ChildSlot.VAlign(VAlign_Fill).HAlign(HAlign_Fill)
@@ -74,20 +75,12 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SAssignNew(_energyValue, STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
+				.Margin(FMargin(10.0f, 0.0f, 20.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getEnergy()); })
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			[
-				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
-				.ColorAndOpacity(FLinearColor::White)
-				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
-			]
+
 			//Minerals
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -108,11 +101,20 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
+				.Text(FText::FromString(_toolbarActor->getMineralsGain() >= 0 ? "+" : ""))
 			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f, 20.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMineralsGain()); })
+			]
+
 			//Money
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -133,11 +135,20 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SNew(STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
+				.Text(FText::FromString(_toolbarActor->getMoneyGain() >= 0 ? "+" : ""))
 			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.Margin(FMargin(10.0f, 0.0f, 0.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getMoneyGain()); })
+			]
+
 			//Population
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -149,10 +160,35 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			.AutoWidth()
 			[
 				SAssignNew(_populationValue, STextBlock)
-				.Margin(FMargin(10.0f, 0.0f))
+				.Margin(FMargin(10.0f, 0.0f, 20.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
 				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getPopulation()); })
+			]
+
+			//Food
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(SImage)
+				.Image(new FSlateDynamicImageBrush(FName(*foodImagePath), FVector2D(64, 64)))
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SAssignNew(_foodValue, STextBlock)
+				.Margin(FMargin(10.0f, 0.0f))
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getFood()); })
+			]
+			+ SHorizontalBox::Slot()
+			.AutoWidth()
+			[
+				SNew(STextBlock)
+				.ColorAndOpacity(FLinearColor::White)
+				.Font(Raleway)
+				.Text(FText::FromString(_toolbarActor->getFoodGain() >= 0 ? "+" : ""))
 			]
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
@@ -161,13 +197,13 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 				.Margin(FMargin(10.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)
 				.Font(Raleway)
-				.Text(FText::AsNumber(gain))
+				.Text_Lambda([this]()->FText {return FText::AsNumber(_toolbarActor->getFoodGain()); })
 			]
 		]
 
 		/*
 		 * \brief Timer in the upper right corner
-		 * \TODO link Game tick
+		 * 
 		 */
 		+ SOverlay::Slot()
 		.VAlign((VAlign_Top))

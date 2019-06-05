@@ -103,15 +103,28 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._population = 0;
-	EconomyManager->resources._energy = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);
 		}
 	}
-	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
+	if (EconomyManager->resources._energy < 0)
+	{
+		EconomyManager->resources._energy = 0;
+	}
+	if (EconomyManager->resources._population < 0)
+	{
+		EconomyManager->resources._population = 0;
+	}
+	if (EconomyManager->resources._food < 0)
+	{
+		EconomyManager->resources._food = 0;
+	}
+	if (EconomyManager->resources._money < 0)
+	{
+		EconomyManager->resources._money = 0;
+	}
 
 	dayOfWeek++;
 	currentDay++;

@@ -1,11 +1,22 @@
 #pragma once
 #include "Building.h"
+#include "MineralBuilding.generated.h"
 
-class MineralBuilding : public UBuilding {
+UCLASS()
+class PGTPROJECT_API UMineralBuilding : public UBuilding {
+	GENERATED_BODY()
+public:
+	int32 MineralProductionValue = 5;
+	int EnergyUpkeep = 20;
+	int MoneyUpkeep = 10;
 
-	int32 MineralProductionValue = 1;
-
-	void BuildingFunction(Resources& resource) override {
-		resource._minerals += MineralProductionValue;
+	void BuildingFunction(Resources &resource) override
+	{
+		if (resource._energy != 0)
+		{
+			resource._minerals += MineralProductionValue;
+			resource._energy -= EnergyUpkeep;
+			resource._money -= MoneyUpkeep;
+		}
 	}
 };

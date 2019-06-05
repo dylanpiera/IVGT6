@@ -21,6 +21,11 @@ public:
 	int getMinerals();
 	int getMoney();
 	int getPopulation();
+	int getFood();
+
+	int getMineralsGain();
+	int getMoneyGain();
+	int getFoodGain();
 
 protected:
 	// Called when the game starts or when spawned

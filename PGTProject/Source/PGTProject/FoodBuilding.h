@@ -1,7 +1,11 @@
 #pragma once
 #include "Building.h"
+#include "FoodBuilding.generated.h"
 
-class FoodBuilding : public UBuilding {
+UCLASS()
+class PGTPROJECT_API UFoodBuilding : public UBuilding {
+	GENERATED_BODY()
+public:
 	int32 FoodProductionValue = 15;
 	int EnergyUpkeep = 5;
 

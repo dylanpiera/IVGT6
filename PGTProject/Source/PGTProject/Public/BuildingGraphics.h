@@ -31,7 +31,7 @@ public:
 	UStaticMesh* BuildingMesh;
 	UMaterial* BuildingMaterial;
 
-	MineralBuilding* Building;
+	UMineralBuilding* Building;
 	AEconomyManager* EcoMan;
 
 };

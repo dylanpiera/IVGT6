@@ -112,6 +112,6 @@ public:
 	static FVector GetScreenSpaceLocation(Hex *hex);
 	Hex* hex;
 
-	UMineralBuilding* Building;
+	UBuilding* Building;
 	bool buildingBuilt = false;
 };

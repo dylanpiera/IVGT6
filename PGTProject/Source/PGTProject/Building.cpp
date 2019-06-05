@@ -1,12 +1,15 @@
 #include "Building.h"
 #include "ConstructionTimerActor.h"
 #include "BuildingGraphics.h"
+#include "EconomyManager.h"
 #include "ConstructionState.h"
 #include "ActiveState.h"
 
 // Constructor
 UBuilding::UBuilding()
 {
+	int32 y = 0;
+	x = &y;
 	// Set total construction time
 	_timeInHours = 5.0f;
 	// Find construction timer
@@ -37,10 +40,12 @@ UBuilding::~UBuilding()
 
 void UBuilding::WhenConstructionFinishes()
 {
-	// Change construction state
-	SetState(new ActiveState());
+	*x = *x + 1;
 	// Spawn building
 	CreateBuilding();
+	// Change construction state
+	SetState(new ActiveState());
+	
 }
 
 void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo)

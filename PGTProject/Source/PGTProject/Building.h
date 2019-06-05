@@ -36,6 +36,8 @@ public:
 	UBuilding();
 	virtual ~UBuilding();
 
+	int32* x;
+
 	// Create building graphics
 	void CreateBuilding();
 

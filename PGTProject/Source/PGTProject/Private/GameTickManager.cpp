@@ -107,7 +107,7 @@ void AGameTickManager::GameTickDay()
 	EconomyManager->resources._population = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("BuildingState %d"), building->GetState()));
+		//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("BuildingState %d"), building->GetState()));
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);
 		}

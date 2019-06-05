@@ -14,6 +14,7 @@ public:
 	// Add new argument called OwnerHUDArg
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
 	SLATE_ARGUMENT(TWeakObjectPtr<AToolbarActor>, ToolbarActorArg);
+	SLATE_ARGUMENT(TWeakObjectPtr<ADataHolder>, DataHolderArgs);
 
 	SLATE_END_ARGS()
 
@@ -25,6 +26,7 @@ private:
 	//Safe pointer to parent HUD
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 	TWeakObjectPtr<class AToolbarActor> _toolbarActor;
+	TWeakObjectPtr<class ADataHolder> _dataHolder;
 
 	TSharedPtr<ToolbarGraphics> _ownerToolbar;
 	TSharedPtr<SSlateWidget> _ownerEconomyBar;

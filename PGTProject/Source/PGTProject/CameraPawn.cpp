@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CameraPawn.h"
+#include "BuildingGraphics.h"
 
 // Sets default values
 ACameraPawn::ACameraPawn()
@@ -162,7 +163,7 @@ void ACameraPawn::OnClickRayCast()
 	//Get's actor for selecting purposes
 	SelectedActor = SelectingActor(hit);
 
-	if(SelectedActor != NULL)
+	if(SelectedActor != NULL )
 	{
 		//TODO: Change destroy to something else. This was for testing purpose.
 		//SelectedActor->Destroy();
@@ -182,10 +183,20 @@ void ACameraPawn::OnClickRayCast()
 			//TSubclassOf<ABuildingGraphics> Building;
 			FActorSpawnParameters SpawnInfo;
 			SpawnInfo.Owner = hex;
+
+			TArray<AActor*> FActors;
+			UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+			ADataHolder::StaticClass(),
+			FActors);
+			ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
+			OptionSections buildingMesh = holder->GetBuilding();
+
+			//ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
 				
 			// Create building
 			UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
 			// Start building construction (its gonna spawn the mesh automatically)
+			building->SetMesh(buildingMesh);
 			building->BuildingConstruction(location, rotation, SpawnInfo);
 
 			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));

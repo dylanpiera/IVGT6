@@ -13,6 +13,8 @@ UBuilding::UBuilding()
 	GetConstructionTimer();	
 	// Set initial construction state
 	SetState(new ConstructionState());
+	_buildingType = MineralsBuilding;
+	
 }
 
 void UBuilding::GetConstructionTimer() {
@@ -55,6 +57,11 @@ void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActor
 void UBuilding::CreateBuilding() {
 	// Create building mesh
 	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+	_buildingGraphics->LoadGraphics(_buildingType);
+}
+
+void UBuilding::SetMesh(OptionSections option) {
+	_buildingType = option;
 }
 
 void UBuilding::BuildingFunction(Resources &resource){}

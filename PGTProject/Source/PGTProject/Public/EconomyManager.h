@@ -15,6 +15,7 @@ class PGTPROJECT_API AEconomyManager : public AActor
 public:	
 	Resources resources;
 
+	UPROPERTY()
 	TArray<UBuilding*> ActiveBuildings;
 
 	/* for testing purposes: */

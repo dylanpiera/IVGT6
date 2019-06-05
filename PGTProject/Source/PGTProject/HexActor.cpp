@@ -20,6 +20,9 @@ AHexActor::AHexActor()
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Define tile cost
+	_aStarCost = 10;
 }
 
 #pragma region Location Calculations
@@ -48,6 +51,17 @@ int AHexActor::hex_distance(const Hex a, const Hex b) const
 	return hex_length(a - b);
 }
 
+/**
+ * \brief
+ * Compare if two hexes are equal.
+ * \param a Hex 1
+ * \param b Hex 2
+ * \return
+ */
+bool AHexActor::hex_equal(const Hex a, const Hex b) const
+{
+	return (a == b) ? true : false;
+}
 
 /**
  * \brief 

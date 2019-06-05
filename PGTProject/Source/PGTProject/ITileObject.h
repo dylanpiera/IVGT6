@@ -72,7 +72,9 @@ public:
 	TileResource _tileResource;
 #pragma endregion 
 
-	ITileObject(const AHexActor::Hex& hex, const UINT32 starCost, const bool buildable = true, const TileResource tileResource = None)
-		: _hex(hex),
-		_aStarCost(starCost), _buildable(buildable), _roadPercentage(0), _tileResource(tileResource) {}
+	ITileObject(const AHexActor::Hex& hex, const bool buildable = true, const TileResource tileResource = None)
+		: _hex(hex), _buildable(buildable), _roadPercentage(0), _tileResource(tileResource)
+		{
+			_aStarCost = _hex->_aStarCost;
+		}
 };

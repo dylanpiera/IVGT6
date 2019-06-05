@@ -63,7 +63,7 @@ public:
 		 * Adds the coordinates of one hex with another hex.
 		 */
 		_Hex<Number, W> operator + (const _Hex<Number, W> other) const {
-			return { other.q + q, other.r + r, s + s };
+			return { other.q + q, other.r + r, other.s + s };
 		}
 
 		/**
@@ -95,6 +95,7 @@ public:
 
 	int hex_length(Hex hex) const;
 	int hex_distance(Hex a, Hex b) const;
+	bool hex_equal(const Hex a, const Hex b) const;
 
 	const std::vector<Hex> kHexDirections =
 	{
@@ -114,4 +115,6 @@ public:
 
 	MineralBuilding* Building;
 	bool buildingBuilt = false;
+
+	int _aStarCost;
 };

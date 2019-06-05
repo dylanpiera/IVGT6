@@ -17,8 +17,9 @@ void ATestPathfinding::BeginPlay()
 	// Start Pathfinding Test
 	UE_LOG(LogTemp, Warning, TEXT("---- Pathfinding Test"));
 
+/*
 	// Based on grid space create testing tiles
-	vector<TestingTile> allTiles;
+	vector<ITileObject> allTiles;
 	for (int x = 0; x < 32; x++) {
 		for (int y = 0; y < 32; y++) {
 			allTiles.push_back(TestingTile(x, y));
@@ -42,7 +43,7 @@ void ATestPathfinding::BeginPlay()
 
 	// End Pathfinding Test
 	UE_LOG(LogTemp, Warning, TEXT("---- End of Pathfinding Test"));
-
+*/
 }
 
 void ATestPathfinding::Tick(float DeltaTime)

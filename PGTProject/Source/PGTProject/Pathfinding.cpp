@@ -9,7 +9,7 @@ Pathfinding::Pathfinding() {
 }
 
 // A* Pathfinding: receives a start tile and an end tile and returns the path
-vector<TestingTile*> Pathfinding::AStarPathfinding(TestingTile* startTile, TestingTile* targetTile) {
+vector<AHexActor*> Pathfinding::AStarPathfinding(AHexActor* startTile, AHexActor* targetTile) {
 	// Reset pathfinding elements
 	Open.clear();
 	Closed.clear();
@@ -44,9 +44,10 @@ vector<TestingTile*> Pathfinding::AStarPathfinding(TestingTile* startTile, Testi
 		}
 
 		// For all the current node neighbors add the not visited ones (not on open or closed list) and update best path
-		for (auto neighbor : current->GetNeighbors()) {
-			TestingTile* t = new TestingTile(neighbor); // Assert tile reference
-			Node* newNeighbor = new Node(t); // Create a new node for the neighbor
+		vector<AHexActor*> currentNeighbors = current->GetNeighbors();
+		for(auto iter = currentNeighbors.begin(); iter != currentNeighbors.end(); iter++) {
+			AHexActor* neighbor = *iter;
+			Node* newNeighbor = new Node(neighbor); // Create a new node for the neighbor
 
 			// If neighbor is not transversable or is in closed jump to next neighbor 
 			if (!IsTransversable() || IsInClosed(newNeighbor)) {
@@ -77,7 +78,7 @@ vector<TestingTile*> Pathfinding::AStarPathfinding(TestingTile* startTile, Testi
 			}
 		}
 	}
-
+	
 	// Build path by tracing back the parents from the target node until the start node
 	BuildPath(&startNode, &targetNode);
 	// Return path from start node to target node
@@ -92,7 +93,7 @@ void Pathfinding::BuildPath(Node* startNode, Node* targetNode) {
 	// While haven't reach the start node, keep backtracing
 	while (!reachedStartNode) {
 		// Add current node to the path
-		TestingTile* tile = current->HexTile;
+		AHexActor* tile = current->HexTile;
 		Path.push_back(tile);
 
 		// Check if current node is the starting node (end of path)
@@ -144,8 +145,7 @@ bool Pathfinding::IsTransversable() {
 // Check if nodeA is equal to nodeB
 bool Pathfinding::EqualNodes(Node* nodeA, Node* nodeB) {
 	// Check if tile position is the same
-	if (nodeA->HexTile->posX == nodeB->HexTile->posX
-		&& nodeA->HexTile->posY == nodeB->HexTile->posY) {
+	if (nodeA->EqualNodes(nodeB)) {
 		return true;
 	}
 	return false;

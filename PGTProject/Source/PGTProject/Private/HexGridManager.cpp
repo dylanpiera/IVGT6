@@ -6,7 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include <EngineGlobals.h>
 #include <Runtime/Engine/Classes/Engine/Engine.h>
-
+#include "Pathfinding.h"
 
 // Sets default values
 AHexGridManager::AHexGridManager()
@@ -23,6 +23,8 @@ void AHexGridManager::BeginPlay()
 	//Testing
 	GenerateGrid();
 	LogGrid();
+
+	TestPathfind();
 }
 
 // Called every frame
@@ -44,6 +46,8 @@ void AHexGridManager::GenerateGrid()
 			FActorSpawnParameters SpawnInfo;
 			AHexActor* a = GetWorld()->SpawnActor<AHexActor>(AHexActor::GetScreenSpaceLocation(hex), Rotation, SpawnInfo);
 			a->hex = hex; // this is for getting grid position
+
+			_tiles.push_back(a);
 		}
 	}
 }
@@ -56,5 +60,34 @@ void AHexGridManager::LogGrid() const
 		{
 			UE_LOG(LogTemp, Warning, TEXT("q: %d - r: %d - s: %d"), hexes[column][row]->q, hexes[column][row]->r, hexes[column][row]->s);
 		}
+	}
+}
+
+// Find HexActor reference by hex 
+AHexActor* AHexGridManager::GetHexActorFromHex(AHexActor::Hex myHex)
+{
+	for (auto iter = _tiles.begin(); iter != _tiles.end(); iter++) {
+		AHexActor* hex_actor = *iter;
+		if (hex_actor->hex_equal(*(hex_actor->hex), myHex))
+		{
+			return hex_actor;
+			break;
+		}
+	}
+	return NULL;
+}
+
+void AHexGridManager::TestPathfind()
+{
+	// Define start and end tiles
+	AHexActor* startTile = _tiles.at(5);
+	AHexActor* endTile = _tiles.at(50);
+	
+	// Test pathfinding system
+	Pathfinding p;
+	vector<AHexActor*> finalPath;
+	finalPath = p.AStarPathfinding(startTile, endTile);
+	for (auto element : finalPath) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Next tile column: %d row: %d"), element->hex->q, element->hex->r));
 	}
 }

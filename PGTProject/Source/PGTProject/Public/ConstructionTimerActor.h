@@ -3,24 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine.h"
+#include "Building.h"
 #include "GameFramework/Actor.h"
-#include "ToolbarGraphics.h"
-#include "BuildingGraphics.generated.h"
+#include "ConstructionTimerActor.generated.h"
 
 UCLASS()
-class PGTPROJECT_API ABuildingGraphics : public AActor
+class PGTPROJECT_API AConstructionTimerActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABuildingGraphics();
-
-	ADataHolder* holder;
-
-	UStaticMeshComponent* Mesh;
-
-	UStaticMesh* BuildingMesh;
+	AConstructionTimerActor();
 
 protected:
 	// Called when the game starts or when spawned
@@ -30,6 +25,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
-	void LoadGraphics(OptionSections buildingIndex);
+	// Start construction timer for building
+	void StartConstruction(UBuilding* building, float TimeInHours);
+	// Warn building time is over
+	void FinishConstruction(UBuilding* building);
 };

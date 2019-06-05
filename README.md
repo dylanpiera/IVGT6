@@ -4,6 +4,8 @@
 
 Project Game Technology Minor Project
 
+[![Build Status](http://137.116.249.74:8080/job/PGT-CICD/badge/icon)](http://137.116.249.74:8080/job/PGT-CICD/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -54,15 +56,16 @@ Explain what these tests test and why
 Give an example
 ```
 
-## Deployment
+## CICD Deployment
 
-Add additional notes about how to deploy this on a live system
+Please read [DEPLOYMENT.MD](CICD/Deployment.md) for details about automated builds and hosting the build system in the cloud.
 
 ## Built With
 
 * [Unreal](https://www.unrealengine.com/) - The game engine
 * [Visual Studio](https://visualstudio.microsoft.com/) - Code Editor
 * [ReSharper C++](https://www.jetbrains.com/resharper-cpp/) - Code Quality Tools
+* [Jwenkins](https://jenkins.io/) - CICD Tool
 
 ## Contributing
 

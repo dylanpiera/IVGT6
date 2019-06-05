@@ -51,9 +51,19 @@ int AToolbarActor::getMinerals()
 	return _econ_manager->resources._minerals;;
 }
 
+int AToolbarActor::getMineralsGain()
+{
+	return _econ_manager->MineralBuildings * 5;
+}
+
 int AToolbarActor::getMoney()
 {
 	return _econ_manager->resources._money;
+}
+
+int AToolbarActor::getMoneyGain()
+{
+	return _econ_manager->resources._population * 2 - _econ_manager->EnergyBuildings * 25 - _econ_manager->MineralBuildings * 10;
 }
 
 int AToolbarActor::getPopulation()
@@ -61,9 +71,18 @@ int AToolbarActor::getPopulation()
 	return _econ_manager->resources._population;
 }
 
-void AToolbarActor::testFunc()
+int AToolbarActor::getFood()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney());
-	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
+	return _econ_manager->resources._food;
 }
 
+int AToolbarActor::getFoodGain()
+{
+	return _econ_manager->FoodBuildings * 15 - _econ_manager->resources._population;
+}
+
+void AToolbarActor::testFunc()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney(), getFood());
+	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
+}

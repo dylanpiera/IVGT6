@@ -38,7 +38,8 @@ enum ToolbarSections
 // Avaiable resources
 enum class EMineralResources
 {
-	Catanium, NightGems
+	Catanium,
+	NightGems
 };
 
 /**

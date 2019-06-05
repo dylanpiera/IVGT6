@@ -11,22 +11,22 @@ DestructionState::~DestructionState()
 {
 }
 
-void DestructionState::BuildingInactive(BuildingObject* building)
+void DestructionState::BuildingInactive(UBuilding* building)
 {
 	return;
 }
 
-void DestructionState::BuildingConstruction(BuildingObject* building)
+void DestructionState::BuildingConstruction(UBuilding* building)
 {
 	return;
 }
 
-void DestructionState::BuildingActive(BuildingObject* building)
+void DestructionState::BuildingActive(UBuilding* building)
 {
 	return;
 }
 
-void DestructionState::BuildingDestruction(BuildingObject* building)
+void DestructionState::BuildingDestruction(UBuilding* building)
 {
 	return;
 }

@@ -2,9 +2,9 @@
 
 #include "BuildingGraphics.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
-#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
-#include "WidgetBlueprintLibrary.h"
+#include "Building.h"
 #include "Engine/Engine.h"
+#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 
 // Sets default values
 ABuildingGraphics::ABuildingGraphics()
@@ -30,8 +30,14 @@ void ABuildingGraphics::BeginPlay()
 
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("Selecting building %d"), building));
 	
-	SetBuildingGraphics(building, Mesh);
+	//SetBuildingGraphics(building, Mesh);
 }
+
+void ABuildingGraphics::LoadGraphics(OptionSections buildingIndex) 
+{
+	SetBuildingGraphics(buildingIndex, Mesh);
+}
+
 
 // Called every frame
 void ABuildingGraphics::Tick(float DeltaTime)

@@ -14,6 +14,7 @@ UBuilding::UBuilding()
 	// Set initial construction state
 	SetState(new ConstructionState());
 	_buildingType = MineralsBuilding;
+	
 }
 
 void UBuilding::GetConstructionTimer() {

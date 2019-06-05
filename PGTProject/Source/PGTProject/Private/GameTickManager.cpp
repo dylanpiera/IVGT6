@@ -102,6 +102,8 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
+	EconomyManager->resources._energy = 0;
+	EconomyManager->resources._population = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {

@@ -46,26 +46,20 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 	{
 		case MineralsBuilding: 
 		{
-			/*UStaticMeshComponent* Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-			Mesh->SetupAttachment(RootComponent);*/
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(50, 50, 50));
 			break;
-			}
+		}
 		case EnergyBuilding:
 		{
-			/*UStaticMeshComponent* Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-			Mesh->SetupAttachment(RootComponent);*/
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(50, 50, 50));
 			break;
-			}
+		}
 		case MoneyBuilding:
 		{
-			/*UStaticMeshComponent* Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
-			Mesh->SetupAttachment(RootComponent);*/
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(50, 50, 50));

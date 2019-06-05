@@ -6,13 +6,11 @@ UCLASS()
 class PGTPROJECT_API UHouseBuilding : public UBuilding {
 	GENERATED_BODY()
 public:
-	int32 PopulationHousingValue = 10;
-	int EnergyUpkeep = 10;
 	int Disdain = 0;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._energy -= EnergyUpkeep;
-		if (resource._food == 0)
+		//resource._energy -= EnergyUpkeep;
+		if (resource._food <= 0)
 		{
 			Disdain++;
 		}
@@ -20,5 +18,10 @@ public:
 		{
 			Disdain--;
 		}
+		if (Disdain > 0)
+		{
+			resource._population--;
+		}
+		resource._money += (resource._population * 2);
 	}
 };

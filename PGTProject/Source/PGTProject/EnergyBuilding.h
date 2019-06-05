@@ -7,11 +7,12 @@ UCLASS()
 class PGTPROJECT_API UEnergyBuilding : public UBuilding {
 	GENERATED_BODY()
 public:
-	int32 EnergyProductionValue = 50;
 	int MoneyUpkeep = 25;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._energy += EnergyProductionValue;
-		resource._money -= MoneyUpkeep;
+		if (resource._money > 0)
+		{
+			resource._money -= MoneyUpkeep;
+		}
 	}
 };

@@ -26,6 +26,7 @@ enum OptionSections
 	EnergyBuilding,
 	MineralsBuilding,
 	MoneyBuilding,
+	FoodBuilding,
 	DestroyTool
 };
 

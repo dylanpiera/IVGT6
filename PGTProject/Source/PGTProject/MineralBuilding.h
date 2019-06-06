@@ -12,10 +12,10 @@ public:
 
 	void BuildingFunction(Resources &resource) override
 	{
-		if (resource._energy != 0)
+		resource._energy -= EnergyUpkeep;
+		if (resource._energy >= 0)
 		{
 			resource._minerals += MineralProductionValue;
-			resource._energy -= EnergyUpkeep;
 		}
 		resource._money -= MoneyUpkeep;
 	}

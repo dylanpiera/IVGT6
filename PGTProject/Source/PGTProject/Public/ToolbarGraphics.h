@@ -53,13 +53,14 @@ private:
 		{ RoughRoad, "Rough Road" },
 		{ EnergyBuilding, "Power Plancat"},
 		{ MineralsBuilding, "Minerawr Extractor"},
-		{ MoneyBuilding, "Intergalatic Mint"}
+		{ MoneyBuilding, "Intergalatic House"},
+		{ FoodBuilding, "Cake is a Lie"}
 	};
 
 	// Style Components
 	FSlateFontInfo ArialFont;
 	enum ImageTypes { BackgroundImagePath, Road_IconPath, Building_IconPath, Road1_IconPath, Building1_IconPath,
-		Building2_IconPath, Building3_IconPath, Destroy_IconPath
+		Building2_IconPath, Building3_IconPath, Building4_IconPath, Destroy_IconPath
 	};
 	map<ImageTypes, FString> ImagePaths;
 

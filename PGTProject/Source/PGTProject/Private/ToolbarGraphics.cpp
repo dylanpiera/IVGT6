@@ -237,7 +237,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					[
 						SNew(SButton)
 						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
-						.OnClicked(this, &ToolbarGraphics::Destroy)
+						.OnClicked(this, &ToolbarGraphics::SelectBuilding, DestroyTool)
 					]
 				]
 			]

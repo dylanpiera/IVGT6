@@ -9,6 +9,8 @@
 #include "HexActor.h"
 #include "Engine/World.h"
 #include "MineralBuilding.h"
+#include "EnergyBuilding.h"
+#include "HouseBuilding.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"

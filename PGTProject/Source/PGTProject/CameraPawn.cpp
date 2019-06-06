@@ -228,6 +228,7 @@ void ACameraPawn::OnClickRayCast()
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->MineralBuildings;
 							hex->buildingBuilt = true;
+							EconomyManager->resources._energy -= 20;
 						}
 						break;
 					}
@@ -248,6 +249,7 @@ void ACameraPawn::OnClickRayCast()
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->EnergyBuildings;
 							hex->buildingBuilt = true;
+                            EconomyManager->resources._energy += 50;
 						}
 						break;
 					}
@@ -268,6 +270,7 @@ void ACameraPawn::OnClickRayCast()
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->Houses;
 							hex->buildingBuilt = true;
+                            EconomyManager->resources._energy -= 10;
 						}
 						break;
 					}

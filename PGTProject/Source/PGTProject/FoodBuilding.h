@@ -10,7 +10,7 @@ public:
 	int EnergyUpkeep = 5;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._energy -= EnergyUpkeep;
+		//resource._energy -= EnergyUpkeep;
 		if (resource._energy >= 0)
 		{
 			resource._food += FoodProductionValue - resource._population;

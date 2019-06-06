@@ -11,7 +11,7 @@ public:
 	int MoneyUpkeep = 25;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._energy += EnergyProductionValue;
+		//resource._energy += EnergyProductionValue;
 		resource._money -= MoneyUpkeep;
 	}
 

@@ -11,7 +11,7 @@ public:
 	int Disdain = 0;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._energy -= EnergyUpkeep;
+		//resource._energy -= EnergyUpkeep;
 		if (resource._food == 0)
 		{
 			Disdain++;

@@ -47,6 +47,7 @@ void UBuilding::WhenConstructionFinishes()
 {
 	*x = *x + 1;
 	// Spawn building
+
 	CreateBuilding();
 	// Change construction state
 	SetState(new ActiveState());

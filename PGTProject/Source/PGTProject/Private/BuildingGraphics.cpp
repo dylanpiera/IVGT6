@@ -14,6 +14,7 @@ ABuildingGraphics::ABuildingGraphics()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
 	Mesh->SetupAttachment(RootComponent);
+	growth = 0;
 }
 
 // Called when the game starts or when spawned
@@ -43,6 +44,7 @@ void ABuildingGraphics::LoadGraphics(OptionSections buildingIndex)
 void ABuildingGraphics::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	BuildingAnimation();
 
 }
 
@@ -54,23 +56,32 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 50));
+			meshComp->SetWorldScale3D(FVector(50, 50, 0));
 			break;
 		}
 		case EnergyBuilding:
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 50));
+			meshComp->SetWorldScale3D(FVector(50, 50, 0));
 			break;
 		}
 		case MoneyBuilding:
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 50));
+			meshComp->SetWorldScale3D(FVector(50, 50, 0));
 			break;
 		}
+	}
+}
+
+void ABuildingGraphics::BuildingAnimation()
+{
+	if (growth < 50)
+	{
+		growth += 0.11;
+		Mesh->SetWorldScale3D(FVector(50, 50, growth));
 	}
 }
 

@@ -22,6 +22,8 @@ public:
 
 	UStaticMesh* BuildingMesh;
 
+	float growth;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -32,4 +34,6 @@ public:
 
 	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
 	void LoadGraphics(OptionSections buildingIndex);
+
+	void BuildingAnimation();
 };

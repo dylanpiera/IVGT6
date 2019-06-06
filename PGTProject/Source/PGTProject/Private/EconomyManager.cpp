@@ -8,7 +8,7 @@
 void AEconomyManager::InitResources()
 {
 	resources._energy = 0;
-	resources._minerals = 0;
+	resources._minerals = 150;
 	resources._population = 0;
 	resources._money = 200;
 	resources._food = 0;

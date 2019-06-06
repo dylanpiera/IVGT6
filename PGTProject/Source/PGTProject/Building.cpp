@@ -8,6 +8,7 @@
 // Constructor
 UBuilding::UBuilding()
 {
+	SetBuildingCost();
 	int32 y = 0;
 	x = &y;
 	// Set total construction time
@@ -17,7 +18,11 @@ UBuilding::UBuilding()
 	// Set initial construction state
 	SetState(new ConstructionState());
 	_buildingType = MineralsBuilding;
-	
+}
+
+void UBuilding::SetBuildingCost() {
+	UE_LOG(LogTemp, Warning, TEXT("Setting cost to 0"));
+	_buildingCost = 0;
 }
 
 void UBuilding::GetConstructionTimer() {

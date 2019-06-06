@@ -32,12 +32,16 @@ private:
 protected:
 	// Total time to construct the building
 	float _timeInHours;
+
+	int _buildingCost;
 public:
 	UBuilding();
 	virtual ~UBuilding();
 
 	int32* x;
 
+	virtual void SetBuildingCost();
+	
 	// Create building graphics
 	void CreateBuilding();
 
@@ -85,6 +89,6 @@ public:
 	*/
 	BuildingState* GetState();
 
-
+	int GetCost() { return _buildingCost; }
 };
 //#endif

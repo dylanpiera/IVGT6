@@ -16,4 +16,9 @@ public:
 			resource._energy -= EnergyUpkeep;
 		}
 	}
+
+	void SetBuildingCost() override {
+		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 20"));
+		_buildingCost = 20;
+	}
 };

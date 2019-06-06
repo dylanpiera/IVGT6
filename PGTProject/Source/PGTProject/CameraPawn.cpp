@@ -183,7 +183,6 @@ void ACameraPawn::OnClickRayCast()
 			//FVector hexPos = SelectedActor->GetActorLocation();
 			AHexActor* hex = Cast<AHexActor>(SelectedActor);
 
-
 			if (!hex->buildingBuilt)
 			{
 				FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
@@ -212,42 +211,69 @@ void ACameraPawn::OnClickRayCast()
 				// Create building
 				switch (buildingMesh)
 				{
-				case MineralsBuilding:
-				{
-					UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
-					hex->Building = building;
-					building->SetMesh(buildingMesh);
-					building->BuildingConstruction(location, rotation, SpawnInfo);
-					EconomyManager->ActiveBuildings.Add(building);
-					building->x = &EconomyManager->MineralBuildings;
-					break;
-				}
-				case EnergyBuilding:
-				{
-					UEnergyBuilding* building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass());
-					hex->Building = building;
-					building->SetMesh(buildingMesh);
-					building->BuildingConstruction(location, rotation, SpawnInfo);
-					EconomyManager->ActiveBuildings.Add(building);
-					building->x = &EconomyManager->EnergyBuildings;
-					break;
-				}
-				case MoneyBuilding:
-				{
-					UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
-					hex->Building = building;
-					building->SetMesh(buildingMesh);
-					building->BuildingConstruction(location, rotation, SpawnInfo);
-					EconomyManager->ActiveBuildings.Add(building);
-					building->x = &EconomyManager->Houses;
-					break;
-				}
+					case MineralsBuilding:
+					{
+						UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
+						building->SetBuildingCost();
+						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
+						if(building->GetCost() > EconomyManager->resources._minerals) {
+							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
+							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
+						}
+						else {
+							EconomyManager->resources._minerals -= building->GetCost();
+							hex->Building = building;
+							building->SetMesh(buildingMesh);
+							building->BuildingConstruction(location, rotation, SpawnInfo);
+							EconomyManager->ActiveBuildings.Add(building);
+							building->x = &EconomyManager->MineralBuildings;
+						}
+						break;
+					}
+					case EnergyBuilding:
+					{
+						UEnergyBuilding* building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass());
+						building->SetBuildingCost();
+						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
+						if(building->GetCost() > EconomyManager->resources._minerals) {
+							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
+							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
+						}
+						else {
+							EconomyManager->resources._minerals -= building->GetCost();
+							hex->Building = building;
+							building->SetMesh(buildingMesh);
+							building->BuildingConstruction(location, rotation, SpawnInfo);
+							EconomyManager->ActiveBuildings.Add(building);
+							building->x = &EconomyManager->EnergyBuildings;
+						}
+						break;
+					}
+					case MoneyBuilding:
+					{
+						UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
+						building->SetBuildingCost();
+						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
+						if(building->GetCost() > EconomyManager->resources._minerals) {
+							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
+							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
+						}
+						else {
+							EconomyManager->resources._minerals -= building->GetCost();
+							hex->Building = building;
+							building->SetMesh(buildingMesh);
+							building->BuildingConstruction(location, rotation, SpawnInfo);
+							EconomyManager->ActiveBuildings.Add(building);
+							building->x = &EconomyManager->Houses;
+						}
+						break;
+					}
 				}
 
 				// Start building construction (its gonna spawn the mesh automatically)
 				hex->buildingBuilt = true;
 
-				GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: " + vec.ToString()));
+				//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: " + vec.ToString()));
 			}
 		}
 		else

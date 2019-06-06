@@ -21,4 +21,9 @@ public:
 			Disdain--;
 		}
 	}
+
+	void SetBuildingCost() override {
+		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 25"));
+		_buildingCost = 25;
+	}
 };

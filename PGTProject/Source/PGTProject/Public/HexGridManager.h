@@ -41,5 +41,5 @@ public:
 	// Get AHexActor reference based on tile column/row
 	AHexActor* GetHexActorFromHex(AHexActor::Hex myHex);
 
-	void TestPathfind();
+	//void TestPathfind();
 };

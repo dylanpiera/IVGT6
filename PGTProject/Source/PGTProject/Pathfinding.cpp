@@ -9,7 +9,7 @@ Pathfinding::Pathfinding() {
 }
 
 // A* Pathfinding: receives a start tile and an end tile and returns the path
-vector<AHexActor*> Pathfinding::AStarPathfinding(AHexActor* startTile, AHexActor* targetTile) {
+list<AHexActor*> Pathfinding::AStarPathfinding(AHexActor* startTile, AHexActor* targetTile) {
 	// Reset pathfinding elements
 	Open.clear();
 	Closed.clear();
@@ -105,10 +105,13 @@ void Pathfinding::BuildPath(Node* startNode, Node* targetNode) {
 		}
 	}
 
-	// Reverse path vector
+	// Reverse path
 	// path: targetNode - node1 - node2 - node3 - startNode
 	// path: startNode - node3 - node2 - node1 - targetNode
-	std::reverse(Path.begin(), Path.end());
+	Path.reverse();
+
+	// Remove start node (current node)
+	Path.pop_front();
 }
 
 // Check if a node is the open list and returns true/false and a node reference (to an existing node in open list or to the received node)

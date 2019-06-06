@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include <EngineGlobals.h>
 #include <Runtime/Engine/Classes/Engine/Engine.h>
-#include "Pathfinding.h"
 
 // Sets default values
 AHexGridManager::AHexGridManager()
@@ -24,7 +23,7 @@ void AHexGridManager::BeginPlay()
 	GenerateGrid();
 	LogGrid();
 
-	TestPathfind();
+	//TestPathfind();
 }
 
 // Called every frame
@@ -77,6 +76,7 @@ AHexActor* AHexGridManager::GetHexActorFromHex(AHexActor::Hex myHex)
 	return NULL;
 }
 
+/*
 void AHexGridManager::TestPathfind()
 {
 	// Define start and end tiles
@@ -85,9 +85,10 @@ void AHexGridManager::TestPathfind()
 	
 	// Test pathfinding system
 	Pathfinding p;
-	vector<AHexActor*> finalPath;
+	list<AHexActor*> finalPath;
 	finalPath = p.AStarPathfinding(startTile, endTile);
 	for (auto element : finalPath) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Next tile column: %d row: %d"), element->hex->q, element->hex->r));
 	}
 }
+*/

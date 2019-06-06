@@ -2,6 +2,8 @@
 
 #include "NPC_Character.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "NPC_Manager.h"
 
 // Sets default values
 ANPC_Character::ANPC_Character()
@@ -21,8 +23,13 @@ void ANPC_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector tile = FVector(4000, 4000, 0);
-	AssignTask(tile);
+	// Pathfinding settings
+	FindNPCManager();
+	if(_npcManager->_hexGridManager->_tiles.size() > 0) {
+		_currentTile = _npcManager->_hexGridManager->_tiles.at(0); // Get first tile 
+		FVector currentTileLocation = _currentTile->GetScreenSpaceLocation(_currentTile->hex);
+		SetActorLocation(currentTileLocation, false);
+	}
 }
 
 // Called every frame
@@ -35,12 +42,16 @@ void ANPC_Character::Tick(float DeltaTime)
 		// If reached building, start working, if not, keep moving
 		if(ReachedLocation())
 		{
+			_currentTile = _goalTile;
+
 			if(ReachedBuilding()) {
 				StartWorking();
 			} else {
-				//FVector nextTile;
-				//MoveToLocation(nextTile);
+				
+				MoveToNextTile();
 			}
+
+			//_npcManager->UpdateIter();
 		}
 	}
 }
@@ -86,6 +97,7 @@ bool ANPC_Character::ReachedLocation()
 	// Check if reached next tile (with a distance tolerance)
 	if(currentLocation.Equals(goal, 100.0f))
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Reached Location!"));
 		return true;
 	} else {
 		return false;
@@ -110,20 +122,57 @@ bool ANPC_Character::ReachedBuilding()
 	}
 }
 
-void ANPC_Character::AssignTask(FVector buildingLocation)
+void ANPC_Character::AssignTask(AHexActor* buildingTile)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Assign task!"));
 	// Save building location
-	_buildingLocation = buildingLocation;
+	_buildingLocation = buildingTile->GetScreenSpaceLocation(buildingTile->hex);
 	
 	// Start moving towards building
-	_goalLocation = _buildingLocation;
-	MoveToLocation(_goalLocation);
+	FindPathToTile(buildingTile);
 	SetBuilderState(EWorkState::Walking);
+	MoveToNextTile();
 }
 
 void ANPC_Character::StartWorking()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Start working!"));
 	SetBuilderState(EWorkState::Working);
+}
+
+void ANPC_Character::FindPathToTile(AHexActor* tile)
+{
+	AHexActor* startTile = _currentTile;
+	AHexActor* endTile = tile;
+	
+	_pathToBuilding.clear();
+	_pathToBuilding = _pathfinder.AStarPathfinding(startTile, endTile);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Found PATH!"));
+}
+
+void ANPC_Character::GetNextTileOnPath()
+{
+	if(_pathToBuilding.size() > 0) {
+		_goalTile = _pathToBuilding.front();
+		_pathToBuilding.pop_front();
+	}
+
+	_goalLocation = _goalTile->GetScreenSpaceLocation(_goalTile->hex);
+}
+
+void ANPC_Character::MoveToNextTile()
+{
+	GetNextTileOnPath();
+	MoveToLocation(_goalLocation);
+}
+
+// Get reference to HexGridManager
+void ANPC_Character::FindNPCManager() {
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+		ANPC_Manager::StaticClass(),
+		FoundActors);
+	if (FoundActors.Num() > 0) {
+		_npcManager = Cast<ANPC_Manager>(FoundActors[0]);
+	}
 }

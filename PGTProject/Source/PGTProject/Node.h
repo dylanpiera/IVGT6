@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include <iostream>
 #include <vector>
-#include "TestingTile.h"
 
 class AHexGridManager;
 class AHexActor;

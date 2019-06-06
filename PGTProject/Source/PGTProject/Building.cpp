@@ -60,14 +60,16 @@ void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActor
 	_rotation = rotation;
 	_spawnInfo = spawnInfo;
 
+	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+	_buildingGraphics->LoadGraphics(_buildingType);
+
 	// Start timer
 	_constructionTimer->StartConstruction(this, _timeInHours);
 }
 
 void UBuilding::CreateBuilding() {
 	// Create building mesh
-	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
-	_buildingGraphics->LoadGraphics(_buildingType);
+	
 }
 
 void UBuilding::SetMesh(OptionSections option) {

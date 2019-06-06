@@ -127,7 +127,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building2_IconPath]), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building3_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[
@@ -156,7 +156,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								+ SOverlay::Slot()
 								[
 									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building3_IconPath]), FVector2D(100, 100)))
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building2_IconPath]), FVector2D(100, 100)))
 								]
 								+ SOverlay::Slot()
 								[

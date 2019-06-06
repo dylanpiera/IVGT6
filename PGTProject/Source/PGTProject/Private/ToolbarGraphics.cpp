@@ -426,4 +426,5 @@ void ToolbarGraphics::StyleSettings()
 	ImagePaths.insert(pair<ImageTypes, FString>(Building1_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_1.png"));
 	ImagePaths.insert(pair<ImageTypes, FString>(Building2_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_2.png"));
 	ImagePaths.insert(pair<ImageTypes, FString>(Building3_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_3.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building4_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_4.png"));
 }

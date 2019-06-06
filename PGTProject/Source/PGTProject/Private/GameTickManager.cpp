@@ -2,9 +2,9 @@
 
 #include "GameTickManager.h"
 #include "Engine/World.h"
+#include "Engine/Engine.h"
 #include "ActiveState.h"
 #include "BuildingState.h"
-#include <typeinfo>
 #include <iostream>
 #include "Utility.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
@@ -103,15 +103,31 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._population = 0;
 	EconomyManager->resources._energy = 0;
+	EconomyManager->resources._population = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
+		//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("BuildingState %d"), building->GetState()));
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);
 		}
 	}
-	EconomyManager->resources._money += 10 * EconomyManager->resources._population;
+	if (EconomyManager->resources._energy < 0)
+	{
+		EconomyManager->resources._energy = 0;
+	}
+	if (EconomyManager->resources._population < 0)
+	{
+		EconomyManager->resources._population = 0;
+	}
+	if (EconomyManager->resources._food < 0)
+	{
+		EconomyManager->resources._food = 0;
+	}
+	if (EconomyManager->resources._money < 0)
+	{
+		EconomyManager->resources._money = 0;
+	}
 
 	dayOfWeek++;
 	currentDay++;

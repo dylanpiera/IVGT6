@@ -1,18 +1,23 @@
 #include "Building.h"
 #include "ConstructionTimerActor.h"
 #include "BuildingGraphics.h"
+#include "EconomyManager.h"
 #include "ConstructionState.h"
 #include "ActiveState.h"
 
 // Constructor
 UBuilding::UBuilding()
 {
+	int32 y = 0;
+	x = &y;
 	// Set total construction time
 	_timeInHours = 5.0f;
 	// Find construction timer
 	GetConstructionTimer();	
 	// Set initial construction state
 	SetState(new ConstructionState());
+	_buildingType = MineralsBuilding;
+	
 }
 
 void UBuilding::GetConstructionTimer() {
@@ -35,10 +40,12 @@ UBuilding::~UBuilding()
 
 void UBuilding::WhenConstructionFinishes()
 {
-	// Change construction state
-	SetState(new ActiveState());
+	*x = *x + 1;
 	// Spawn building
 	CreateBuilding();
+	// Change construction state
+	SetState(new ActiveState());
+	
 }
 
 void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo)
@@ -55,12 +62,14 @@ void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActor
 void UBuilding::CreateBuilding() {
 	// Create building mesh
 	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+	_buildingGraphics->LoadGraphics(_buildingType);
 }
 
-void UBuilding::BuildingFunction(Resources &resource)
-{
-	resource._money -= 100;
+void UBuilding::SetMesh(OptionSections option) {
+	_buildingType = option;
 }
+
+void UBuilding::BuildingFunction(Resources &resource){}
 
 void UBuilding::BuildingActive(Resources &resource, Resources &maintenance)
 {

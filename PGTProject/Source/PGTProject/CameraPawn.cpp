@@ -1,6 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CameraPawn.h"
+#include "Constants.h"
+#include "EconomyManager.h"
+#include "BuildingGraphics.h"
 
 // Sets default values
 ACameraPawn::ACameraPawn()
@@ -9,7 +12,7 @@ ACameraPawn::ACameraPawn()
 	camSpeed = 15;
 	rotation = 0;
 
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Sets camera controls ro player0 otherwise it crashes the editor
@@ -58,7 +61,7 @@ void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 	//MouseWheel input
 	InputComponent->BindAxis("MouseWheelAxis", this, &ACameraPawn::CameraZoom);
-	
+
 	//Rotation Input
 	InputComponent->BindAxis("RotateRight", this, &ACameraPawn::CameraRotationRight);
 	InputComponent->BindAxis("RotateLeft", this, &ACameraPawn::CameraRotationLeft);
@@ -105,7 +108,7 @@ void ACameraPawn::GetCameraPanDirection()
 void ACameraPawn::CameraZoom(float axisValue)
 {
 	//ZoomIn
-	if(axisValue > 0)
+	if (axisValue > 0)
 		CameraArmHeight -= 25;
 
 	//ZoomOut
@@ -135,8 +138,8 @@ void ACameraPawn::CameraRotationRight(float axisValue)
 	}
 }
 
-void ACameraPawn::OnClickRayCast() 
-{	
+void ACameraPawn::OnClickRayCast()
+{
 	//Declared empty Vectors. These will be filled up with converted screenspace values
 	FVector mousePos, mouseDir;
 
@@ -157,40 +160,122 @@ void ACameraPawn::OnClickRayCast()
 
 	//Throw out linetrace (second line is the debug line)
 	GetWorld()->LineTraceSingleByChannel(hit, startLocation, endLocation, ECC_Visibility, CollParams);
-	UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
+	//UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
 
 	//Get's actor for selecting purposes
 	SelectedActor = SelectingActor(hit);
 
-	if(SelectedActor != NULL)
+	if (SelectedActor != NULL)
 	{
 		//TODO: Change destroy to something else. This was for testing purpose.
 		//SelectedActor->Destroy();
+
+		//Ecoman
+		TArray<AActor*> FoundActors;
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+			AEconomyManager::StaticClass(),
+			FoundActors);
+		AEconomyManager* EconomyManager = Cast<AEconomyManager>(FoundActors[0]);
+
 
 		if (SelectedActor->IsA(AHexActor::StaticClass()))
 		{
 			//FVector hexPos = SelectedActor->GetActorLocation();
 			AHexActor* hex = Cast<AHexActor>(SelectedActor);
-			FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
-			
-			// BuildBuilding (activate or add something to the hex)
 
-			
-			FVector location = hex->GetActorLocation();
-			FRotator rotation = hex->GetActorRotation();
 
-			//TSubclassOf<ABuildingGraphics> Building;
-			FActorSpawnParameters SpawnInfo;
-			SpawnInfo.Owner = hex;
-				
-			// Create building
-			MineralBuilding* building = NewObject<MineralBuilding>(MineralBuilding::StaticClass());
-			// Start building construction (its gonna spawn the mesh automatically)
-			building->BuildingConstruction(location, rotation, SpawnInfo);
+			if (!hex->buildingBuilt)
+			{
+				FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
 
-			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: "  + vec.ToString()));
+				// BuildBuilding (activate or add something to the hex)
+
+
+				FVector location = hex->GetActorLocation();
+				FRotator rotation = hex->GetActorRotation();
+
+				//TSubclassOf<ABuildingGraphics> Building;
+				FActorSpawnParameters SpawnInfo;
+				SpawnInfo.Owner = hex;
+
+				TArray<AActor*> FActors;
+				UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+					ADataHolder::StaticClass(),
+					FActors);
+				ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
+				OptionSections buildingMesh = holder->GetBuilding();
+
+
+
+				//ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
+
+				// Create building
+				switch (buildingMesh)
+				{
+				case MineralsBuilding:
+				{
+					UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
+					hex->Building = building;
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					building->x = &EconomyManager->MineralBuildings;
+					break;
+				}
+				case EnergyBuilding:
+				{
+					UEnergyBuilding* building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass());
+					hex->Building = building;
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					building->x = &EconomyManager->EnergyBuildings;
+					break;
+				}
+				case MoneyBuilding:
+				{
+					UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
+					hex->Building = building;
+					building->SetMesh(buildingMesh);
+					building->BuildingConstruction(location, rotation, SpawnInfo);
+					EconomyManager->ActiveBuildings.Add(building);
+					building->x = &EconomyManager->Houses;
+					break;
+				}
+				}
+
+				// Start building construction (its gonna spawn the mesh automatically)
+				hex->buildingBuilt = true;
+
+				GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: " + vec.ToString()));
+			}
 		}
-		else SelectedActor->Destroy();
+		else
+		{
+			TArray<AActor*> FActors;
+			UGameplayStatics::GetAllActorsOfClass(GetWorld(),
+				ADataHolder::StaticClass(),
+				FActors);
+			ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
+			OptionSections buildingMesh = holder->GetBuilding();
+			if (buildingMesh == DestroyTool) {
+				auto parent = SelectedActor->GetOwner();
+				if (parent->IsA(AHexActor::StaticClass()))
+				{
+					//FVector hexPos = SelectedActor->GetActorLocation();
+					AHexActor* hex = Cast<AHexActor>(parent);
+					*hex->Building->x -= 1;
+					hex->buildingBuilt = false;
+					EconomyManager->ActiveBuildings.Remove(hex->Building);
+
+					SelectedActor->Destroy();
+				}
+				else
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("No hex found."));
+				}
+			}
+		}
 	}
 }
 

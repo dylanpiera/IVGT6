@@ -2,6 +2,7 @@
 //#define BuildingObject_Header
 #pragma once
 #include "Resources.h"
+#include "Constants.h"
 #include "Runtime/Core/Public/Math/Vector.h"
 #include "Engine/World.h"
 #include "UObject/NoExportTypes.h"
@@ -20,6 +21,7 @@ private:
 	FVector _location;
 	FRotator _rotation;
 	FActorSpawnParameters _spawnInfo;
+	OptionSections _buildingType;
 
 	// Construction Timer
 	AConstructionTimerActor* _constructionTimer;
@@ -33,6 +35,8 @@ protected:
 public:
 	UBuilding();
 	virtual ~UBuilding();
+
+	int32* x;
 
 	// Create building graphics
 	void CreateBuilding();
@@ -70,6 +74,11 @@ public:
 	 *
 	*/
 	void SetState(BuildingState* state);
+
+	/**
+	 *
+	 */
+	void SetMesh(OptionSections option);
 
 	/**
 	 *

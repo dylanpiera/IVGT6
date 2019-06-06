@@ -113,7 +113,7 @@ public:
 	static FVector GetScreenSpaceLocation(Hex *hex);
 	Hex* hex;
 
-	MineralBuilding* Building;
+	UBuilding* Building;
 	bool buildingBuilt = false;
 
 	int _aStarCost;

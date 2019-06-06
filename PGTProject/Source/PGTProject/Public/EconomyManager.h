@@ -15,6 +15,7 @@ class PGTPROJECT_API AEconomyManager : public AActor
 public:	
 	Resources resources;
 
+	UPROPERTY()
 	TArray<UBuilding*> ActiveBuildings;
 
 	/* for testing purposes: */
@@ -24,6 +25,8 @@ public:
 	int32 EnergyBuildings;
 	UPROPERTY(EditAnywhere)
 	int32 Houses;
+	UPROPERTY(EditAnywhere)
+	int32 FoodBuildings;
 
 	void InitResources();
 

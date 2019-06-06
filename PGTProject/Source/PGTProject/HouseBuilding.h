@@ -1,10 +1,24 @@
 #pragma once
 #include "Building.h"
+#include "HouseBuilding.generated.h"
 
-class HouseBuilding : public UBuilding {
-	int32 PopulationHousingValue = 8;
+UCLASS()
+class PGTPROJECT_API UHouseBuilding : public UBuilding {
+	GENERATED_BODY()
+public:
+	int32 PopulationHousingValue = 10;
+	int EnergyUpkeep = 10;
+	int Disdain = 0;
 
 	void BuildingFunction(Resources& resource) override {
-		resource._population += PopulationHousingValue;
+		resource._energy -= EnergyUpkeep;
+		if (resource._food == 0)
+		{
+			Disdain++;
+		}
+		else if (Disdain != 0)
+		{
+			Disdain--;
+		}
 	}
 };

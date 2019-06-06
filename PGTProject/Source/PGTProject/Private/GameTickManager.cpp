@@ -103,7 +103,7 @@ void AGameTickManager::GameTickHour()
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._energy = 0;
+	//EconomyManager->resources._energy = 0;
 	EconomyManager->resources._population = 0;
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
@@ -112,10 +112,10 @@ void AGameTickManager::GameTickDay()
 			building->BuildingFunction(EconomyManager->resources);
 		}
 	}
-	if (EconomyManager->resources._energy < 0)
-	{
-		EconomyManager->resources._energy = 0;
-	}
+	//if (EconomyManager->resources._energy < 0)
+	//{
+	//	EconomyManager->resources._energy = 0;
+	//}
 	if (EconomyManager->resources._population < 0)
 	{
 		EconomyManager->resources._population = 0;

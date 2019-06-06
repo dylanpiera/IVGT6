@@ -109,11 +109,21 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 							]
 							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, EnergyBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("100 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -138,11 +148,21 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 							]
 							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, MineralsBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("50 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -167,6 +187,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 							]
 							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
@@ -174,9 +195,18 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, MoneyBuilding)
 								.ColorAndOpacity(FLinearColor::White)
 							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("25 Minerals"))
+								.ColorAndOpacity(FLinearColor::White)
+							]
 						]
 						// Building 4
-						+ SUniformGridPanel::Slot(3, 0)
+							+ SUniformGridPanel::Slot(3, 0)
 							[
 								SNew(SVerticalBox)
 								+ SVerticalBox::Slot()
@@ -187,21 +217,31 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								SNew(SImage)
 								.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building4_IconPath]), FVector2D(100, 100)))
 							]
-						+ SOverlay::Slot()
+							+ SOverlay::Slot()
 							[
 								SNew(SButton)
 								.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
-							.OnClicked(this, &ToolbarGraphics::SelectBuilding, FoodBuilding)
-							.DesiredSizeScale(FVector2D(60, 60))
+								.OnClicked(this, &ToolbarGraphics::SelectBuilding, FoodBuilding)
+								.DesiredSizeScale(FVector2D(60, 60))
 							]
 							]
-						+ SVerticalBox::Slot()
+							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
-							.Justification(ETextJustify::Center)
-							.Text(this, &ToolbarGraphics::GetOptionTitle, FoodBuilding)
-							.ColorAndOpacity(FLinearColor::White)
+								.Justification(ETextJustify::Center)
+								.Text(this, &ToolbarGraphics::GetOptionTitle, FoodBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("20 Minerals"))
+								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
 					]

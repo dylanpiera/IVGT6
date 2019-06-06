@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include <EngineGlobals.h>
 #include <Runtime/Engine/Classes/Engine/Engine.h>
+#include <Runtime/Json/Public/Json.h>
 
 
 // Sets default values
@@ -46,6 +47,27 @@ void AHexGridManager::GenerateGrid()
 			a->hex = hex; // this is for getting grid position
 		}
 	}
+}
+
+void AHexGridManager::GenerateWithLudo()
+{
+    FString tool = FPaths::Combine(FPaths::ProjectDir(), "Ludo\\LudoTool.exe");
+    FPlatformProcess::CreateProc(*tool, nullptr, true, false, false, nullptr, 0, nullptr, nullptr);
+}
+
+
+FString AHexGridManager::ReadFile(FString filename)
+{
+    //Read file ini [project]/Content/Data/
+    //you can change with other location
+    FString directory = FPaths::Combine(FPaths::GameContentDir(), "Data");
+    FString result;
+    IPlatformFile& file = FPlatformFileManager::Get().GetPlatformFile();
+    if (file.CreateDirectory(*directory)) {
+        FString myFile = directory + "/" + filename;
+        FFileHelper::LoadFileToString(result, *myFile);
+    }
+    return result;
 }
 
 void AHexGridManager::LogGrid() const

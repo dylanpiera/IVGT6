@@ -1,0 +1,8 @@
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/obj/x86/Debug/LudoTool.csprojAssemblyReference.cache
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/obj/x86/Debug/LudoTool.csproj.CoreCompileInputs.cache
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/bin/Debug/LudoTool.exe
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/bin/Debug/LudoTool.pdb
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/bin/Debug/PhantomGrammarIndependent.dll
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/obj/x86/Debug/LudoTool.csproj.CopyComplete
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/obj/x86/Debug/LudoTool.exe
+/Users/aleksejhorvat/Documents/dev/IVGT6/LudoTool/LudoTool/obj/x86/Debug/LudoTool.pdb

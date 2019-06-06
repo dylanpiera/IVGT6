@@ -56,21 +56,21 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 0));
+			meshComp->SetWorldScale3D(FVector(45, 45, 0));
 			break;
 		}
 		case EnergyBuilding:
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 0));
+			meshComp->SetWorldScale3D(FVector(45, 45, 0));
 			break;
 		}
 		case MoneyBuilding:
 		{
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));
 			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(50, 50, 0));
+			meshComp->SetWorldScale3D(FVector(45, 45, 0));
 			break;
 		}
 	}
@@ -78,10 +78,10 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 
 void ABuildingGraphics::BuildingAnimation()
 {
-	if (growth < 50)
+	if (growth < 45)
 	{
-		growth += 0.11;
-		Mesh->SetWorldScale3D(FVector(50, 50, growth));
+		growth += 0.16;
+		Mesh->SetWorldScale3D(FVector(45, 45, growth));
 	}
 }
 

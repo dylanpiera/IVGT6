@@ -227,6 +227,7 @@ void ACameraPawn::OnClickRayCast()
 							building->BuildingConstruction(location, rotation, SpawnInfo);
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->MineralBuildings;
+							hex->buildingBuilt = true;
 						}
 						break;
 					}
@@ -246,6 +247,7 @@ void ACameraPawn::OnClickRayCast()
 							building->BuildingConstruction(location, rotation, SpawnInfo);
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->EnergyBuildings;
+							hex->buildingBuilt = true;
 						}
 						break;
 					}
@@ -265,13 +267,14 @@ void ACameraPawn::OnClickRayCast()
 							building->BuildingConstruction(location, rotation, SpawnInfo);
 							EconomyManager->ActiveBuildings.Add(building);
 							building->x = &EconomyManager->Houses;
+							hex->buildingBuilt = true;
 						}
 						break;
 					}
 				}
 
 				// Start building construction (its gonna spawn the mesh automatically)
-				hex->buildingBuilt = true;
+				
 
 				//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: " + vec.ToString()));
 			}

@@ -7,6 +7,10 @@
 #include "ConstructionTimerActor.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API AConstructionTimerActor : public AActor
 {
 	GENERATED_BODY()

@@ -6,6 +6,10 @@
 #include "EconomyManager.generated.h"
 
 UCLASS()
+/**
+ * @brief Sets up buildings and starting values for resources
+ * 
+ */
 class PGTPROJECT_API AEconomyManager : public AActor
 {
 	GENERATED_BODY()
@@ -15,7 +19,7 @@ public:
 	
 	UPROPERTY()
 	/**
-	 * @brief 
+	 * @brief Makes a list to put active buildings in
 	 * 
 	 */
 	TArray<UBuilding*> ActiveBuildings;
@@ -31,14 +35,14 @@ public:
 	int32 FoodBuildings;
 
 	/**
-	 * @brief 
+	 * @brief Set starting values of resources
 	 * 
 	 */
 	void InitResources();
 
 protected:
 	/**
-	 * @brief 
+	 * @brief Sets buildings at the start of the game
 	 * 
 	 */
 	virtual void BeginPlay() override;

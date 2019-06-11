@@ -4,7 +4,7 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief  Set values affected by house building
  * 
  */
 class PGTPROJECT_API UHouseBuilding : public UBuilding {
@@ -15,12 +15,11 @@ public:
 	int Disdain = 0;
 
 	/**
-	 * @brief 
+	 * @brief Adjust disdain value
 	 * 
 	 * @param resource 
 	 */
 	void BuildingFunction(Resources& resource) override {
-		//resource._energy -= EnergyUpkeep;
 		if (resource._food == 0)
 		{
 			Disdain++;

@@ -4,7 +4,7 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief Set values affected by food building
  * 
  */
 class PGTPROJECT_API UFoodBuilding : public UBuilding {
@@ -14,12 +14,11 @@ public:
 	int EnergyUpkeep = 5;
 
 	/**
-	 * @brief 
+	 * @brief Adjust food value based on population
 	 * 
 	 * @param resource 
 	 */
 	void BuildingFunction(Resources& resource) override {
-		//resource._energy -= EnergyUpkeep;
 		if (resource._energy >= 0)
 		{
 			resource._food += FoodProductionValue - resource._population;

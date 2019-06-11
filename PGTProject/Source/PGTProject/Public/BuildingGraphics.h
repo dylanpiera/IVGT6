@@ -6,6 +6,10 @@
 #include "BuildingGraphics.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ABuildingGraphics : public AActor
 {
 	GENERATED_BODY()

@@ -5,7 +5,7 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief  Set values affected by energy building
  * 
  */
 class PGTPROJECT_API UEnergyBuilding : public UBuilding {
@@ -15,12 +15,11 @@ public:
 	int MoneyUpkeep = 25;
 
 	/**
-	 * @brief 
+	 * @brief Remove upkeep costs
 	 * 
 	 * @param resource 
 	 */
 	void BuildingFunction(Resources& resource) override {
-		//resource._energy += EnergyProductionValue;
 		resource._money -= MoneyUpkeep;
 	}
 

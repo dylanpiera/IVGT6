@@ -4,7 +4,7 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief Set values affected by mineral building
  * 
  */
 class PGTPROJECT_API UMineralBuilding : public UBuilding {
@@ -15,13 +15,12 @@ public:
 	int MoneyUpkeep = 10;
 
 	/**
-	 * @brief 
+	 * @brief  Set values affected by mineral building during the game
 	 * 
 	 * @param resource 
 	 */
 	void BuildingFunction(Resources &resource) override
 	{
-		//resource._energy -= EnergyUpkeep;
 		if (resource._energy >= 0)
 		{
 			resource._minerals += MineralProductionValue;

@@ -8,6 +8,10 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API HexActorGraphics
 {
 private:

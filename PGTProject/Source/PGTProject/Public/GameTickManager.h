@@ -6,6 +6,10 @@
 #include "GameTickManager.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API AGameTickManager : public AActor
 {
 	GENERATED_BODY()

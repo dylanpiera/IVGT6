@@ -6,6 +6,10 @@
 #include "DataHolder.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ADataHolder : public AActor
 {
 	GENERATED_BODY()

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
 
 #include "ToolbarGraphics.h"
 #include "SlateOptMacros.h"
@@ -109,6 +109,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 							]
 							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
@@ -116,38 +117,18 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, EnergyBuilding)
 								.ColorAndOpacity(FLinearColor::White)
 							]
-						]
-						// Building 2
-						+ SUniformGridPanel::Slot(1, 0)
-						[
-							SNew(SVerticalBox)
 							+ SVerticalBox::Slot()
-							[
-								SNew(SOverlay)
-								+ SOverlay::Slot()
-								[
-									SNew(SImage)
-									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building2_IconPath]), FVector2D(100, 100)))
-								]
-								+ SOverlay::Slot()
-								[
-									SNew(SButton)
-									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
-									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MineralsBuilding)
-									.DesiredSizeScale(FVector2D(60, 60))
-								]
-							]
-							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
-								.Text(this, &ToolbarGraphics::GetOptionTitle, MineralsBuilding)
+								.Text(FText::FromString("100 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
-						// Building 3
-						+ SUniformGridPanel::Slot(2, 0)
+						// Building 2
+						+ SUniformGridPanel::Slot(1, 0)
 						[
 							SNew(SVerticalBox)
 							+ SVerticalBox::Slot()
@@ -162,16 +143,104 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								[
 									SNew(SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
+									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MineralsBuilding)
+									.DesiredSizeScale(FVector2D(60, 60))
+								]
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(this, &ToolbarGraphics::GetOptionTitle, MineralsBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("50 Minerals"))
+								.ColorAndOpacity(FLinearColor::White)
+							]
+						]
+						// Building 3
+						+ SUniformGridPanel::Slot(2, 0)
+						[
+							SNew(SVerticalBox)
+							+ SVerticalBox::Slot()
+							[
+								SNew(SOverlay)
+								+ SOverlay::Slot()
+								[
+									SNew(SImage)
+									.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building2_IconPath]), FVector2D(100, 100)))
+								]
+								+ SOverlay::Slot()
+								[
+									SNew(SButton)
+									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MoneyBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
 								]
 							]
 							+ SVerticalBox::Slot()
+							.AutoHeight()
 							[
 								SNew(STextBlock)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, MoneyBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("25 Minerals"))
+								.ColorAndOpacity(FLinearColor::White)
+							]
+						]
+						// Building 4
+							+ SUniformGridPanel::Slot(3, 0)
+							[
+								SNew(SVerticalBox)
+								+ SVerticalBox::Slot()
+							[
+								SNew(SOverlay)
+								+ SOverlay::Slot()
+							[
+								SNew(SImage)
+								.Image(new FSlateDynamicImageBrush(FName(*ImagePaths[Building4_IconPath]), FVector2D(100, 100)))
+							]
+							+ SOverlay::Slot()
+							[
+								SNew(SButton)
+								.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
+								.OnClicked(this, &ToolbarGraphics::SelectBuilding, FoodBuilding)
+								.DesiredSizeScale(FVector2D(60, 60))
+							]
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(this, &ToolbarGraphics::GetOptionTitle, FoodBuilding)
+								.ColorAndOpacity(FLinearColor::White)
+							]
+							+ SVerticalBox::Slot()
+							.AutoHeight()
+							[
+								SNew(STextBlock)
+								.Font(ArialFont)
+								.Justification(ETextJustify::Center)
+								.Text(FText::FromString("20 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -357,4 +426,5 @@ void ToolbarGraphics::StyleSettings()
 	ImagePaths.insert(pair<ImageTypes, FString>(Building1_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_1.png"));
 	ImagePaths.insert(pair<ImageTypes, FString>(Building2_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_2.png"));
 	ImagePaths.insert(pair<ImageTypes, FString>(Building3_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_3.png"));
+	ImagePaths.insert(pair<ImageTypes, FString>(Building4_IconPath, ProjectDir + "Assets/UI/Images/Building_Icon_4.png"));
 }

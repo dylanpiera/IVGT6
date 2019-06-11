@@ -1,0 +1,6 @@
+version: 0.6f
+start: TILEMAP 8 8 0:random 1:undefined 2:random 3:undefined 4:random 5:undefined 6:random 7:undefined 8:undefined 9:random 10:undefined 11:random 12:undefined 13:random 14:undefined 15:random 16:random 17:undefined 18:random 19:undefined 20:random 21:undefined 22:random 23:undefined 24:undefined 25:random 26:undefined 27:random 28:undefined 29:random 30:undefined 31:random 32:random 33:undefined 34:random 35:undefined 36:random 37:undefined 38:random 39:undefined 40:undefined 41:random 42:undefined 43:random 44:undefined 45:random 46:undefined 47:random 48:random 49:undefined 50:random 51:undefined 52:random 53:undefined 54:random 55:undefined 56:undefined 57:random 58:undefined 59:random 60:undefined 61:random 62:undefined 63:random
+rule: AddStart(max=1) = TILEMAP 1 1 0:undefined > {0 = TILEMAP 1 1 0:levelStart}
+rule: AddEnd(max=1) = TILEMAP 1 1 0:undefined > {0 = TILEMAP 1 1 0:levelEnd}
+rule: AddSpace(step=1) = TILEMAP 1 1 0:undefined > {0 = TILEMAP 1 1 0:ground}
+rule: Random(step=1) = TILEMAP 1 1 0:random > {0 = TILEMAP 1 1 0:easy} | {1(prob=0.75f) = TILEMAP 1 1 0:medium} | {2(prob=0.5f) = TILEMAP 1 1 0:hard}

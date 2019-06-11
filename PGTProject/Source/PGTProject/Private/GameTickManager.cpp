@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
 
 #include "GameTickManager.h"
 #include "Engine/World.h"
@@ -84,11 +84,11 @@ void AGameTickManager::GameTickHour()
 		bCanTick = false;
 		hourNow++;
 
-		//refactor for optimal use. Need buttons for this.
-		//GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, timer / timeMultiplier, false);
+		//Starts the timer
 		GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, 0.005f, false);
 		currentHour = hourNow;
 
+		// if the day ends reset currentHour
 		if(currentHour > 23)
 		{
 			GameTickDay();
@@ -99,28 +99,26 @@ void AGameTickManager::GameTickHour()
 
 
 //This is where the magic should happen!
-//Manages the dayly tick
+//Manages the daily tick
 void AGameTickManager::GameTickDay()
 {
 	// Update Resources
-	EconomyManager->resources._energy = 0;
 	EconomyManager->resources._population = 0;
+
+	// Itterates through all buildings added to the building list
 	for (UBuilding* building : EconomyManager->ActiveBuildings)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("BuildingState %d"), building->GetState()));
+		//Reflects BuildingStates to see what buildings are active and use Functions accordingly
 		if (Utility::compare_ptrs<ActiveState, BuildingState>(building->GetState())) {
 			building->BuildingFunction(EconomyManager->resources);
 		}
 	}
-	if (EconomyManager->resources._energy < 0)
-	{
-		EconomyManager->resources._energy = 0;
-	}
-	if (EconomyManager->resources._population < 0)
+
+	if (EconomyManager->resources._population < 0)	// can't have negative population
 	{
 		EconomyManager->resources._population = 0;
 	}
-	if (EconomyManager->resources._food < 0)
+	if (EconomyManager->resources._food < 0)		// can't have negative food
 	{
 		EconomyManager->resources._food = 0;
 	}

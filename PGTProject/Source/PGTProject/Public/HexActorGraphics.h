@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -10,14 +8,37 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API HexActorGraphics
 {
 private:
-	UStaticMesh* _hexTileMesh;		// Mesh storage
-	UMaterial* _terrainMaterial;		// Terrain Material
 
-	UStaticMesh* _mineralMesh;		// Minerals Mesh storage
-	map<EMineralResources, UMaterial*> _mineralResourceMaterials; // Store resources materials
+	/**
+	 * @brief Mesh storage
+	 * 
+	 */
+	UStaticMesh* _hexTileMesh;		
+
+	/**
+	 * @brief Terrain Material
+	 * 
+	 */
+	UMaterial* _terrainMaterial;
+
+	/**
+	 * @brief Minerals Mesh storage
+	 * 
+	 */
+	UStaticMesh* _mineralMesh;
+
+	/**
+	 * @brief Store resources materials
+	 * 
+	 */
+	map<EMineralResources, UMaterial*> _mineralResourceMaterials;
 
 	// Check if material exists
 	bool IfMaterialExists(EMineralResources resource);
@@ -26,13 +47,38 @@ public:
 	FVector MeshSize;				// Mesh size
 	float Radius;					// Mesh sphere radius
 
-	HexActorGraphics();				// Constructor
-	~HexActorGraphics();			// Destructor
+	/**
+	 * @brief Construct a new Hex Actor Graphics object
+	 * 
+	 */
+	HexActorGraphics();
+	
+	/**
+	 * @brief Destroy the Hex Actor Graphics object
+	 * 
+	 */
+	~HexActorGraphics();
 
-	// Create a graphic visualization of an hexagon tile for a HexActor 
+	/**
+	 * @brief Create a graphic visualization of an hexagon tile for a HexActor
+	 * 
+	 * @param HexActorRef 
+	 */
 	void CreateHexGraphics(AHexActor* HexActorRef);
-	// Create a graphic visualization of the resources for a HexActor
+
+	/**
+	 * @brief Create a graphic visualization of the resources for a HexActor
+	 * 
+	 * @param resource 
+	 * @param HexActorRef 
+	 */
 	void AddResourceGraphics(EMineralResources resource, AHexActor* HexActorRef);
-	// Remove graphic visualization of resources from HexActor
+
+	
+	/**
+	 * @brief Remove graphic visualization of resources from HexActor
+	 * 
+	 * @param HexActorRef 
+	 */
 	void RemoveResourceGraphics(AHexActor* HexActorRef);
 };

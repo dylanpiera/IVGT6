@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
 
 #include "DataHolder.h"
 
@@ -14,6 +14,7 @@ ADataHolder::ADataHolder()
 void ADataHolder::BeginPlay()
 {
 	Super::BeginPlay();
+	//initializes variable
 	abuilding = RoughRoad;
 }
 

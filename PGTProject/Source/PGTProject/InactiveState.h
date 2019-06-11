@@ -1,29 +1,50 @@
 #pragma once
 #include "BuildingState.h"
+
+/**
+ * @brief The State a building should be in while inactive
+ * 
+ */
 class InactiveState : public BuildingState
 {
 public:
+	/**
+	 * @brief Construct a new Inactive State object
+	 * 
+	 */
 	InactiveState();
+	/**
+	 * @brief Destroy the Inactive State object
+	 * 
+	 */
 	~InactiveState();
 
 	/**
-	 * See: BuildingState.h - Line 20
-	*/
+	 * @brief Sets BuildingState to ActiveState
+	 * 
+	 * @param building 
+	 */
 	void BuildingActive(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 26
-	*/
+	 * @brief Sets BuildingState to InactiveState
+	 * 
+	 * @param building 
+	 */
 	void BuildingInactive(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 32
-	*/
+	 * @brief Sets BuildingState to ConstructionState
+	 * 
+	 * @param building 
+	 */
 	void BuildingConstruction(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 38
-	*/
+	 * @brief Sets BuildingState to DestructionState
+	 * 
+	 * @param building 
+	 */
 	void BuildingDestruction(UBuilding* building);
 };
 

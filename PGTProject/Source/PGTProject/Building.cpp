@@ -8,6 +8,7 @@
 // Constructor
 UBuilding::UBuilding()
 {
+	SetBuildingCost();
 	int32 y = 0;
 	x = &y;
 	// Set total construction time
@@ -17,7 +18,11 @@ UBuilding::UBuilding()
 	// Set initial construction state
 	SetState(new ConstructionState());
 	_buildingType = MineralsBuilding;
-	
+}
+
+void UBuilding::SetBuildingCost() {
+	UE_LOG(LogTemp, Warning, TEXT("Setting cost to 0"));
+	_buildingCost = 0;
 }
 
 void UBuilding::GetConstructionTimer() {
@@ -40,9 +45,10 @@ UBuilding::~UBuilding()
 
 void UBuilding::WhenConstructionFinishes()
 {
+	//Sets the total number of buildingType + 1 in the EconomyManager
 	*x = *x + 1;
-	// Spawn building
-	CreateBuilding();
+
+	
 	// Change construction state
 	SetState(new ActiveState());
 	
@@ -55,6 +61,7 @@ void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActor
 	_rotation = rotation;
 	_spawnInfo = spawnInfo;
 
+	CreateBuilding();
 	// Start timer
 	_constructionTimer->StartConstruction(this, _timeInHours);
 }
@@ -79,14 +86,17 @@ void UBuilding::BuildingActive(Resources &resource, Resources &maintenance)
 
 void UBuilding::BuildingUpkeep(Resources &resource)
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::BuildingInactive()
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::BuildingDestruction()
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::SetState(BuildingState * state)

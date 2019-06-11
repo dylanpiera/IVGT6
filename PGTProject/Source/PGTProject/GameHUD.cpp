@@ -15,7 +15,6 @@ void AGameHUD::BeginPlay()
 		AToolbarActor::StaticClass(),
 		FoundActors);
 	TWeakObjectPtr<AToolbarActor> toolbar = Cast<AToolbarActor>(FoundActors[0]);
-	toolbar->testFunc();
 
 	TArray<AActor*> Found;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),

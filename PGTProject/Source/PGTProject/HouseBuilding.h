@@ -3,6 +3,10 @@
 #include "HouseBuilding.generated.h"
 
 UCLASS()
+/**
+ * @brief  Set values affected by house building
+ * 
+ */
 class PGTPROJECT_API UHouseBuilding : public UBuilding {
 	GENERATED_BODY()
 public:
@@ -10,8 +14,12 @@ public:
 	int EnergyUpkeep = 10;
 	int Disdain = 0;
 
+	/**
+	 * @brief Adjust disdain value
+	 * 
+	 * @param resource 
+	 */
 	void BuildingFunction(Resources& resource) override {
-		resource._energy -= EnergyUpkeep;
 		if (resource._food == 0)
 		{
 			Disdain++;
@@ -20,5 +28,14 @@ public:
 		{
 			Disdain--;
 		}
+	}
+
+	/**
+	 * @brief Set the Building Cost object
+	 * 
+	 */
+	void SetBuildingCost() override {
+		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 25"));
+		_buildingCost = 25;
 	}
 };

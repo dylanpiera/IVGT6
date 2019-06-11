@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,28 +6,52 @@
 #include "DataHolder.generated.h"
 
 UCLASS()
+/**
+ * @brief Data Holder class to Get and Set values from and to Actors/Toolbars
+ * 
+ */
 class PGTPROJECT_API ADataHolder : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	/**
+	 * @brief Construct a new ADataHolder object
+	 * 
+	 */
 	ADataHolder();
 
 	OptionSections abuilding;
 
+	/**
+	 * @brief Set the Building object
+	 * 
+	 * @param building 
+	 */
 	void SetBuilding(OptionSections building);
-
+    
+	/**
+	 * @brief Get the Building object
+	 * 
+	 * @return OptionSections 
+	 */
 	OptionSections GetBuilding();
 
 	
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief 
+	 * 
+	 */
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	/**
+	 * @brief 
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
 
 

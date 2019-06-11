@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -9,7 +7,10 @@
 class AHexGridManager;
 class AHexActor;
 using std::vector;
-
+/**
+ * @brief 
+ * 
+ */
 struct Node
 {
 public:
@@ -33,13 +34,22 @@ public:
 	vector<AHexActor*> GetNeighbors();
 	// Get cost of visiting a node
 	int GetCost();
-	// Get distance from another node
+	/**
+	 * @brief Get distance from another node
+	 * 
+	 * @param target 
+	 * @return int 
+	 */
 	int GetDistanceFrom(Node* target);
 	// Get reference to HexGridManager
 	void FindHexGridManager();
 	// Check if two nodes reference the same HexActor
 	bool EqualNodes(Node* other);
 
+	/**
+	 * @brief Destroy the Node object
+	 * 
+	 */
 	~Node();
 };
 

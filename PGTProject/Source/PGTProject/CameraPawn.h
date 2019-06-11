@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 
@@ -18,23 +16,40 @@
 
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ACameraPawn : public APawn
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
+	/**
+	 * @brief Construct a new ACameraPawn object, sets default values for this pawn's properties
+	 * 
+	 */
 	ACameraPawn();
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief Called when the game starts or when spawned
+	 * 
+	 */
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	/**
+	 * @brief Called every frame
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
+	/**
+	 * @brief Called to bind functionality to input
+	 * 
+	 * @param PlayerInputComponent 
+	 */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
@@ -73,18 +88,45 @@ public:
 	
 
 	UFUNCTION()
+	/**
+	 * @brief Get the Camera Pan Direction object
+	 * 
+	 */
 	void GetCameraPanDirection();
 
+	/**
+	 * @brief 
+	 * 
+	 * @param axisValue 
+	 */
 	void CameraZoom(float axisValue);
 
+	/**
+	 * @brief 
+	 * 
+	 * @param axisValue 
+	 */
 	void CameraRotationLeft(float axisValue);
 
+	/**
+	 * @brief 
+	 * 
+	 * @param axisValue 
+	 */
 	void CameraRotationRight(float axisValue);
 
-	//Creates a Line Trace from screen to world
+	/**
+	 * @brief Creates a Line Trace from screen to world
+	 * 
+	 */
 	void OnClickRayCast();
 
-	//Simple function to get the selected Actor
+	/**
+	 * @brief Simple function to get the selected Actor
+	 * 
+	 * @param h 
+	 * @return AActor* 
+	 */
 	AActor* SelectingActor(FHitResult h);
 	
 };

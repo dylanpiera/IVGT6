@@ -8,6 +8,10 @@
 
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API AToolbarActor : public AActor
 {
 	GENERATED_BODY()

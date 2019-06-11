@@ -5,7 +5,12 @@
 #include "GameFramework/Actor.h"
 #include "HexGridManager.generated.h"
 
+
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API AHexGridManager : public AActor
 {
 	GENERATED_BODY()

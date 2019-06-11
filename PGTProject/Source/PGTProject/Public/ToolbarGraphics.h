@@ -10,9 +10,10 @@
 
 using namespace std;
 
-
-
-
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 {
 public:

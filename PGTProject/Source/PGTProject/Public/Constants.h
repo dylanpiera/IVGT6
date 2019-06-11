@@ -1,11 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 
 /**
- * @brief 
+ * @brief enum of building types
  * 
  */
 enum class EBuildingType
@@ -17,7 +15,7 @@ enum class EBuildingType
 };
 
 /**
- * @brief 
+ * @brief enum of interaction modes
  * 
  */
 enum class EInteractionMode
@@ -29,7 +27,7 @@ enum class EInteractionMode
 };
 
 /**
- * @brief 
+ * @brief Option Sections reference enum to the Bottem ToolBar
  * 
  */
 enum OptionSections
@@ -43,7 +41,7 @@ enum OptionSections
 };
 
 /**
- * @brief 
+ * @brief enum to buildings or road
  * 
  */
 enum ToolbarSections
@@ -53,7 +51,7 @@ enum ToolbarSections
 };
 
 /**
- * @brief 
+ * @brief enum of Minerals
  * 
  */
 enum class EMineralResources
@@ -63,7 +61,7 @@ enum class EMineralResources
 };
 
 /**
- * @brief
+ * @brief Simple collection of constants
  * 
  */
 class PGTPROJECT_API Constants

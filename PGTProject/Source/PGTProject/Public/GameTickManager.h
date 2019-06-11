@@ -6,6 +6,10 @@
 #include "GameTickManager.generated.h"
 
 UCLASS()
+/**
+ * @brief Class that processes the game itself based on ingame hourly itteration
+ * 
+ */
 class PGTPROJECT_API AGameTickManager : public AActor
 {
 	GENERATED_BODY()
@@ -65,31 +69,31 @@ public:
 	void GameTick();
 
 	/**
-	 * @brief 
+	 * @brief Processes GameTickHour()
 	 * 
 	 */
 	void GameTickHour();
 
 	/**
-	 * @brief 
+	 * @brief Ingame daily itteration
 	 * 
 	 */
 	void GameTickDay();
 
 	/**
-	 * @brief 
+	 * @brief Ingame monthly itteration
 	 * 
 	 */
 	void GameTickMonth();
 
 	/**
-	 * @brief 
+	 * @brief ingame yearly itteration
 	 * 
 	 */
 	void GameTickYear();
 
 	/**
-	 * @brief 
+	 * @brief Resets the hourly timer
 	 * 
 	 */
 	void ResetTimer();

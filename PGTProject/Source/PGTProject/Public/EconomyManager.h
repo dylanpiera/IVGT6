@@ -6,6 +6,10 @@
 #include "EconomyManager.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API AEconomyManager : public AActor
 {
 	GENERATED_BODY()

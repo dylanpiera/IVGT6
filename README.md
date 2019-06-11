@@ -56,6 +56,20 @@ Explain what these tests test and why
 Give an example
 ```
 
+## Code Conventions
+For consistency amongst the project members, code conventions have been applied. These conventions have been documented below and in Resharper. With these conventions the coding style will stay consistent.
+
+Types - UpperCamelCase
+Parameters - lowerCamelCase
+Common Variables - lowerCamelCase
+Struct Data Members - _lowerCamelCase
+Class Data Members - _lowerCamelCase
+Constants - kUpperCamelCase
+Functions - UpperCamelCase[all_lower]
+Class, Struct, Union & Enum - UpperCamelCase
+Namespaces - all_lower
+Macros ALL_UPPER
+
 ## CICD Deployment
 
 Please read [DEPLOYMENT.MD](CICD/Deployment.md) for details about automated builds and hosting the build system in the cloud.

@@ -7,8 +7,9 @@
 
 UCLASS()
 /**
- * @brief Sets up buildings and starting values for resources
+ * @brief The Economy Manager actor to run in the scene
  * 
+ * Stores a reference to the current resource amount as well as to what buildings are active in play.
  */
 class PGTPROJECT_API AEconomyManager : public AActor
 {
@@ -19,12 +20,13 @@ public:
 	
 	UPROPERTY()
 	/**
-	 * @brief Makes a list to put active buildings in
+	 * @brief An array of (Active) Buildings
 	 * 
+	 * Holds all the buildings currently in the game.
 	 */
 	TArray<UBuilding*> ActiveBuildings;
 
-	/* for testing purposes: */
+	/* Editor-visible properties to have code-only starting buildings */
 	UPROPERTY(EditAnywhere)		
 	int32 MineralBuildings;
 	UPROPERTY(EditAnywhere)
@@ -35,14 +37,15 @@ public:
 	int32 FoodBuildings;
 
 	/**
-	 * @brief Set starting values of resources
+	 * @brief Initalizes the economy manager with base resources
 	 * 
+	 * And also creates code-only starting buildings if defined above.
 	 */
 	void InitResources();
 
 protected:
 	/**
-	 * @brief Sets buildings at the start of the game
+	 * @brief Unreal Actor Implementation
 	 * 
 	 */
 	virtual void BeginPlay() override;

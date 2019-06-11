@@ -5,8 +5,9 @@
 #include <algorithm>
 
 /**
- * @brief 
+ * @brief Storage container for non-coordinate based hex details.
  * 
+ * Contains non-coordinate details of the hex, like the AStar Cost to enter the tile, or what mineral is on it.
  */
 class ITileObject
 {
@@ -44,9 +45,9 @@ public:
 	float _roadPercentage;
 
 	/**
-	 * @brief 
+	 * @brief Calculates the aStar cost based on the road percentage.
 	 * 
-	 * @return UINT32 
+	 * @return UINT32 Cost
 	 */
 	UINT32 CalculateRoadCost() const
 	{
@@ -57,7 +58,7 @@ public:
 	EconomyManager::Resources _resources;
 
 	/**
-	 * @brief Updates the supplied parameter with the resource output from this tile.
+	 * @brief [OBSOLETE] Updates the supplied parameter with the resource output from this tile.
 	 * 
 	 * @param resources 
 	 */

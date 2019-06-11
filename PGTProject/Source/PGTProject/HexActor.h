@@ -9,8 +9,9 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief A Hex (tile) Actor
  * 
+ * A single HexTile in actor format, contains a reference to its own managed logic from the HexGridManager.
  */
 class PGTPROJECT_API AHexActor : public AActor
 {
@@ -41,32 +42,41 @@ public:
 	/**
 	 * @brief The data structure for a given Hex represented in Hex Coordinates.
 	 * 
-	 * @tparam Number 
-	 * @tparam W 
+	 * @tparam Number The type of data storage, either int or double
+	 * @tparam W A seperation for whether the hex is a real Hex or just a hex used for calculations.
 	 */
 	template <typename Number, int W>
-	/**
-	 * @brief ReSharper disable once CppInconsistentNaming
-	 * 
-	 */
 	struct _Hex {
 		union {
+			/**
+			 * @brief The 3 coordinates in array format. 
+			 * 
+			 * Specifically useful for when looping through the code.
+			 */
 			const Number v[3];
+			
+			/**
+			 * @brief The 3 coodinates in struct format.
+			 * 
+			 * QRS are the XYZ equivalent for our implementation of the Axial-Coordinate system.
+			 * This specific struct makes it clearer what you're calling from code, when you don't necessarily
+			 * need to loop through all numbers.
+			 */
 			struct { const Number q, r, s; };
 		};
 		/**
 		 * @brief Construct a new hex object
 		 * 
-		 * @param q 
-		 * @param r 
+		 * @param q Column (x)
+		 * @param r Row (y)
 		 */
 		_Hex(Number q, Number r) : v{ q, r, -q - r } {}
 		/**
 		 * @brief Construct a new hex object
 		 * 
-		 * @param q 
-		 * @param r 
-		 * @param s 
+		 * @param q Column (x)
+		 * @param r Row (y)
+		 * @param s (z)
 		 */
 		_Hex(Number q, Number r, Number s) : v{ q, r, s } {}
 
@@ -133,39 +143,41 @@ public:
 	typedef _Hex<double, 0> FractionalHexDifference;
 
 	/**
-	 * @brief 
-	 * 
-	 * @param hex 
-	 * @return int 
+	 * @brief Returns the length of a hex based on its grid coordinates.
+	 * @param The hex object 
+	 * @return int The length of the hex
 	 */
 	int hex_length(Hex hex) const;
 	/**
-	 * @brief 
+	 * @brief Calculates the distance between two hexes in grid space.
 	 * 
-	 * @param a 
-	 * @param b 
-	 * @return int 
+	 * @param a Hex 1
+	 * @param b Hex 2
+	 * @return int The distance between two hexes
 	 */
 	int hex_distance(Hex a, Hex b) const;
 
+	/**
+	 * @brief The 6 cardinal directions of a Hex Grid
+	 */
 	const std::vector<Hex> kHexDirections =
 	{
 		Hex(1, 0, -1), Hex(1, -1, 0), Hex(0, -1, 1),
 		Hex(-1, 0, 1), Hex(-1, 1, 0), Hex(0, 1, -1)
 	};
 	/**
-	 * @brief 
+	 * @brief Gets a hex with kHexDirections based coordinates, to be used for calculations.
 	 * 
-	 * @param direction 
+	 * @param direction int 0-5, taking the correct direction from kHexDirections 
 	 * @return Hex 
 	 */
 	Hex hex_direction(const int direction) const;
 	/**
-	 * @brief 
+	 * @brief Tries to get an adjacent hex in a certain direction from the current hex.
 	 * 
-	 * @param hex 
-	 * @param direction 
-	 * @return Hex 
+	 * @param hex Current Hex
+	 * @param direction Direction to Look in
+	 * @return Hex Found neighbor, if any.
 	 */
 	Hex hex_neighbor(const Hex hex, const int direction) const;
 

@@ -49,8 +49,6 @@ public:
 	// Get builder working state
 	EWorkState GetBuilderState();
 
-	UPROPERTY()
-	FVector _buildingLocation;
 	// Assing a task to builder
 	void AssignTask(AHexActor* buildingTile);
 
@@ -62,7 +60,7 @@ private:
 	// Working state
 	EWorkState _state;
 	// Next building location
-	
+	FVector _buildingLocation;
 	// Next tile to move to
 	FVector _goalLocation;
 	// Pathfinding instance

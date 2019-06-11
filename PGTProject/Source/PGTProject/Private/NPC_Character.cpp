@@ -37,6 +37,7 @@ void ANPC_Character::BeginPlay()
 		//FVector currentTileLocation = _currentTile->GetScreenSpaceLocationForHex(_currentTile->hex);
 		FVector aux = AHexActor::GetScreenSpaceLocation(_currentTile->hex);
 		_goalLocation = FVector(aux.X, aux.Y, aux.Z);
+		aux.Z += 100;
 		SetActorLocation(aux, false);
 	}
 }

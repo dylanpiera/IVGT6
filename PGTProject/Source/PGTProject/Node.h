@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,7 +6,10 @@
 #include "TestingTile.h"
 
 using std::vector;
-
+/**
+ * @brief 
+ * 
+ */
 struct Node
 {
 public:
@@ -23,15 +24,36 @@ public:
 	// Node parent (for backtracing path)
 	Node* Parent;
 
-	// Create a node 
+	/**
+	 * @brief Construct a new Node object
+	 * 
+	 * @param hexTile 
+	 */
 	Node(TestingTile* hexTile);
-	// Get node neighbors
+	/**
+	 * @brief Get the Neighbors object
+	 * 
+	 * @return vector<TestingTile> 
+	 */
 	vector<TestingTile> GetNeighbors();
-	// Get cost of visiting a node
+	/**
+	 * @brief Get cost of visiting a node
+	 * 
+	 * @return int 
+	 */
 	int GetCost();
-	// Get distance from another node
+	/**
+	 * @brief Get distance from another node
+	 * 
+	 * @param target 
+	 * @return int 
+	 */
 	int GetDistanceFrom(Node* target);
 
+	/**
+	 * @brief Destroy the Node object
+	 * 
+	 */
 	~Node();
 };
 

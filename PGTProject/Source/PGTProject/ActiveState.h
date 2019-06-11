@@ -1,29 +1,45 @@
 #pragma once
 #include "BuildingState.h"
 
+/**
+ * @brief 
+ * 
+ */
 class ActiveState : public BuildingState
 {
 public:
+	/**
+	 * @brief Destroy the Active State object
+	 * 
+	 */
 	~ActiveState();
 
 	/**
-	 * See: BuildingState.h - Line 20
-	*/
+	 * @brief 
+	 * 
+	 * @param building 
+	 */
 	void BuildingActive(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 26
-	*/
+	 * @brief 
+	 * 
+	 * @param building 
+	 */
 	void BuildingInactive(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 32
-	*/
+	 * @brief 
+	 * 
+	 * @param building 
+	 */
 	void BuildingConstruction(UBuilding* building);
 
 	/**
-	 * See: BuildingState.h - Line 38
-	*/
+	 * @brief 
+	 * 
+	 * @param building 
+	 */
 	void BuildingDestruction(UBuilding* building);
 };
 

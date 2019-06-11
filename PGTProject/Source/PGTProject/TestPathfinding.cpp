@@ -1,4 +1,3 @@
-
 #include "TestPathfinding.h" // (UPDATE) Testing class
 
 #include "Pathfinding.h"	// Pathfinding system

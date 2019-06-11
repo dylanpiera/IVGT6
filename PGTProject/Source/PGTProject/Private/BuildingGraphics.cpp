@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
 
 #include "BuildingGraphics.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
@@ -12,8 +12,11 @@ ABuildingGraphics::ABuildingGraphics()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Instantiate the static mesh and set as RootComponent
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("VisualRepresentation"));
 	Mesh->SetupAttachment(RootComponent);
+
+	//initialize growth variable for animation.
 	growth = 0;
 }
 
@@ -22,16 +25,13 @@ void ABuildingGraphics::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Finds the actor ADataHolder in the gameworld.
 	TArray<AActor*> FActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 		ADataHolder::StaticClass(),
 		FActors);
 	holder = Cast<ADataHolder>(FActors[0]);
 	OptionSections building = holder->GetBuilding();
-
-	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf(TEXT("Selecting building %d"), building));
-	
-	//SetBuildingGraphics(building, Mesh);
 }
 
 void ABuildingGraphics::LoadGraphics(OptionSections buildingIndex) 
@@ -54,6 +54,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 	{
 		case MineralsBuilding: 
 		{
+			// Loads the proper mesh for the specific building type.
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(45, 45, 0));
@@ -61,6 +62,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 		}
 		case EnergyBuilding:
 		{
+			// Loads the proper mesh for the specific building type.
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(45, 45, 0));
@@ -68,6 +70,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 		}
 		case MoneyBuilding:
 		{
+			// Loads the proper mesh for the specific building type.
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(45, 45, 0));
@@ -75,6 +78,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 		}
 		case FoodBuilding:
 		{
+			// Loads the proper mesh for the specific building type.
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/Cone.Cone'")); 
 			meshComp->SetStaticMesh(BuildingMesh);
 			meshComp->SetWorldScale3D(FVector(2, 2, 2));
@@ -85,6 +89,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 
 void ABuildingGraphics::BuildingAnimation()
 {
+	// Hardcoded testing. this looked best ingame.
 	if (growth < 45)
 	{
 		growth += 0.16;

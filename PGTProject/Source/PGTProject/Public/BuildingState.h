@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 
 /**
- * Polymorphic Parent of all States a Building can have
+ * @brief Polymorphic Parent of all States a Building can have
  * Implemented by using the State Design Pattern: [link]
  */
 class BuildingState

@@ -6,6 +6,10 @@
 #include "DataHolder.generated.h"
 
 UCLASS()
+/**
+ * @brief Data Holder class to Get and Set values from and to Actors/Toolbars
+ * 
+ */
 class PGTPROJECT_API ADataHolder : public AActor
 {
 	GENERATED_BODY()

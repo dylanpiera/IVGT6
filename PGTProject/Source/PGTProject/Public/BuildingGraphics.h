@@ -6,6 +6,10 @@
 #include "BuildingGraphics.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ABuildingGraphics : public AActor
 {
 	GENERATED_BODY()
@@ -13,7 +17,7 @@ class PGTPROJECT_API ABuildingGraphics : public AActor
 public:	
 	
 	/**
-	 * @brief 
+	 * @brief Constructs the BuildingGraphics 
 	 * 
 	 */
 	ABuildingGraphics();
@@ -29,7 +33,7 @@ public:
 protected:
 	
 	/**
-	 * @brief 
+	 * @brief Override BeginPlay function. Find the ADataHolder Actor in the game world.
 	 * 
 	 */
 	virtual void BeginPlay() override;
@@ -37,7 +41,7 @@ protected:
 public:	
 	
 	/**
-	 * @brief 
+	 * @brief Standard Unreal Tick function.
 	 * 
 	 * @param DeltaTime 
 	 */
@@ -52,14 +56,14 @@ public:
 	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
 
 	/**
-	 * @brief 
+	 * @brief Used to set parameter for SetBuildingGraphics
 	 * 
 	 * @param buildingIndex 
 	 */
 	void LoadGraphics(OptionSections buildingIndex);
 
 	/**
-	 * @brief 
+	 * @brief Slowly increments the Z-axis in the to visualize a "growth", Runs in the Tick function
 	 * 
 	 */
 	void BuildingAnimation();

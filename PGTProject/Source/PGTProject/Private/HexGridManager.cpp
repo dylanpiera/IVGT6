@@ -24,6 +24,19 @@ void AHexGridManager::BeginPlay()
 	//Testing
 	GenerateGrid();
 	LogGrid();
+
+
+	GenerateWithLudo();
+	FString data = ReadFile("out.txt");
+
+    std::vector<string> result;
+
+    while( data.good() )
+    {
+        string substr;
+        getline( ss, substr, ',' );
+        result.push_back( substr );
+    }
 }
 
 // Called every frame

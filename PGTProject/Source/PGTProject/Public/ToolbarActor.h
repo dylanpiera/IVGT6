@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -14,21 +12,74 @@ class PGTPROJECT_API AToolbarActor : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
+public:
+
+	/**
+	 * @brief Construct a new AToolbarActor object
+	 * 
+	 */
 	AToolbarActor();
+
+	/**
+	 * @brief Get the Energy object
+	 * 
+	 * @return int 
+	 */
 	int getEnergy();
+
+	/**
+	 * @brief Get the Minerals object
+	 * 
+	 * @return int 
+	 */
 	int getMinerals();
+	/**
+	 * @brief Get the Money object
+	 * 
+	 * @return int 
+	 */
 	int getMoney();
+
+	/**
+	 * @brief Get the Population object
+	 * 
+	 * @return int 
+	 */
 	int getPopulation();
+
+	/**
+	 * @brief Get the Food object
+	 * 
+	 * @return int 
+	 */
 	int getFood();
 
+	/**
+	 * @brief Get the Minerals Gain object
+	 * 
+	 * @return int 
+	 */
 	int getMineralsGain();
+
+	/**
+	 * @brief Get the Money Gain object
+	 * 
+	 * @return int 
+	 */
 	int getMoneyGain();
+
+	/**
+	 * @brief Get the Food Gain object
+	 * 
+	 * @return int 
+	 */
 	int getFoodGain();
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief 
+	 * 
+	 */
 	virtual void BeginPlay() override;
 	int currentTool;
 	int currentMode;
@@ -37,9 +88,12 @@ private:
 	AEconomyManager* _econ_manager;
 
 public:	
-	void testFunc();
 
-	// Called every frame
+	/**
+	 * @brief 
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
 	
 	AGameTickManager* GameTickManager;

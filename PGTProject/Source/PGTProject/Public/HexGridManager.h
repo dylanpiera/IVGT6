@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,24 +11,54 @@ class PGTPROJECT_API AHexGridManager : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	/**
+	 * @brief Construct a new AHexGridManager object
+	 * 
+	 */
 	AHexGridManager();
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief 
+	 * 
+	 */
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	/**
+	 * @brief 
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
 
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GenerateGrid();
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void LogGrid() const;
 
 	const int mapsize = 32;
 
+	/**
+	 * @brief 
+	 * 
+	 */
 	AHexActor::Hex *hexes[32][32];
 
+	/**
+	 * @brief Get the Hex At object
+	 * 
+	 * @param x 
+	 * @param y 
+	 * @return AHexActor::Hex* 
+	 */
 	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
 
 };

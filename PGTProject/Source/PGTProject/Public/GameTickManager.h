@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,15 +11,25 @@ class PGTPROJECT_API AGameTickManager : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	/**
+	 * @brief Construct a new AGameTickManager object
+	 * 
+	 */
 	AGameTickManager();
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief 
+	 * 
+	 */
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	/**
+	 * @brief 
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
@@ -50,15 +58,57 @@ public:
 	AEconomyManager* EconomyManager;
 
 	UFUNCTION()
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GameTick();
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GameTickHour();
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GameTickDay();
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GameTickMonth();
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void GameTickYear();
 
+	/**
+	 * @brief 
+	 * 
+	 */
 	void ResetTimer();
 
+	/**
+	 * @brief Set the Speed Time One object
+	 * 
+	 */
 	void SetSpeedTimeOne();
+
+	/**
+	 * @brief Set the Speed Time Two object
+	 * 
+	 */
 	void SetSpeedTimeTwo();
+
+	/**
+	 * @brief Set the Speed Time Four object
+	 * 
+	 */
 	void SetSpeedTimeFour();
 };

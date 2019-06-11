@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -14,8 +12,12 @@ class PGTPROJECT_API AEconomyManager : public AActor
 
 public:	
 	Resources resources;
-
+	
 	UPROPERTY()
+	/**
+	 * @brief 
+	 * 
+	 */
 	TArray<UBuilding*> ActiveBuildings;
 
 	/* for testing purposes: */
@@ -28,9 +30,16 @@ public:
 	UPROPERTY(EditAnywhere)
 	int32 FoodBuildings;
 
+	/**
+	 * @brief 
+	 * 
+	 */
 	void InitResources();
 
 protected:
-	// Called when the game starts or when spawned
+	/**
+	 * @brief 
+	 * 
+	 */
 	virtual void BeginPlay() override;
 };

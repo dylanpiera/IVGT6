@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 
+/**
+ * @brief 
+ * 
+ */
 enum class EBuildingType
 {
 	Mineral,
@@ -12,6 +16,10 @@ enum class EBuildingType
 	Road
 };
 
+/**
+ * @brief 
+ * 
+ */
 enum class EInteractionMode
 {
 	Insert,
@@ -20,6 +28,10 @@ enum class EInteractionMode
 	Delete
 };
 
+/**
+ * @brief 
+ * 
+ */
 enum OptionSections
 {
 	RoughRoad,
@@ -30,14 +42,20 @@ enum OptionSections
 	DestroyTool
 };
 
-// Toolbar structure definitions
+/**
+ * @brief 
+ * 
+ */
 enum ToolbarSections
 {
 	RoadsSection,
 	BuildingsSection
 };
 
-// Avaiable resources
+/**
+ * @brief 
+ * 
+ */
 enum class EMineralResources
 {
 	Catanium,
@@ -45,7 +63,8 @@ enum class EMineralResources
 };
 
 /**
- *
+ * @brief
+ * 
  */
 class PGTPROJECT_API Constants
 {

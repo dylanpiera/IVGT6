@@ -5,8 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Pathfinding.h"
-//#include "HexGridManager.h"
-//#include "NPC_Manager.h"
 #include "Constants.h"
 #include "Runtime/Core/Public/Math/Vector.h"
 #include "NPC_Character.generated.h"
@@ -39,9 +37,6 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = SkeletalMesh)
 	class USkeletalMeshComponent* CharacterMesh;
 
-	//UPROPERTY(EditAnywhere)
-	//FVector myNextLocation;
-
 	// Move character to a specific world location
 	UFUNCTION(BlueprintImplementableEvent, Category = "MoveCharacterEvent")
 	void MoveToLocation(const FVector& newLocation);
@@ -52,8 +47,10 @@ public:
 	// Assing a task to builder
 	void AssignTask(AHexActor* buildingTile);
 
+	// Move to next tile in path to building
 	void MoveToNextTile();
 
+	// Set building world space location
 	void SetBuildingLocation(FVector aux);
 
 private:
@@ -70,8 +67,7 @@ private:
 	// Tiles info
 	AHexActor* _currentTile;
 	AHexActor* _goalTile;
-	// Reference to HexGridManager
-	//AHexGridManager* _hexGridManager;
+	// Reference to NPCManager
 	ANPC_Manager* _npcManager;
 
 	// Modify working state
@@ -84,12 +80,10 @@ private:
 	bool ReachedBuilding();
 	// Make builder start work
 	void StartWorking();
-
+	// Use pathfinding to find path to building
 	void FindPathToTile(AHexActor* tile);
-
+	// Get next tile for NPC to move to
 	void GetNextTileOnPath();
-
 	// Get reference to HexGridManager
-	//void FindHexGridManager();
 	void FindNPCManager();
 };

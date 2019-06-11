@@ -33,8 +33,6 @@ void ANPC_Character::BeginPlay()
 	FindNPCManager();
 	if(_npcManager->_hexGridManager->_tiles.size() > 0) {
 		_currentTile = _npcManager->_hexGridManager->_tiles.at(0); // Get first tile 
-		//FVector currentTileLocation = _currentTile->GetActorLocation();
-		//FVector currentTileLocation = _currentTile->GetScreenSpaceLocationForHex(_currentTile->hex);
 		FVector aux = AHexActor::GetScreenSpaceLocation(_currentTile->hex);
 		_goalLocation = FVector(aux.X, aux.Y, aux.Z);
 		aux.Z += 100;
@@ -60,8 +58,6 @@ void ANPC_Character::Tick(float DeltaTime)
 				
 				MoveToNextTile();
 			}
-
-			//_npcManager->UpdateIter();
 		}
 	}
 }
@@ -137,18 +133,6 @@ void ANPC_Character::AssignTask(AHexActor* buildingTile)
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Assign task!"));
 
 	SetBuildingLocation(buildingTile->GetActorLocation());
-	//AHexActor::GetScreenSpaceLocation(buildingTile->hex);
-	//UE_LOG(LogTemp, Warning, TEXT("TRY 1"));
-	//_buildingLocation = buildingTile->GetActorLocation();
-	//FVector aux = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
-	//UE_LOG(LogTemp, Warning, TEXT("aux %f %f %f"), aux.X, aux.Y, aux.Z);
-	//_buildingLocation = FVector(aux.X, aux.Y, aux.Z);
-
-	//SetBuildingLocation(aux);
-	//UE_LOG(LogTemp, Warning, TEXT("TRY 2"));
-	//_buildingLocation = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
-	//UE_LOG(LogTemp, Warning, TEXT("TRY 3"));
-	//_buildingLocation = buildingTile->GetScreenSpaceLocationForHex(buildingTile->hex);
 	
 	// Start moving towards building
 	FindPathToTile(buildingTile);
@@ -187,8 +171,6 @@ void ANPC_Character::GetNextTileOnPath()
 		_pathToBuilding.pop_front();
 	}
 
-	//_goalLocation = _goalTile->GetScreenSpaceLocationForHex(_goalTile->hex);
-	//_goalLocation = _goalTile->GetActorLocation();
 	FVector aux = AHexActor::GetScreenSpaceLocation(_goalTile->hex);
 	_goalLocation = FVector(aux.X, aux.Y, aux.Z);
 }

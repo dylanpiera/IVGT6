@@ -27,15 +27,6 @@ void ANPC_Manager::BeginPlay()
 void ANPC_Manager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	/*
-	if(_buildersList.size() > 0 && !_controllerIsBusy) {
-		ANPC_Character* builder = _buildersList.at(i);
-		if(builder->GetBuilderState() == EWorkState::Walking)
-		{
-			_controllerIsBusy = true;
-			builder->MoveToNextTile();
-		}
-	}*/
 }
 
 ANPC_Character* ANPC_Manager::SpawnBuilder()
@@ -88,15 +79,3 @@ void ANPC_Manager::Test()
 	myBuilder->AssignTask(tile);
 	myBuilder2->AssignTask(tile2);
 }
-
-/*
-void ANPC_Manager::UpdateIter()
-{
-	if(i + 1 < _buildersList.size()) {
-		i = i + 1;
-	} else {
-		i = 0;
-	}
-	_controllerIsBusy = false;
-}
-*/

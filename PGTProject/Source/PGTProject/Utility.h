@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @brief 
+ * @brief Class for reflection Functions.
  * 
  */
 class Utility
@@ -8,7 +8,11 @@ class Utility
 public:
 	template<typename compare, typename baseclass>
 	/**
-	 * @brief 
+	 * @brief Compare subclasses of the base class. If subclasses are of
+	 * the same type it returns true. if not they return false.
+	 * 
+	 * If subclass is being casted to other type of subclass it returns a nullptr.'
+	 * If subclass is casted to same type subclass it returns somevalue.
 	 * 
 	 * @param a 
 	 * @param b 
@@ -23,7 +27,11 @@ public:
 
 	template<typename compare, typename baseclass>
 	/**
-	 * @brief 
+	 * @brief Compare subclasses of the base class. If subclasses are of
+	 * the same type it returns true. if not they return false.
+	 * 
+	 * If subclass is being casted to other type of subclass it returns a nullptr.'
+	 * If subclass is casted to same type subclass it returns somevalue.
 	 * 
 	 * @param a 
 	 * @return true 

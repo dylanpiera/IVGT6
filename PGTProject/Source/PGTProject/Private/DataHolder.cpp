@@ -14,6 +14,7 @@ ADataHolder::ADataHolder()
 void ADataHolder::BeginPlay()
 {
 	Super::BeginPlay();
+	//initializes variable
 	abuilding = RoughRoad;
 }
 

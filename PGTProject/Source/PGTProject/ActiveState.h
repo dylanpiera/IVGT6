@@ -2,7 +2,7 @@
 #include "BuildingState.h"
 
 /**
- * @brief 
+ * @brief The State a building should be in while under construction
  * 
  */
 class ActiveState : public BuildingState
@@ -15,28 +15,28 @@ public:
 	~ActiveState();
 
 	/**
-	 * @brief 
+	 * @brief Sets BuildingState to ActiveState
 	 * 
 	 * @param building 
 	 */
 	void BuildingActive(UBuilding* building);
 
 	/**
-	 * @brief 
+	 * @brief Sets BuildingState to InactiveState
 	 * 
 	 * @param building 
 	 */
 	void BuildingInactive(UBuilding* building);
 
 	/**
-	 * @brief 
+	 * @brief Sets BuildingState to ConstructionState
 	 * 
 	 * @param building 
 	 */
 	void BuildingConstruction(UBuilding* building);
 
 	/**
-	 * @brief 
+	 * @brief Sets BuildingState to DestructionState
 	 * 
 	 * @param building 
 	 */

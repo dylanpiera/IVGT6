@@ -17,7 +17,7 @@
 
 UCLASS()
 /**
- * @brief 
+ * @brief Camera Class that handles input, raycasting and building placement.
  * 
  */
 class PGTPROJECT_API ACameraPawn : public APawn
@@ -95,21 +95,21 @@ public:
 	void GetCameraPanDirection();
 
 	/**
-	 * @brief 
+	 * @brief Zoom in and out using scrollwheel
 	 * 
 	 * @param axisValue 
 	 */
 	void CameraZoom(float axisValue);
 
 	/**
-	 * @brief 
+	 * @brief RotateLeft using the "Q" key
 	 * 
 	 * @param axisValue 
 	 */
 	void CameraRotationLeft(float axisValue);
 
 	/**
-	 * @brief 
+	 * @brief Rotate right using the "E" key
 	 * 
 	 * @param axisValue 
 	 */
@@ -117,12 +117,13 @@ public:
 
 	/**
 	 * @brief Creates a Line Trace from screen to world
+	 * Also handles all the raycasting.
 	 * 
 	 */
 	void OnClickRayCast();
 
 	/**
-	 * @brief Simple function to get the selected Actor
+	 * @brief Simple function to get the selected Actor from raycast hit
 	 * 
 	 * @param h 
 	 * @return AActor* 

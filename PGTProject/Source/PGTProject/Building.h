@@ -8,25 +8,15 @@
 #include "UObject/NoExportTypes.h"
 #include "Building.generated.h"
 
-/**
- * @brief 
- * 
- */
 class AConstructionTimerActor;
-/**
- * @brief 
- * 
- */
+
 class ABuildingGraphics;
-/**
- * @brief 
- * 
- */
+
 class BuildingState;
 
 UCLASS()
 /**
- * @brief 
+ * @brief Base Class for all building types. 
  * 
  */
 class PGTPROJECT_API UBuilding : public UObject {
@@ -81,7 +71,8 @@ public:
 	void CreateBuilding();
 
 	/**
-	 * @brief 
+	 * @brief Sets the location, rotation and spawnInfo for the building
+	 * to be spawned.
 	 * 
 	 * @param location 
 	 * @param rotation 
@@ -90,38 +81,41 @@ public:
 	void BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo);
 
 	/**
-	 * @brief Function called when time is over
+	 * @brief Sets BuildingState to new ActiveState and adds + 1 to the buidlingType total amount
 	 * 
 	 */
 	void WhenConstructionFinishes();
 
-	/*
-	 * override this and implement what the building needs to update
-	*/
+	/**
+	 * @brief Runs both BuildingFunction and BuildingUpkeep
+	 * 
+	 * @param resource 
+	 * @param maintenance 
+	 */
 	virtual void BuildingActive(Resources &resource, Resources &maintenance);
 
 	/**
-	 * @brief 
+	 * @brief Override to implement building production of choice. 
 	 * 
 	 * @param resource 
 	 */
 	virtual void BuildingFunction(Resources &resource);
 
 	/**
-	 * @brief 
+	 * @brief Override to implement building upkeep of choice
 	 * 
 	 * @param resource 
 	 */
 	virtual void BuildingUpkeep(Resources &resource);
 
 	/**
-	 * @brief 
+	 * @brief Override to implement function of choice while Inactive
 	 * 
 	 */
 	virtual void BuildingInactive();
 
 	/**
-	 * @brief 
+	 * @brief Override to implement function of choice when building is destroyed
 	 * 
 	 */
 	virtual void BuildingDestruction();

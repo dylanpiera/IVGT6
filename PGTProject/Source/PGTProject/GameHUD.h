@@ -5,13 +5,14 @@
 #include "GameHUD.generated.h"
 
 /**
- * @brief 
+ * @brief Widget component to main UI structure
  * 
  */
 class MainGraphics;
 
 UCLASS()
 /**
+ * @class AGameHUD
  * @brief 
  * 
  */
@@ -20,7 +21,7 @@ class PGTPROJECT_API AGameHUD : public AHUD
 	GENERATED_BODY()
 	
 	public:
-		//SafePointer to Widgets
+		// SafePointer to main UI structure
 		TSharedPtr<MainGraphics> _mainWidget;
 
 		/**

@@ -7,37 +7,53 @@
 
 using std::vector;
 /**
- * @brief 
+ * @struct Node
+ * @brief Auxiliar struct for pathfinding. 
  * 
  */
 struct Node
 {
 public:
-	// Reference for hextile
+	/**
+	 * @var HexTile
+	 * @brief Reference to an existing tile in the game.
+	*/
 	TestingTile* HexTile;
 
-	// Node costs
-	int FCost;			// Total cost
-	int HCost;			// Cost from the end node
-	int GCost;			// Cost from the start node
+	/**
+	 * @var FCost
+	 * @brief Total cost of node: HCost + GCost
+	 *
+	 * @var HCost
+	 * @brief Cost from the "end" node in path.
+	 *
+	 * @var GCost
+	 * @brief Cost from the "start" node in path.
+	*/
+	int FCost;
+	int HCost;
+	int GCost;
 
-	// Node parent (for backtracing path)
+	/**
+	 * @var Parent
+	 * @brief Parent of this node (used for backtracing path)
+	*/
 	Node* Parent;
 
 	/**
-	 * @brief Construct a new Node object
+	 * @brief Create a new Node with a reference for a hextile and initilizing the node costs
 	 * 
 	 * @param hexTile 
 	 */
 	Node(TestingTile* hexTile);
 	/**
-	 * @brief Get the Neighbors object
+	 * @brief Get all neighbors from current hextile
 	 * 
 	 * @return vector<TestingTile> 
 	 */
 	vector<TestingTile> GetNeighbors();
 	/**
-	 * @brief Get cost of visiting a node
+	 * @brief Get cost of visiting the node
 	 * 
 	 * @return int 
 	 */
@@ -51,7 +67,7 @@ public:
 	int GetDistanceFrom(Node* target);
 
 	/**
-	 * @brief Destroy the Node object
+	 * @brief Default destructor
 	 * 
 	 */
 	~Node();

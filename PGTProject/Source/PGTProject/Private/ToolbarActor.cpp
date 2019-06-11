@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
 
 #include "ToolbarActor.h"
 #include "EconomyManager.h"
@@ -29,9 +29,6 @@ void AToolbarActor::BeginPlay()
 		AGameTickManager::StaticClass(),
 		FoundGameTickManagers);
 	GameTickManager = Cast<AGameTickManager>(FoundGameTickManagers[0]);
-
-
-	testFunc();
 }
 
 // Called every frame
@@ -79,10 +76,4 @@ int AToolbarActor::getFood()
 int AToolbarActor::getFoodGain()
 {
 	return _econ_manager->FoodBuildings * 15 - _econ_manager->resources._population;
-}
-
-void AToolbarActor::testFunc()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Energy: %d, Materials: %d, Energy: %d"), getEnergy(), getMinerals(), getMoney(), getFood());
-	//UE_LOG(LogTemp, Warning, TEXT("Energy: "));
 }

@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "CameraPawn.h"
 #include "Constants.h"
 #include "EconomyManager.h"
@@ -78,30 +76,25 @@ void ACameraPawn::GetCameraPanDirection()
 	// Pan left
 	if (mousePosX <= margin)
 	{
-		//camDirectionY = -1;
 		AddActorWorldOffset(RootScene->GetRightVector() * camSpeed * -1);
 	}
 
 	// Pan up
 	if (mousePosY <= margin)
 	{
-		//camDirectionX = 1;
 		AddActorWorldOffset(RootScene->GetForwardVector() * camSpeed);
 	}
 
 	// Pan right
 	if (mousePosX >= screenSizeX - margin)
 	{
-		//camDirectionY = 1;
 		AddActorWorldOffset(RootScene->GetRightVector() * camSpeed);
 	}
 
 	// Pan down
 	if (mousePosY >= screenSizeY - margin)
 	{
-		//camDirectionX = -1;
 		AddActorWorldOffset(RootScene->GetForwardVector() * camSpeed * -1);
-
 	}
 }
 
@@ -180,33 +173,27 @@ void ACameraPawn::OnClickRayCast()
 
 		if (SelectedActor->IsA(AHexActor::StaticClass()))
 		{
-			//FVector hexPos = SelectedActor->GetActorLocation();
+
+			// Cast selected vector to HexActor
 			AHexActor* hex = Cast<AHexActor>(SelectedActor);
 
-			if (!hex->buildingBuilt)
+			if (!hex->buildingBuilt) // checks if already building build.
 			{
 				FVector vec = FVector(hex->hex->q, hex->hex->r, hex->hex->s);
-
-				// BuildBuilding (activate or add something to the hex)
-
 
 				FVector location = hex->GetActorLocation();
 				FRotator rotation = hex->GetActorRotation();
 
-				//TSubclassOf<ABuildingGraphics> Building;
 				FActorSpawnParameters SpawnInfo;
 				SpawnInfo.Owner = hex;
 
+				// Find DataHolder
 				TArray<AActor*> FActors;
 				UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 					ADataHolder::StaticClass(),
 					FActors);
 				ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
 				OptionSections buildingMesh = holder->GetBuilding();
-
-
-
-				//ABuildingGraphics* Building = GetWorld()->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), location, rotation, SpawnInfo);
 
 				// Create building
 				switch (buildingMesh)
@@ -218,7 +205,6 @@ void ACameraPawn::OnClickRayCast()
 						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
 						if(building->GetCost() > EconomyManager->resources._minerals) {
 							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
 						}
 						else {
 							EconomyManager->resources._minerals -= building->GetCost();
@@ -239,7 +225,6 @@ void ACameraPawn::OnClickRayCast()
 						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
 						if(building->GetCost() > EconomyManager->resources._minerals) {
 							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
 						}
 						else {
 							EconomyManager->resources._minerals -= building->GetCost();
@@ -260,7 +245,6 @@ void ACameraPawn::OnClickRayCast()
 						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
 						if(building->GetCost() > EconomyManager->resources._minerals) {
 							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-							//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You need: " + building->GetCost()));
 						}
 						else {
 							EconomyManager->resources._minerals -= building->GetCost();
@@ -275,21 +259,18 @@ void ACameraPawn::OnClickRayCast()
 						break;
 					}
 				}
-
-				// Start building construction (its gonna spawn the mesh automatically)
-				
-
-				//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Position: " + vec.ToString()));
 			}
 		}
 		else
 		{
+			//Finds Dataholder.
 			TArray<AActor*> FActors;
 			UGameplayStatics::GetAllActorsOfClass(GetWorld(),
 				ADataHolder::StaticClass(),
 				FActors);
 			ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
 			OptionSections buildingMesh = holder->GetBuilding();
+
 			if (buildingMesh == DestroyTool) {
 				auto parent = SelectedActor->GetOwner();
 				if (parent->IsA(AHexActor::StaticClass()))

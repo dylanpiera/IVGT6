@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -12,44 +10,86 @@
 
 using namespace std;
 
-
-
-
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 {
 public:
+
+	/**
+	 * @brief Construct a new slate begin args object
+	 * 
+	 */
 	SLATE_BEGIN_ARGS(ToolbarGraphics) {}
 
-	// Add new argument called OwnerHUDArg
+	/**
+	 * @brief Add new argument called OwnerHUDArg
+	 * 
+	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
+
+	/**
+	 * @brief Add new argument called DataHolderArgs
+	 * 
+	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<class ADataHolder>, DataHolderArgs);
 
+	/**
+	 * @brief 
+	 * 
+	 */
 	SLATE_END_ARGS()
 
-	
-	// Constructs this widget with InArgs
-
+	/**
+	 * @brief Constructs this widget with InArgs
+	 * 
+	 * @param InArgs 
+	 */
 	void Construct(const FArguments& InArgs);
-
-	/*void SetBuilding(OptionSections option);
-	OptionSections GetBuilding();*/
 	
 private:
 
-	//Safe pointer to parent HUD
+	/**
+	 * @brief Safe pointer to parent HUD
+	 * 
+	 */
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
-	TWeakObjectPtr<class ADataHolder> _dataHolder;
-	
-	//OptionSections _building;
-	/* "mutable" variables are so they be updated inside "const" functions */
 
-	mutable ToolbarSections CurrentSection; // Holds current toolbar section
-	mutable bool IsOpenToolbarViewPanel; // Informs whether or not the view options panel should be opened
-	mutable map<ToolbarSections, FString> SectionsTitles = { // Sections Names
+	/**
+	 * @brief Safe pointer to parent HUD
+	 * 
+	 */
+	TWeakObjectPtr<class ADataHolder> _dataHolder;
+
+	/* "mutable" variables are so they be updated inside "const" functions */
+	/**
+	 * @brief Holds current toolbar section. "mutable" variable so they be updated inside "const" functions.
+	 * 
+	 */
+	mutable ToolbarSections CurrentSection; // 
+
+	/**
+	 * @brief Informs whether or not the view options panel should be opened. "mutable" variable so they be updated inside "const" functions.
+	 * 
+	 */
+	mutable bool IsOpenToolbarViewPanel;
+
+	/**
+	 * @brief Sections Names. "mutable" variable so they be updated inside "const" functions.
+	 * 
+	 */
+	mutable map<ToolbarSections, FString> SectionsTitles = {
 		{RoadsSection, "Roads" },
 		{BuildingsSection, "Buildings" }
 	};
-	mutable map<OptionSections, FString> OptionsTitles = { // Sections Options Names
+
+	/**
+	 * @brief Sections Options Names. 
+	 * 
+	 */
+	mutable map<OptionSections, FString> OptionsTitles = { 
 		{ RoughRoad, "Rough Road" },
 		{ EnergyBuilding, "Power Plancat"},
 		{ MineralsBuilding, "Minerawr Extractor"},
@@ -57,30 +97,85 @@ private:
 		{ FoodBuilding, "Cake is a Lie"}
 	};
 
-	// Style Components
 	FSlateFontInfo ArialFont;
+
+	/**
+	 * @brief Style Components. "mutable" variable so they be updated inside "const" functions.
+	 * 
+	 */
 	enum ImageTypes { BackgroundImagePath, Road_IconPath, Building_IconPath, Road1_IconPath, Building1_IconPath,
 		Building2_IconPath, Building3_IconPath, Building4_IconPath, Destroy_IconPath
 	};
 	map<ImageTypes, FString> ImagePaths;
 
-	// Get section name to be displayed on interface
+	
+	/**
+	 * @brief Get the Section Title object name to be displayed on interface
+	 * 
+	 * @param Index 
+	 * @return FText 
+	 */
 	FText GetSectionTitle(ToolbarSections Index) const;
-	// Get option title for section
+
+	/**
+	 * @brief Get the Option Title object
+	 * 
+	 * @param OptionIndex 
+	 * @return FText 
+	 */
 	FText GetOptionTitle(OptionSections OptionIndex) const;
-	// Change which section is selected
+
+	/**
+	 * @brief Change which section is selected
+	 * 
+	 * @param Index 
+	 * @return FReply 
+	 */
 	FReply ChangeSection(ToolbarSections Index) const;
-	// Update which section should be visible
+
+	/**
+	 * @brief Get the Section Visibility object. Update which section should be visible
+	 * 
+	 * @param Index 
+	 * @return EVisibility 
+	 */
 	EVisibility GetSectionVisibility(ToolbarSections Index) const;
-	// Get toolbar view options panel visibility
+
+	/**
+	 * @brief Get the Toolbar View Visibility object
+	 * 
+	 * @return EVisibility 
+	 */
 	EVisibility GetToolbarViewVisibility() const;
-	// Select road option
+	
+	/**
+	 * @brief Select road option
+	 * 
+	 * @param Index 
+	 * @return FReply 
+	 */
 	FReply SelectRoad(OptionSections Index) const;
-	// Select building option
+
+	
+	/**
+	 * @brief Select building option. Sets the building Index for the DataHolder.
+	 * 
+	 * @param Index 
+	 * @return FReply 
+	 */
 	FReply SelectBuilding(OptionSections Index);
-	// Define style settings
+
+	/**
+	 * @brief 
+	 * 
+	 */
 	void StyleSettings();
-	// Destroy building/road
+
+	/**
+	 * @brief Destroy building/road
+	 * 
+	 * @return FReply 
+	 */
 	FReply Destroy() const;
 };
 

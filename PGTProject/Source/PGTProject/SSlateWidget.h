@@ -4,19 +4,42 @@
 #include "GameHUD.h"
 #include "ToolbarActor.h"
 
+/**
+ * @brief Makes top UI bar
+ * 
+ */
 class PGTPROJECT_API SSlateWidget : public SCompoundWidget
 {
 public:
+	/**
+	 * @brief Construct a new slate begin args object
+	 * 
+	 */
 	SLATE_BEGIN_ARGS(SSlateWidget)
 	{}
 
-	//Add new argument called OwnerHUDArg
+	/**
+	 * @brief Construct a new slate argument object called OwnerHUDArg
+	 * 
+	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<AGameHUD>, OwnerHUDArg);
+	/**
+	 * @brief Construct a new slate argument object
+	 * 
+	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<AToolbarActor>, ToolbarActorArg)
-
+	/**
+	 * @brief Ends args object
+	 * 
+	 */
 	SLATE_END_ARGS()
 
-	/** Constructs this widget with InArgs */
+	
+	/**
+	 * @brief Constructs this widget with InArgs
+	 * 
+	 * @param InArgs 
+	 */
 	void Construct(const FArguments& InArgs);
 
 private:

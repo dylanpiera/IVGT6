@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -7,7 +5,10 @@
 #include "TestingTile.h" // (UPDATE) Test class
 
 using namespace std;
-
+/**
+ * @brief 
+ * 
+ */
 class Pathfinding
 {
 private:
@@ -15,21 +16,85 @@ private:
 	vector<Node*> Closed;									// Closed nodes list
 	vector<TestingTile*> Path;								// Nodes path list
 
-	int HCost(Node* node, Node* targetNode);				// Cost from the end node
-	int FCost(Node* node);									// Total cost for a node
+	/**
+	 * @brief Cost from the end node
+	 * 
+	 * @param node 
+	 * @param targetNode 
+	 * @return int 
+	 */
+	int HCost(Node* node, Node* targetNode);
+	/**
+	 * @brief Total cost for a node
+	 * 
+	 * @param node 
+	 * @return int 
+	 */
+	int FCost(Node* node);
 
-	bool EqualNodes(Node* nodeA, Node* nodeB);				// Check if nodeA is equal to nodeB
-	bool IsTransversable();									// Check if node is transversable (if node can be visited)
-	bool IsInClosed(Node* node);							// Check if a node is in the closed list
-	pair<bool, Node*> IsInOpen(Node* node);					// Check if a node is the open list
-	Node* GetNodeWithLowestCost();							// Search for node with the lowest cost in open list
-	void BuildPath(Node* startNode, Node* targetNode);		// Build path from start node to target node
+	/**
+	 * @brief Check if nodeA is equal to nodeB
+	 * 
+	 * @param nodeA 
+	 * @param nodeB 
+	 * @return true 
+	 * @return false 
+	 */
+	bool EqualNodes(Node* nodeA, Node* nodeB);
+	/**
+	 * @brief Check if node is transversable (if node can be visited)
+	 * 
+	 * @return true 
+	 * @return false 
+	 */
+	bool IsTransversable();
+	/**
+	 * @brief Check if a node is in the closed list
+	 * 
+	 * @param node 
+	 * @return true 
+	 * @return false 
+	 */
+	bool IsInClosed(Node* node);
+	/**
+	 * @brief Check if a node is the open list
+	 * 
+	 * @param node 
+	 * @return pair<bool, Node*> 
+	 */
+	pair<bool, Node*> IsInOpen(Node* node);
+	/**
+	 * @brief Search for node with the lowest cost in open list
+	 * 
+	 * @return Node* 
+	 */
+	Node* GetNodeWithLowestCost();
+	/**
+	 * @brief Build path from start node to target node
+	 * 
+	 * @param startNode 
+	 * @param targetNode 
+	 */
+	void BuildPath(Node* startNode, Node* targetNode);
 
 public:
 	
-	// A* Pathfinding: receives a start tile and an end tile and returns the path
+	/**
+	 * @brief A* Pathfinding: receives a start tile and an end tile and returns the path
+	 * 
+	 * @param startNode 
+	 * @param targetNode 
+	 * @return vector<TestingTile*> 
+	 */
 	vector<TestingTile*> AStarPathfinding(TestingTile* startNode, TestingTile* targetNode);
-	
-	Pathfinding();		// Constructor
-	~Pathfinding();		// Destructor
+	/**
+	 * @brief Construct a new Pathfinding object
+	 * 
+	 */
+	Pathfinding();
+	/**
+	 * @brief Destroy the Pathfinding object
+	 * 
+	 */
+	~Pathfinding();
 };

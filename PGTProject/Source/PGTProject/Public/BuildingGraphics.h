@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,12 +6,20 @@
 #include "BuildingGraphics.generated.h"
 
 UCLASS()
+/**
+ * @brief 
+ * 
+ */
 class PGTPROJECT_API ABuildingGraphics : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	
+	/**
+	 * @brief Constructs the BuildingGraphics 
+	 * 
+	 */
 	ABuildingGraphics();
 
 	ADataHolder* holder;
@@ -25,15 +31,40 @@ public:
 	float growth;
 
 protected:
-	// Called when the game starts or when spawned
+	
+	/**
+	 * @brief Override BeginPlay function. Find the ADataHolder Actor in the game world.
+	 * 
+	 */
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	
+	/**
+	 * @brief Standard Unreal Tick function.
+	 * 
+	 * @param DeltaTime 
+	 */
 	virtual void Tick(float DeltaTime) override;
 
+	/**
+	 * @brief Sets the BuildingGraphic to the building type specific graphic.
+	 * 
+	 * @param buildingIndex
+	 * @param meshComp
+	 */
 	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
+
+	/**
+	 * @brief Used to set parameter for SetBuildingGraphics
+	 * 
+	 * @param buildingIndex 
+	 */
 	void LoadGraphics(OptionSections buildingIndex);
 
+	/**
+	 * @brief Slowly increments the Z-axis in the to visualize a "growth", Runs in the Tick function
+	 * 
+	 */
 	void BuildingAnimation();
 };

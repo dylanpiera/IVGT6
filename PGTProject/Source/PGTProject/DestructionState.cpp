@@ -1,7 +1,5 @@
 #include "DestructionState.h"
 
-
-
 DestructionState::DestructionState()
 {
 }

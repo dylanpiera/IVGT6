@@ -3,6 +3,10 @@
 #include "MineralBuilding.generated.h"
 
 UCLASS()
+/**
+ * @brief Set values affected by mineral building
+ * 
+ */
 class PGTPROJECT_API UMineralBuilding : public UBuilding {
 	GENERATED_BODY()
 public:
@@ -10,9 +14,13 @@ public:
 	int EnergyUpkeep = 20;
 	int MoneyUpkeep = 10;
 
+	/**
+	 * @brief  Set values affected by mineral building during the game
+	 * 
+	 * @param resource 
+	 */
 	void BuildingFunction(Resources &resource) override
 	{
-		//resource._energy -= EnergyUpkeep;
 		if (resource._energy >= 0)
 		{
 			resource._minerals += MineralProductionValue;
@@ -20,6 +28,10 @@ public:
 		resource._money -= MoneyUpkeep;
 	}
 
+	/**
+	 * @brief Set the Building Cost object
+	 * 
+	 */
 	void SetBuildingCost() override {
 		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 50"));
 		_buildingCost = 50;

@@ -45,10 +45,10 @@ UBuilding::~UBuilding()
 
 void UBuilding::WhenConstructionFinishes()
 {
+	//Sets the total number of buildingType + 1 in the EconomyManager
 	*x = *x + 1;
-	// Spawn building
 
-	CreateBuilding();
+	
 	// Change construction state
 	SetState(new ActiveState());
 	
@@ -61,16 +61,15 @@ void UBuilding::BuildingConstruction(FVector location, FRotator rotation, FActor
 	_rotation = rotation;
 	_spawnInfo = spawnInfo;
 
-	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
-	_buildingGraphics->LoadGraphics(_buildingType);
-
+	CreateBuilding();
 	// Start timer
 	_constructionTimer->StartConstruction(this, _timeInHours);
 }
 
 void UBuilding::CreateBuilding() {
 	// Create building mesh
-	
+	_buildingGraphics = GWorld->SpawnActor<ABuildingGraphics>(ABuildingGraphics::StaticClass(), _location, _rotation, _spawnInfo);
+	_buildingGraphics->LoadGraphics(_buildingType);
 }
 
 void UBuilding::SetMesh(OptionSections option) {
@@ -87,14 +86,17 @@ void UBuilding::BuildingActive(Resources &resource, Resources &maintenance)
 
 void UBuilding::BuildingUpkeep(Resources &resource)
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::BuildingInactive()
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::BuildingDestruction()
 {
+	// ADD FUNCTION IN SUBCLASS
 }
 
 void UBuilding::SetState(BuildingState * state)

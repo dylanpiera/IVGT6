@@ -68,7 +68,7 @@ Constants - kUpperCamelCase
 Functions - UpperCamelCase[all_lower]
 Class, Struct, Union & Enum - UpperCamelCase
 Namespaces - all_lower
-Macros ALL_UPPER
+Macros - ALL_UPPER
 
 ## CICD Deployment
 

@@ -16,42 +16,61 @@ class BuildingState;
 
 UCLASS()
 /**
- * @brief Base Class for all building types. 
+ * @class Building
+ * @brief Base Class for all building types. Multiple buildings can be created.
+ * Needs to be a UCLASS to work with ConstructionTimer.
  * 
  */
 class PGTPROJECT_API UBuilding : public UObject {
 	GENERATED_BODY()
 private:
-	// Graphics info
+	/**
+	 * @brief Reference to graphic representation
+	 */
 	ABuildingGraphics* _buildingGraphics;
+	/**
+	 * @brief Store information to spawn building graphics
+	 */
 	FVector _location;
 	FRotator _rotation;
 	FActorSpawnParameters _spawnInfo;
+	/**
+	 * @brief Building type
+	 */
 	OptionSections _buildingType;
 
-	// Construction Timer
+	/**
+	 * @brief Reference to AConstructionTimerActor
+	 */
 	AConstructionTimerActor* _constructionTimer;
 	/**
-	 * @brief Get the Construction Timer object
+	 * @brief Get reference to a AConstructionTimerActor in the world
 	 * 
 	 */
 	void GetConstructionTimer();
 
-	// Current construction phase to control building functionality
+	/**
+	 * @brief Current construction phase to control building functionality
+	 */
 	BuildingState *_bState;
 protected:
-	// Total time to construct the building
+	/**
+	 * @brief Total time to construct the building
+	 */
 	float _timeInHours;
-
+	/**
+	 * @brief Financial cost to create this building
+	 */
 	int _buildingCost;
 public:
 	/**
-	 * @brief Construct a new UBuilding object
+	 * @brief Construct a new building.
+	 * Set AConstructionTimerActor reference, building cost, total construction time, and initial construction state.
 	 * 
 	 */
 	UBuilding();
 	/**
-	 * @brief Destroy the UBuilding object
+	 * @brief Default destructor
 	 * 
 	 */
 	virtual ~UBuilding();
@@ -59,20 +78,19 @@ public:
 	int32* x;
 
 	/**
-	 * @brief Set the Building Cost object
+	 * @brief Set building financial cost
 	 * 
 	 */
 	virtual void SetBuildingCost();
 
 	/**
-	 * @brief Create a Building graphics object
+	 * @brief Create building graphical representation.
 	 * 
 	 */
 	void CreateBuilding();
 
 	/**
-	 * @brief Sets the location, rotation and spawnInfo for the building
-	 * to be spawned.
+	 * @brief Sets basic information for spawning the building, and starts building construction.
 	 * 
 	 * @param location 
 	 * @param rotation 
@@ -81,7 +99,7 @@ public:
 	void BuildingConstruction(FVector location, FRotator rotation, FActorSpawnParameters spawnInfo);
 
 	/**
-	 * @brief Sets BuildingState to new ActiveState and adds + 1 to the buidlingType total amount
+	 * @brief Update construction state for building and update total amount of buildings.
 	 * 
 	 */
 	void WhenConstructionFinishes();
@@ -121,28 +139,28 @@ public:
 	virtual void BuildingDestruction();
 
 	/**
-	 * @brief Set the State object
+	 * @brief Set building construction state
 	 * 
 	 * @param state 
 	 */
 	void SetState(BuildingState* state);
 
 	/**
-	 * @brief Set the Mesh object
+	 * @brief Set building type to define building mesh
 	 * 
 	 * @param option 
 	 */
 	void SetMesh(OptionSections option);
 
 	/**
-	 * @brief Get the State object
+	 * @brief Get building construction state
 	 * 
 	 * @return BuildingState* 
 	 */
 	BuildingState* GetState();
 
 	/**
-	 * @brief Get the Cost object
+	 * @brief Get building cost
 	 * 
 	 * @return int 
 	 */

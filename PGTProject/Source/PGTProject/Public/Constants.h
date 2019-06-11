@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 
 /**
- * @brief enum of building types
+ * @brief ENUM: Building types
  * 
  */
 enum class EBuildingType
@@ -15,7 +15,7 @@ enum class EBuildingType
 };
 
 /**
- * @brief enum of interaction modes
+ * @brief ENUM: Interaction modes
  * 
  */
 enum class EInteractionMode
@@ -27,7 +27,7 @@ enum class EInteractionMode
 };
 
 /**
- * @brief Option Sections reference enum to the Bottem ToolBar
+ * @brief ENUM: Toolbar options in each section
  * 
  */
 enum OptionSections
@@ -41,7 +41,7 @@ enum OptionSections
 };
 
 /**
- * @brief enum to buildings or road
+ * @brief ENUM: Toolbar sections
  * 
  */
 enum ToolbarSections
@@ -51,7 +51,7 @@ enum ToolbarSections
 };
 
 /**
- * @brief enum of Minerals
+ * @brief ENUM: Types of mineral resources
  * 
  */
 enum class EMineralResources

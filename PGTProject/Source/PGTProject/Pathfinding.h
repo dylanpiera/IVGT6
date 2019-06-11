@@ -6,18 +6,31 @@
 
 using namespace std;
 /**
- * @brief 
+ * @class Pathfinding
+ * @brief Find a path between two hextiles, with A* algorithm.
+ * The path is a collection of hextiles that leads from the start tile to the end tile.
  * 
  */
 class Pathfinding
 {
 private:
-	vector<Node*> Open;										// Open nodes list
-	vector<Node*> Closed;									// Closed nodes list
-	vector<TestingTile*> Path;								// Nodes path list
+	/**
+	 * @var Open
+	 * @brief Collection of open nodes (available nodes to evaluate if should be on path)
+	 * 
+	 * @var Closed
+	 * @brief Collection of closed nodes (already evaluated nodes to be on path)
+	 * 
+	 * @var Path
+	 * @brief Collection of hextiles that leads from the start tile to the end tile.
+	 */
+
+	vector<Node*> Open;	
+	vector<Node*> Closed;
+	vector<TestingTile*> Path;
 
 	/**
-	 * @brief Cost from the end node
+	 * @brief Calculate cost to go from the current node to the "end" node 
 	 * 
 	 * @param node 
 	 * @param targetNode 
@@ -25,7 +38,7 @@ private:
 	 */
 	int HCost(Node* node, Node* targetNode);
 	/**
-	 * @brief Total cost for a node
+	 * @brief Calculate total cost of a node
 	 * 
 	 * @param node 
 	 * @return int 
@@ -80,7 +93,7 @@ private:
 public:
 	
 	/**
-	 * @brief A* Pathfinding: receives a start tile and an end tile and returns the path
+	 * @brief A* Pathfinding: Calculates a path of tiles that leads from a start tile to a target tile.
 	 * 
 	 * @param startNode 
 	 * @param targetNode 
@@ -88,12 +101,12 @@ public:
 	 */
 	vector<TestingTile*> AStarPathfinding(TestingTile* startNode, TestingTile* targetNode);
 	/**
-	 * @brief Construct a new Pathfinding object
+	 * @brief Default constructor
 	 * 
 	 */
 	Pathfinding();
 	/**
-	 * @brief Destroy the Pathfinding object
+	 * @brief Default destructor
 	 * 
 	 */
 	~Pathfinding();

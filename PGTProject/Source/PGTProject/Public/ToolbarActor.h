@@ -6,10 +6,9 @@
 #include "GameTickManager.h"
 #include "ToolbarActor.generated.h"
 
-
 UCLASS()
 /**
- * @brief 
+ * @brief Link for the SlateWidget to get access to the resources from the economy mananger
  * 
  */
 class PGTPROJECT_API AToolbarActor : public AActor
@@ -81,7 +80,7 @@ public:
 
 protected:
 	/**
-	 * @brief 
+	 * @brief Called when the game starts
 	 * 
 	 */
 	virtual void BeginPlay() override;
@@ -94,7 +93,7 @@ private:
 public:	
 
 	/**
-	 * @brief 
+	 * @brief Called every frame
 	 * 
 	 * @param DeltaTime 
 	 */

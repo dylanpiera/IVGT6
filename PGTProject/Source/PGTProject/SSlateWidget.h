@@ -5,7 +5,7 @@
 #include "ToolbarActor.h"
 
 /**
- * @brief 
+ * @brief Makes top UI bar
  * 
  */
 class PGTPROJECT_API SSlateWidget : public SCompoundWidget
@@ -29,7 +29,7 @@ public:
 	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<AToolbarActor>, ToolbarActorArg)
 	/**
-	 * @brief 
+	 * @brief Ends args object
 	 * 
 	 */
 	SLATE_END_ARGS()

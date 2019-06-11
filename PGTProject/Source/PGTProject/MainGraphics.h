@@ -7,42 +7,34 @@
 #include "ToolbarActor.h"
 
 /**
- * @brief 
+ * @class MainGraphics
+ * @brief Widget component that instanciates toolbar composing widgets.
+ * Base of UI structure.
  * 
  */
 class PGTPROJECT_API MainGraphics : public SCompoundWidget
 {
 public:
 	/**
-	 * @brief Construct a new slate begin args object
+	 * @brief Define MainGraphics slate component arguments
+	 * Child widgets require pointers to GameHUD, DataHolder and ToolbarActor.
+	 * @var OwnerHUDArg
+	 * @var ToolbarActorArg
+	 * @var DataHolderArgs
 	 * 
 	 */
 	SLATE_BEGIN_ARGS(MainGraphics) {}
 
-	/**
-	 * @brief Construct a new slate argument object called OwnerHUDArg
-	 * 
-	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
-	/**
-	 * @brief Construct a new slate argument object
-	 * 
-	 */
+
 	SLATE_ARGUMENT(TWeakObjectPtr<AToolbarActor>, ToolbarActorArg);
-	/**
-	 * @brief Construct a new slate argument object
-	 * 
-	 */
+
 	SLATE_ARGUMENT(TWeakObjectPtr<ADataHolder>, DataHolderArgs);
 
-	/**
-	 * @brief 
-	 * 
-	 */
 	SLATE_END_ARGS()
 
 	/**
-	 * @brief Constructs this widget with InArgs
+	 * @brief Handle received arguments and create main UI structure.
 	 * 
 	 * @param InArgs 
 	 */
@@ -50,11 +42,27 @@ public:
 
 private:
 
-	//Safe pointer to parent HUD
+	/**
+	 * @brief Safe pointer to parent HUD
+	 * 
+	 */
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
+	/**
+	 * @brief Safe pointer to ToolbarActor
+	 * 
+	 */
 	TWeakObjectPtr<class AToolbarActor> _toolbarActor;
+	/**
+	 * @brief Safe pointer to DataHolder
+	 * 
+	 */
 	TWeakObjectPtr<class ADataHolder> _dataHolder;
 
+	/**
+	 * @brief Child widgets
+	 * @var _ownerToolbar
+	 * @var _ownerEconomyBar
+	 */
 	TSharedPtr<ToolbarGraphics> _ownerToolbar;
 	TSharedPtr<SSlateWidget> _ownerEconomyBar;
 };

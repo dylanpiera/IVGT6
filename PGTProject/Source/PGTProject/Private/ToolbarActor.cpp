@@ -29,9 +29,6 @@ void AToolbarActor::BeginPlay()
 		AGameTickManager::StaticClass(),
 		FoundGameTickManagers);
 	GameTickManager = Cast<AGameTickManager>(FoundGameTickManagers[0]);
-
-
-	testFunc();
 }
 
 // Called every frame

@@ -44,6 +44,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	/**
+	 * @brief Sets the BuildingGraphic to the building type specific graphic.
+	 * 
+	 * @param buildingIndex
+	 * @param meshComp
+	 */
+	void SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp);
+
+	/**
 	 * @brief 
 	 * 
 	 * @param buildingIndex 

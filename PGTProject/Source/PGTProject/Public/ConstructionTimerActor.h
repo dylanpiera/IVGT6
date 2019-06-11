@@ -8,9 +8,11 @@
 
 UCLASS()
 /**
- * @class Construction Timer
+ * @class AConstructionTimerActor
  * @brief Class used to set a timer to simulate a construction for a building.
- * The timer is triggered by a building and when the timer is finished the building is notified. 
+ * The timer is triggered by a building and when the timer is finished the building is notified.
+ * In order to use Unreal timer, this class needs to be an Unreal Actor.
+ * This class should be instanciated only once. 
  */
 class PGTPROJECT_API AConstructionTimerActor : public AActor
 {

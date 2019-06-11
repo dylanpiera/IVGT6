@@ -9,7 +9,8 @@
 using namespace std;
 
 /**
- * @brief 
+ * @class HexActorGraphics
+ * @brief Creates a graphic representation for a hexagonal tile.
  * 
  */
 class PGTPROJECT_API HexActorGraphics
@@ -17,30 +18,34 @@ class PGTPROJECT_API HexActorGraphics
 private:
 
 	/**
-	 * @brief Mesh storage
+	 * @brief Store hexagonal tile static mesh
 	 * 
 	 */
 	UStaticMesh* _hexTileMesh;		
 
 	/**
-	 * @brief Terrain Material
+	 * @brief Store terrain material
 	 * 
 	 */
 	UMaterial* _terrainMaterial;
 
 	/**
-	 * @brief Minerals Mesh storage
+	 * @brief Store minerals resource static mesh
 	 * 
 	 */
 	UStaticMesh* _mineralMesh;
 
 	/**
-	 * @brief Store resources materials
+	 * @brief Store all resources materials
 	 * 
 	 */
 	map<EMineralResources, UMaterial*> _mineralResourceMaterials;
 
-	// Check if material exists
+	/**
+	 * @brief Check if resource has a linked material to represent the resource
+	 * 
+	 * @param resource 
+	 */
 	bool IfMaterialExists(EMineralResources resource);
 
 public:
@@ -48,26 +53,26 @@ public:
 	float Radius;					// Mesh sphere radius
 
 	/**
-	 * @brief Construct a new Hex Actor Graphics object
+	 * @brief Get all meshes and materials needed in the project, and store references to them.
 	 * 
 	 */
 	HexActorGraphics();
 	
 	/**
-	 * @brief Destroy the Hex Actor Graphics object
+	 * @brief Default destructor
 	 * 
 	 */
 	~HexActorGraphics();
 
 	/**
-	 * @brief Create a graphic visualization of an hexagon tile for a HexActor
+	 * @brief Attach hexagonal mesh to AHexActor and apply terrain material to mesh.
 	 * 
 	 * @param HexActorRef 
 	 */
 	void CreateHexGraphics(AHexActor* HexActorRef);
 
 	/**
-	 * @brief Create a graphic visualization of the resources for a HexActor
+	 * @brief Attach resource mesh to AHexActor and apply resource material.
 	 * 
 	 * @param resource 
 	 * @param HexActorRef 
@@ -76,7 +81,7 @@ public:
 
 	
 	/**
-	 * @brief Remove graphic visualization of resources from HexActor
+	 * @brief Remove resource graphics from AHexActor
 	 * 
 	 * @param HexActorRef 
 	 */

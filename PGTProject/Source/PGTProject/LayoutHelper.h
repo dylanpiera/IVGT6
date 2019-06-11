@@ -4,8 +4,7 @@
 #include "IntPoint.h"
 
 /**
- * @brief 
- * 
+ * @brief Used for calculating where to render hex meshes.
  */
 class PGTPROJECT_API LayoutHelper
 {

@@ -316,17 +316,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-//void ToolbarGraphics::SetBuilding(OptionSections option)
-//{
-//	_building = option;
-//}
-//
-//OptionSections ToolbarGraphics::GetBuilding()
-//{
-//	return _building;
-//}
-
-
 // Get option title for section
 FText ToolbarGraphics::GetOptionTitle(OptionSections OptionIndex) const
 {
@@ -337,22 +326,13 @@ FText ToolbarGraphics::GetOptionTitle(OptionSections OptionIndex) const
 // Select road option
 FReply ToolbarGraphics::SelectRoad(OptionSections Index) const
 {
-	// TODO: Make function select and place down a road
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Selecting road"));
-	UE_LOG(LogTemp, Warning, TEXT("Selecting road: %d"), Index);
-
 	return FReply::Handled();
 }
 
 // Select building option
 FReply ToolbarGraphics::SelectBuilding(OptionSections Index)
-{
-	// TODO: Make function select and place down a building
-	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, FString::Printf(TEXT("Selecting building %d"), _building));
-	
+{	
 	_dataHolder->SetBuilding(Index);
-
-	//UE_LOG(LogTemp, Warning, TEXT("Selecting building: %d"), _building);
 	
 	return FReply::Handled();
 }
@@ -399,9 +379,6 @@ FText ToolbarGraphics::GetSectionTitle(ToolbarSections Index) const
 // Destroy building/road
 FReply ToolbarGraphics::Destroy() const
 {
-	// TODO: Make function destroy building/road
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Destroy"));
-
 	return FReply::Handled();
 }
 

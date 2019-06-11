@@ -8,12 +8,14 @@
 #include "Engine/Engine.h"
 #include "Runtime/Core/Public/Math/Vector.h"
 
+
 // Sets default values
 ANPC_Character::ANPC_Character()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	
 	// Configure visual representation
 	LoadMesh();
 
@@ -26,6 +28,7 @@ void ANPC_Character::BeginPlay()
 {
 	Super::BeginPlay();
 
+	_buildingLocation = FVector(0, 0, 0);
 	// Pathfinding settings
 	FindNPCManager();
 	if(_npcManager->_hexGridManager->_tiles.size() > 0) {
@@ -131,14 +134,16 @@ bool ANPC_Character::ReachedBuilding()
 void ANPC_Character::AssignTask(AHexActor* buildingTile)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Assign task!"));
-	// Save building location
-	//_buildingLocation = buildingTile->GetActorLocation();
+
+	SetBuildingLocation(buildingTile->GetActorLocation());
 	//AHexActor::GetScreenSpaceLocation(buildingTile->hex);
 	//UE_LOG(LogTemp, Warning, TEXT("TRY 1"));
-	_buildingLocation = buildingTile->GetActorLocation();
-	FVector aux = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
-	UE_LOG(LogTemp, Warning, TEXT("aux %f %f %f"), aux.X, aux.Y, aux.Z);
-	_buildingLocation = FVector(aux.X, aux.Y, aux.Z);
+	//_buildingLocation = buildingTile->GetActorLocation();
+	//FVector aux = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
+	//UE_LOG(LogTemp, Warning, TEXT("aux %f %f %f"), aux.X, aux.Y, aux.Z);
+	//_buildingLocation = FVector(aux.X, aux.Y, aux.Z);
+
+	//SetBuildingLocation(aux);
 	//UE_LOG(LogTemp, Warning, TEXT("TRY 2"));
 	//_buildingLocation = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
 	//UE_LOG(LogTemp, Warning, TEXT("TRY 3"));
@@ -148,6 +153,14 @@ void ANPC_Character::AssignTask(AHexActor* buildingTile)
 	FindPathToTile(buildingTile);
 	SetBuilderState(EWorkState::Walking);
 	MoveToNextTile();
+}
+
+void ANPC_Character::SetBuildingLocation(FVector aux)
+{
+	float X = aux.X;
+	float Y = aux.Y;
+	float Z = aux.Z;
+	_buildingLocation.Set(X,Y,Z);
 }
 
 void ANPC_Character::StartWorking()

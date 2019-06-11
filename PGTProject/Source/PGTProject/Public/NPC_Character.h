@@ -8,8 +8,8 @@
 //#include "HexGridManager.h"
 //#include "NPC_Manager.h"
 #include "Constants.h"
-#include "NPC_Character.generated.h"
 #include "Runtime/Core/Public/Math/Vector.h"
+#include "NPC_Character.generated.h"
 
 class ANPC_Manager;
 
@@ -44,21 +44,25 @@ public:
 
 	// Move character to a specific world location
 	UFUNCTION(BlueprintImplementableEvent, Category = "MoveCharacterEvent")
-	void MoveToLocation(FVector& newLocation);
+	void MoveToLocation(const FVector& newLocation);
 
 	// Get builder working state
 	EWorkState GetBuilderState();
 
+	UPROPERTY()
+	FVector _buildingLocation;
 	// Assing a task to builder
 	void AssignTask(AHexActor* buildingTile);
 
 	void MoveToNextTile();
 
+	void SetBuildingLocation(FVector aux);
+
 private:
 	// Working state
 	EWorkState _state;
 	// Next building location
-	FVector _buildingLocation;
+	
 	// Next tile to move to
 	FVector _goalLocation;
 	// Pathfinding instance

@@ -83,7 +83,7 @@ void ANPC_Manager::Test()
 {
 	ANPC_Character* myBuilder = SpawnBuilder();
 	ANPC_Character* myBuilder2 = SpawnBuilder();
-	AHexActor* tile = _hexGridManager->_tiles.at(30);
+	AHexActor* tile = Cast<AHexActor>(_hexGridManager->_tiles.at(30));
 	AHexActor* tile2 = _hexGridManager->_tiles.at(10);
 	myBuilder->AssignTask(tile);
 	myBuilder2->AssignTask(tile2);

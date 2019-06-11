@@ -9,6 +9,7 @@
 //#include "NPC_Manager.h"
 #include "Constants.h"
 #include "NPC_Character.generated.h"
+#include "Runtime/Core/Public/Math/Vector.h"
 
 class ANPC_Manager;
 
@@ -43,7 +44,7 @@ public:
 
 	// Move character to a specific world location
 	UFUNCTION(BlueprintImplementableEvent, Category = "MoveCharacterEvent")
-	void MoveToLocation(const FVector& newLocation);
+	void MoveToLocation(FVector& newLocation);
 
 	// Get builder working state
 	EWorkState GetBuilderState();

@@ -4,6 +4,9 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "NPC_Manager.h"
+#include "HexActor.h"
+#include "Engine/Engine.h"
+#include "Runtime/Core/Public/Math/Vector.h"
 
 // Sets default values
 ANPC_Character::ANPC_Character()
@@ -27,8 +30,11 @@ void ANPC_Character::BeginPlay()
 	FindNPCManager();
 	if(_npcManager->_hexGridManager->_tiles.size() > 0) {
 		_currentTile = _npcManager->_hexGridManager->_tiles.at(0); // Get first tile 
-		FVector currentTileLocation = _currentTile->GetScreenSpaceLocation(_currentTile->hex);
-		SetActorLocation(currentTileLocation, false);
+		//FVector currentTileLocation = _currentTile->GetActorLocation();
+		//FVector currentTileLocation = _currentTile->GetScreenSpaceLocationForHex(_currentTile->hex);
+		FVector aux = AHexActor::GetScreenSpaceLocation(_currentTile->hex);
+		_goalLocation = FVector(aux.X, aux.Y, aux.Z);
+		SetActorLocation(aux, false);
 	}
 }
 
@@ -126,7 +132,17 @@ void ANPC_Character::AssignTask(AHexActor* buildingTile)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Assign task!"));
 	// Save building location
-	_buildingLocation = buildingTile->GetScreenSpaceLocation(buildingTile->hex);
+	//_buildingLocation = buildingTile->GetActorLocation();
+	//AHexActor::GetScreenSpaceLocation(buildingTile->hex);
+	//UE_LOG(LogTemp, Warning, TEXT("TRY 1"));
+	_buildingLocation = buildingTile->GetActorLocation();
+	FVector aux = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
+	UE_LOG(LogTemp, Warning, TEXT("aux %f %f %f"), aux.X, aux.Y, aux.Z);
+	_buildingLocation = FVector(aux.X, aux.Y, aux.Z);
+	//UE_LOG(LogTemp, Warning, TEXT("TRY 2"));
+	//_buildingLocation = AHexActor::GetScreenSpaceLocation(buildingTile->hex);
+	//UE_LOG(LogTemp, Warning, TEXT("TRY 3"));
+	//_buildingLocation = buildingTile->GetScreenSpaceLocationForHex(buildingTile->hex);
 	
 	// Start moving towards building
 	FindPathToTile(buildingTile);
@@ -157,7 +173,10 @@ void ANPC_Character::GetNextTileOnPath()
 		_pathToBuilding.pop_front();
 	}
 
-	_goalLocation = _goalTile->GetScreenSpaceLocation(_goalTile->hex);
+	//_goalLocation = _goalTile->GetScreenSpaceLocationForHex(_goalTile->hex);
+	//_goalLocation = _goalTile->GetActorLocation();
+	FVector aux = AHexActor::GetScreenSpaceLocation(_goalTile->hex);
+	_goalLocation = FVector(aux.X, aux.Y, aux.Z);
 }
 
 void ANPC_Character::MoveToNextTile()

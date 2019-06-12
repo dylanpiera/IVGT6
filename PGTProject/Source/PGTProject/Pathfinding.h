@@ -7,18 +7,44 @@
 
 using namespace std;
 /**
- * @brief 
+ * @class Pathfinding
+ * @brief Find a path between two hextiles, with A* algorithm.
+ * The path is a collection of hextiles that leads from the start tile to the end tile.
  * 
  */
 class Pathfinding
 {
 private:
-	vector<Node*> Open;										// Open nodes list
-	vector<Node*> Closed;									// Closed nodes list
-	list<AHexActor*> Path;								// Nodes path list
-	
-	int HCost(Node* node, Node* targetNode);				// Cost from the end node
-	int FCost(Node* node);									// Total cost for a node
+	/**
+	 * @var Open
+	 * @brief Collection of open nodes (available nodes to evaluate if should be on path)
+	 * 
+	 * @var Closed
+	 * @brief Collection of closed nodes (already evaluated nodes to be on path)
+	 * 
+	 * @var Path
+	 * @brief Collection of hextiles that leads from the start tile to the end tile.
+	 */
+
+	vector<Node*> Open;	
+	vector<Node*> Closed;
+	list<AHexActor*> Path;
+
+	/**
+	 * @brief Calculate cost to go from the current node to the "end" node 
+	 * 
+	 * @param node 
+	 * @param targetNode 
+	 * @return int 
+	 */
+	int HCost(Node* node, Node* targetNode);
+	/**
+	 * @brief Calculate total cost of a node
+	 * 
+	 * @param node 
+	 * @return int 
+	 */
+	int FCost(Node* node);
 
 	/**
 	 * @brief Check if nodeA is equal to nodeB
@@ -67,9 +93,22 @@ private:
 
 public:
 	
-	// A* Pathfinding: receives a start tile and an end tile and returns the path
+	/**
+	 * @brief A* Pathfinding: Calculates a path of tiles that leads from a start tile to a target tile.
+	 * 
+	 * @param startNode 
+	 * @param targetNode 
+	 * @return vector<TestingTile*> 
+	 */
 	list<AHexActor*> AStarPathfinding(AHexActor* startNode, AHexActor* targetNode);
-
-	Pathfinding();		// Constructor
-	~Pathfinding();		// Destructor
+	/**
+	 * @brief Default constructor
+	 * 
+	 */
+	Pathfinding();
+	/**
+	 * @brief Default destructor
+	 * 
+	 */
+	~Pathfinding();
 };

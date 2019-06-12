@@ -11,7 +11,8 @@
 using namespace std;
 
 /**
- * @brief 
+ * @class ToolbarGraphics
+ * @brief Create UI for bottom toolbar.
  * 
  */
 class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
@@ -19,31 +20,22 @@ class PGTPROJECT_API ToolbarGraphics : public SCompoundWidget
 public:
 
 	/**
-	 * @brief Construct a new slate begin args object
+	 * @brief Define ToolbarGraphics slate component arguments
+	 * Use pointers to GameHUD and DataHolder.
+	 * @var OwnerHUDArg
+	 * @var DataHolderArgs
 	 * 
 	 */
 	SLATE_BEGIN_ARGS(ToolbarGraphics) {}
 
-	/**
-	 * @brief Add new argument called OwnerHUDArg
-	 * 
-	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<class AGameHUD>, OwnerHUDArg);
 
-	/**
-	 * @brief Add new argument called DataHolderArgs
-	 * 
-	 */
 	SLATE_ARGUMENT(TWeakObjectPtr<class ADataHolder>, DataHolderArgs);
 
-	/**
-	 * @brief 
-	 * 
-	 */
 	SLATE_END_ARGS()
 
 	/**
-	 * @brief Constructs this widget with InArgs
+	 * @brief Handle received arguments and create UI structure.
 	 * 
 	 * @param InArgs 
 	 */
@@ -58,27 +50,28 @@ private:
 	TWeakObjectPtr<class AGameHUD> _ownerHUD;
 
 	/**
-	 * @brief Safe pointer to parent HUD
+	 * @brief Safe pointer to DataHolder class
 	 * 
 	 */
 	TWeakObjectPtr<class ADataHolder> _dataHolder;
 
 	/* "mutable" variables are so they be updated inside "const" functions */
 	/**
-	 * @brief Holds current toolbar section. "mutable" variable so they be updated inside "const" functions.
+	 * @brief Holds current toolbar section.
+	 * Observation: This variable is declared "mutable" to allow it to be updated inside "const" functions.
 	 * 
 	 */
-	mutable ToolbarSections CurrentSection; // 
+	mutable ToolbarSections CurrentSection;
 
 	/**
-	 * @brief Informs whether or not the view options panel should be opened. "mutable" variable so they be updated inside "const" functions.
-	 * 
+	 * @brief Informs whether or not the View Options Panel should be opened.
+	 * Observation: This variable is declared "mutable" to allow it to be updated inside "const" functions.
 	 */
 	mutable bool IsOpenToolbarViewPanel;
 
 	/**
-	 * @brief Sections Names. "mutable" variable so they be updated inside "const" functions.
-	 * 
+	 * @brief Toolbar Sections Names
+	 * Observation: This variable is declared "mutable" to allow it to be updated inside "const" functions.
 	 */
 	mutable map<ToolbarSections, FString> SectionsTitles = {
 		{RoadsSection, "Roads" },
@@ -86,8 +79,8 @@ private:
 	};
 
 	/**
-	 * @brief Sections Options Names. 
-	 * 
+	 * @brief Tollbar Options Names 
+	 * Observation: This variable is declared "mutable" to allow it to be updated inside "const" functions.
 	 */
 	mutable map<OptionSections, FString> OptionsTitles = { 
 		{ RoughRoad, "Rough Road" },
@@ -100,7 +93,7 @@ private:
 	FSlateFontInfo ArialFont;
 
 	/**
-	 * @brief Style Components. "mutable" variable so they be updated inside "const" functions.
+	 * @brief UI Styling Components
 	 * 
 	 */
 	enum ImageTypes { BackgroundImagePath, Road_IconPath, Building_IconPath, Road1_IconPath, Building1_IconPath,
@@ -110,7 +103,7 @@ private:
 
 	
 	/**
-	 * @brief Get the Section Title object name to be displayed on interface
+	 * @brief Get the section name based on section index
 	 * 
 	 * @param Index 
 	 * @return FText 
@@ -118,7 +111,7 @@ private:
 	FText GetSectionTitle(ToolbarSections Index) const;
 
 	/**
-	 * @brief Get the Option Title object
+	 * @brief Get the option name based on option index
 	 * 
 	 * @param OptionIndex 
 	 * @return FText 
@@ -134,7 +127,7 @@ private:
 	FReply ChangeSection(ToolbarSections Index) const;
 
 	/**
-	 * @brief Get the Section Visibility object. Update which section should be visible
+	 * @brief Get a section visibility. Only current section should be visible if any section is opened.
 	 * 
 	 * @param Index 
 	 * @return EVisibility 
@@ -142,7 +135,7 @@ private:
 	EVisibility GetSectionVisibility(ToolbarSections Index) const;
 
 	/**
-	 * @brief Get the Toolbar View Visibility object
+	 * @brief Get visibility for sections. Depends if any section is opened or not.
 	 * 
 	 * @return EVisibility 
 	 */
@@ -166,13 +159,13 @@ private:
 	FReply SelectBuilding(OptionSections Index);
 
 	/**
-	 * @brief 
+	 * @brief Define UI style settings. Ex: images, icons, fonts. 
 	 * 
 	 */
 	void StyleSettings();
 
 	/**
-	 * @brief Destroy building/road
+	 * @brief Destroy a building or road
 	 * 
 	 * @return FReply 
 	 */

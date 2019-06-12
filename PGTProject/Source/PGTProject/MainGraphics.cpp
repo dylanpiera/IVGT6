@@ -12,7 +12,7 @@ void MainGraphics::Construct(const FArguments& InArgs)
 	_toolbarActor = InArgs._ToolbarActorArg;
 	_dataHolder = InArgs._DataHolderArgs;
 
-	// Interface
+	// Main User Interface Division
 	ChildSlot
 	.HAlign(HAlign_Fill)
 	.VAlign(VAlign_Fill)

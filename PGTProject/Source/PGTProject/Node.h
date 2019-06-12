@@ -8,31 +8,57 @@ class AHexGridManager;
 class AHexActor;
 using std::vector;
 /**
- * @brief 
+ * @struct Node
+ * @brief Auxiliar struct for pathfinding. 
  * 
  */
 struct Node
 {
 public:
+
 	// HexGrid Manager reference
 	AHexGridManager* _hexGridManager;
 
 	// Reference for hextile
 	AHexActor* HexTile;
 
-	// Node costs
-	int FCost;			// Total cost
-	int HCost;			// Cost from the end node
-	int GCost;			// Cost from the start node
+	/**
+	 * @var FCost
+	 * @brief Total cost of node: HCost + GCost
+	 *
+	 * @var HCost
+	 * @brief Cost from the "end" node in path.
+	 *
+	 * @var GCost
+	 * @brief Cost from the "start" node in path.
+	*/
+	int FCost;
+	int HCost;
+	int GCost;
 
-	// Node parent (for backtracing path)
+	/**
+	 * @var Parent
+	 * @brief Parent of this node (used for backtracing path)
+	*/
 	Node* Parent;
 
-	// Create a node 
+	/**
+	 * @brief Create a new Node with a reference for a hextile and initilizing the node costs
+	 * 
+	 * @param hexTile 
+	 */
 	Node(AHexActor* hexTile);
-	// Get node neighbors
+	/**
+	 * @brief Get all neighbors from current hextile
+	 * 
+	 * @return vector<TestingTile> 
+	 */
 	vector<AHexActor*> GetNeighbors();
-	// Get cost of visiting a node
+	/**
+	 * @brief Get cost of visiting the node
+	 * 
+	 * @return int 
+	 */
 	int GetCost();
 	/**
 	 * @brief Get distance from another node
@@ -47,7 +73,7 @@ public:
 	bool EqualNodes(Node* other);
 
 	/**
-	 * @brief Destroy the Node object
+	 * @brief Default destructor
 	 * 
 	 */
 	~Node();

@@ -1,5 +1,6 @@
 #include "CameraPawn.h"
 #include "Constants.h"
+#include "building.h"
 #include "EconomyManager.h"
 #include "BuildingGraphics.h"
 
@@ -45,17 +46,20 @@ void ACameraPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
+	
 	GetCameraPanDirection();
 	PC->GetViewportSize(screenSizeX, screenSizeY);
+	
+
 }
 
 // Called to bind functionality to input
 void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 	//LeftCLick
-	InputComponent->BindAction("LeftClick", IE_Pressed, this, &ACameraPawn::OnClickRayCast);
+	InputComponent->BindAction("LeftClick", IE_Pressed, this, &ACameraPawn::PlaceBuilding);
 
 	//MouseWheel input
 	InputComponent->BindAxis("MouseWheelAxis", this, &ACameraPawn::CameraZoom);
@@ -131,7 +135,9 @@ void ACameraPawn::CameraRotationRight(float axisValue)
 	}
 }
 
-void ACameraPawn::OnClickRayCast()
+//BADSMELL: The function OnClickRayCast is far too big.
+//			The function starts at line 137 and ends at 299
+FHitResult ACameraPawn::RayCast()
 {
 	//Declared empty Vectors. These will be filled up with converted screenspace values
 	FVector mousePos, mouseDir;
@@ -155,14 +161,26 @@ void ACameraPawn::OnClickRayCast()
 	GetWorld()->LineTraceSingleByChannel(hit, startLocation, endLocation, ECC_Visibility, CollParams);
 	//UKismetSystemLibrary::DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, 5.f, .3f);
 
+	return hit;
+}
+
+AActor* ACameraPawn::SelectingActor(FHitResult h)
+{
+	return h.Actor != NULL ? h.GetActor() : NULL;
+}
+
+void ACameraPawn::PlaceBuilding()
+{
+	FHitResult h = RayCast();
 	//Get's actor for selecting purposes
-	SelectedActor = SelectingActor(hit);
+	SelectedActor = SelectingActor(h);
 
 	if (SelectedActor != NULL)
 	{
-		//TODO: Change destroy to something else. This was for testing purpose.
-		//SelectedActor->Destroy();
 
+		//BADSMELL: The Get all actor's function is used several times.
+		//		    Might want to make this a singleton that is globaly
+		//			accessable.
 		//Ecoman
 		TArray<AActor*> FoundActors;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(),
@@ -184,8 +202,7 @@ void ACameraPawn::OnClickRayCast()
 				FVector location = hex->GetActorLocation();
 				FRotator rotation = hex->GetActorRotation();
 
-				FActorSpawnParameters SpawnInfo;
-				SpawnInfo.Owner = hex;
+				
 
 				// Find DataHolder
 				TArray<AActor*> FActors;
@@ -195,69 +212,32 @@ void ACameraPawn::OnClickRayCast()
 				ADataHolder* holder = Cast<ADataHolder>(FActors[0]);
 				OptionSections buildingMesh = holder->GetBuilding();
 
+
+				UBuilding* building;
 				// Create building
 				switch (buildingMesh)
 				{
 					case MineralsBuilding:
 					{
-						UMineralBuilding* building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
-						building->SetBuildingCost();
-						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
-						if(building->GetCost() > EconomyManager->resources._minerals) {
-							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-						}
-						else {
-							EconomyManager->resources._minerals -= building->GetCost();
-							hex->Building = building;
-							building->SetMesh(buildingMesh);
-							building->BuildingConstruction(location, rotation, SpawnInfo);
-							EconomyManager->ActiveBuildings.Add(building);
-							building->x = &EconomyManager->MineralBuildings;
-							hex->buildingBuilt = true;
-							EconomyManager->resources._energy -= 20;
-						}
+						building = NewObject<UMineralBuilding>(UMineralBuilding::StaticClass());
+						building = SelectedBuilding(building, buildingMesh, EconomyManager, hex, -20);
+						building->totalOfBuildingType = &EconomyManager->MineralBuildings; // specific
 						break;
 					}
-					case EnergyBuilding:
-					{
-						UEnergyBuilding* building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass());
-						building->SetBuildingCost();
-						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
-						if(building->GetCost() > EconomyManager->resources._minerals) {
-							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-						}
-						else {
-							EconomyManager->resources._minerals -= building->GetCost();
-							hex->Building = building;
-							building->SetMesh(buildingMesh);
-							building->BuildingConstruction(location, rotation, SpawnInfo);
-							EconomyManager->ActiveBuildings.Add(building);
-							building->x = &EconomyManager->EnergyBuildings;
-							hex->buildingBuilt = true;
-                            EconomyManager->resources._energy += 50;
-						}
-						break;
-					}
-					case MoneyBuilding:
-					{
-						UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
-						building->SetBuildingCost();
-						//TODO: This can use refactoring, very bad implementation but quick and dirty :)
-						if(building->GetCost() > EconomyManager->resources._minerals) {
-							GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
-						}
-						else {
-							EconomyManager->resources._minerals -= building->GetCost();
-							hex->Building = building;
-							building->SetMesh(buildingMesh);
-							building->BuildingConstruction(location, rotation, SpawnInfo);
-							EconomyManager->ActiveBuildings.Add(building);
-							building->x = &EconomyManager->Houses;
-							hex->buildingBuilt = true;
-                            EconomyManager->resources._energy -= 10;
-						}
-						break;
-					}
+				case EnergyBuilding:
+				{
+					building = NewObject<UEnergyBuilding>(UEnergyBuilding::StaticClass());
+					building = SelectedBuilding(building, buildingMesh, EconomyManager, hex, 50);
+					building->totalOfBuildingType /*what is this!?*/ = &EconomyManager->EnergyBuildings; // specific
+					break;
+				}
+				case MoneyBuilding:
+				{
+					building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
+					building = SelectedBuilding(building, buildingMesh, EconomyManager, hex, 50);
+					building->totalOfBuildingType = &EconomyManager->Houses;
+					break;
+				}
 				}
 			}
 		}
@@ -290,12 +270,34 @@ void ACameraPawn::OnClickRayCast()
 			}
 		}
 	}
+
+	
+
 }
 
-AActor* ACameraPawn::SelectingActor(FHitResult h)
+UBuilding* ACameraPawn::SelectedBuilding(UBuilding* building, OptionSections mesh, AEconomyManager* ecoMan, AHexActor* hex, int engCost)
 {
-	return h.Actor != NULL ? h.GetActor() : NULL;
+	building->SetBuildingCost();
+	if (building->GetCost() > ecoMan->resources._minerals) {
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("You lack the required resource to build this building."));
+	}
+	else {
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.Owner = hex;
+
+		ecoMan->resources._minerals -= building->GetCost();
+		hex->Building = building;
+		building->SetMesh(mesh);
+		building->BuildingConstruction(hex->GetActorLocation(), hex->GetActorRotation(), SpawnInfo);
+		ecoMan->ActiveBuildings.Add(building);
+		hex->buildingBuilt = true;
+		ecoMan->resources._energy += engCost;
+	}
+	return building;
 }
+
+
+
 
 
 

@@ -9,7 +9,7 @@ ActiveState::~ActiveState()
 
 void ActiveState::BuildingInactive(UBuilding* building)
 {
-	building->SetState(dynamic_cast<BuildingState*>(new InactiveState()));
+	building->SetState(new InactiveState());
 }
 
 void ActiveState::BuildingDestruction(UBuilding* building)

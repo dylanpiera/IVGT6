@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "EconomyManager.h"
 #include "GameTickManager.h"
+#include "Constants.h"
 #include "ToolbarActor.generated.h"
 
 UCLASS()

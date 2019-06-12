@@ -45,46 +45,43 @@ void ABuildingGraphics::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	BuildingAnimation();
-
 }
 
 void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStaticMeshComponent* meshComp)
 {
+	//BADSMELL: Code Duplication! I can "Extract Method" here.
 	switch (buildingIndex)
 	{
 		case MineralsBuilding: 
 		{
 			// Loads the proper mesh for the specific building type.
-			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
-			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(45, 45, 0));
-			break;
+			SetGraphic(TEXT("StaticMesh'/Game/Meshes/mineral.mineral'"));
 		}
 		case EnergyBuilding:
 		{
 			// Loads the proper mesh for the specific building type.
-			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
-			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(45, 45, 0));
-			break;
+			SetGraphic(TEXT("StaticMesh'/Game/Meshes/energy.energy'"));
 		}
 		case MoneyBuilding:
 		{
 			// Loads the proper mesh for the specific building type.
-			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));
-			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(45, 45, 0));
+			SetGraphic(TEXT("StaticMesh'/Game/Meshes/house.house'"));
 			break;
 		}
 		case FoodBuilding:
 		{
 			// Loads the proper mesh for the specific building type.
-			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/Cone.Cone'")); 
-			meshComp->SetStaticMesh(BuildingMesh);
-			meshComp->SetWorldScale3D(FVector(2, 2, 2));
-			break;
+			SetGraphic(TEXT("StaticMesh'/Game/Meshes/Cone.Cone'"));
 		}
 	}
+}
+
+// filePath should be TEXT("filepathstring")
+void ABuildingGraphics::SetGraphic(const TCHAR* filePath)
+{
+	BuildingMesh = LoadObject<UStaticMesh>(nullptr, filePath);
+	Mesh->SetStaticMesh(BuildingMesh);
+	Mesh->SetWorldScale3D(FVector(45, 45, 0));
 }
 
 void ABuildingGraphics::BuildingAnimation()

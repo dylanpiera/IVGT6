@@ -77,6 +77,9 @@ enum class EWorkState
 class PGTPROJECT_API Constants
 {
 public:
+
+
+
 	Constants();
 	~Constants();
 };

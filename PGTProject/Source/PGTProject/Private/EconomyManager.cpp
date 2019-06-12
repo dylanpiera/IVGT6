@@ -2,6 +2,7 @@
 #include "MineralBuilding.h"
 #include "EnergyBuilding.h"
 #include "HouseBuilding.h"
+#include "Building.h"
 #include "FoodBuilding.h"
 #include <ActiveState.h>
 

@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "HexActor.h"
 #include "Engine/World.h"
+#include "EconomyManager.h"
 #include "MineralBuilding.h"
 #include "EnergyBuilding.h"
 #include "HouseBuilding.h"
@@ -117,17 +118,24 @@ public:
 
 	/**
 	 * @brief Creates a Line Trace from screen to world
-	 * Also handles all the raycasting.
+	 *	and returns a FHitResult containing
+	 *	hit information for further use
 	 * 
+	 * @returns AActor
 	 */
-	void OnClickRayCast();
+	FHitResult RayCast();
 
+
+	void PlaceBuilding();
+
+	UBuilding* SelectedBuilding(UBuilding* building, OptionSections mesh, AEconomyManager* ecoMan, AHexActor* hex, int engCost);
+	
 	/**
-	 * @brief Simple function to get the selected Actor from raycast hit
-	 * 
-	 * @param h 
-	 * @return AActor* 
-	 */
+	* @brief Simple function to get the selected Actor from raycast hit
+	*
+	* @param h
+	* @return AActor*
+	*/
 	AActor* SelectingActor(FHitResult h);
 	
 };

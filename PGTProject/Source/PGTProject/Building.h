@@ -75,7 +75,7 @@ public:
 	 */
 	virtual ~UBuilding();
 
-	int32* x;
+	int32* totalOfBuildingType;
 
 	/**
 	 * @brief Set building financial cost

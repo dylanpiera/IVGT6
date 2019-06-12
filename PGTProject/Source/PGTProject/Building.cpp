@@ -46,7 +46,7 @@ UBuilding::~UBuilding()
 void UBuilding::WhenConstructionFinishes()
 {
 	//Sets the total number of buildingType + 1 in the EconomyManager
-	*x = *x + 1;
+	*totalOfBuildingType = *totalOfBuildingType + 1;
 
 	
 	// Change construction state

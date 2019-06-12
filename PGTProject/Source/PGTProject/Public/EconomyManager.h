@@ -1,9 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Building.h"
 #include "GameFramework/Actor.h"
+
+#include "Resources.h"
 #include "EconomyManager.generated.h"
+
+class UBuilding;
 
 UCLASS()
 /**

@@ -67,4 +67,6 @@ public:
 	 * 
 	 */
 	void BuildingAnimation();
+
+	void SetGraphic(const TCHAR* kFilePath);
 };

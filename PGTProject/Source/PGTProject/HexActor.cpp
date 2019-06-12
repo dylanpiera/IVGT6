@@ -14,10 +14,15 @@ AHexActor::AHexActor()
 {
 	hex = new Hex(1, 1);
 	// Create hexagon tile graphics
+	UE_LOG(LogTemp, Warning, TEXT("Creating HEX GRAPHICS"));
 	Graphic.CreateHexGraphics(this);
+	UE_LOG(LogTemp, Warning, TEXT("meshsize %f %f %f radius %f"),Graphic.MeshSize.X, Graphic.MeshSize.Y, Graphic.MeshSize.Z, Graphic.Radius);
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Define tile cost
+	_aStarCost = 10;
 }
 
 #pragma region Location Calculations
@@ -46,6 +51,17 @@ int AHexActor::hex_distance(const Hex a, const Hex b) const
 	return hex_length(a - b);
 }
 
+/**
+ * \brief
+ * Compare if two hexes are equal.
+ * \param a Hex 1
+ * \param b Hex 2
+ * \return
+ */
+bool AHexActor::hex_equal(const Hex a, const Hex b) const
+{
+	return (a == b) ? true : false;
+}
 
 /**
  * \brief 
@@ -107,11 +123,34 @@ std::vector<FIntPoint> AHexActor::polygon_corners(const LayoutHelper::Layout lay
 FVector AHexActor::GetScreenSpaceLocation(Hex *hex)
 {
 	// Calculate space position for hex based on mesh size
+	UE_LOG(LogTemp, Warning, TEXT("meshsize x = %f y = %f"), Graphic.MeshSize.X, Graphic.MeshSize.Y);
 	float k = (Graphic.MeshSize.X - Graphic.MeshSize.Y / FMath::Sqrt(12));
+	UE_LOG(LogTemp, Warning, TEXT("k = %f"), k);
 
 	// Gap between tiles for better visualization
 	float gapX = hex->q * 3;
 	float gapY = hex->r * 3;
+	UE_LOG(LogTemp, Warning, TEXT("gap x = %f y = %f"), gapX, gapY);
+
+	return FVector(
+		hex->q * k + gapX,
+		hex->r * Graphic.MeshSize.Y + hex->q * (Graphic.MeshSize.Y / 2.f) + gapY,
+		0
+	);
+}
+
+FVector AHexActor::GetScreenSpaceLocationForHex(Hex *hex)
+{
+	UE_LOG(LogTemp, Warning, TEXT("NON STATIC"));
+	// Calculate space position for hex based on mesh size
+	UE_LOG(LogTemp, Warning, TEXT("meshsize x = %d y = %d"), Graphic.MeshSize.X, Graphic.MeshSize.Y);
+	float k = (Graphic.MeshSize.X - Graphic.MeshSize.Y / FMath::Sqrt(12));
+	UE_LOG(LogTemp, Warning, TEXT("k = %d"), k);
+
+	// Gap between tiles for better visualization
+	float gapX = hex->q * 3;
+	float gapY = hex->r * 3;
+	UE_LOG(LogTemp, Warning, TEXT("gap x = %d y = %d"), gapX, gapY);
 
 	return FVector(
 		hex->q * k + gapX,

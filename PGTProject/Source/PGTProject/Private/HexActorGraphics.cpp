@@ -18,10 +18,13 @@ HexActorGraphics::HexActorGraphics()
 	_mineralResourceMaterials.insert(pair<EMineralResources, UMaterial*>(EMineralResources::NightGems,
 		LoadObject<UMaterial>(nullptr, TEXT("Material'/Game/Assets/Resources/NightGemsMat.NightGemsMat'"))));
 
+	UE_LOG(LogTemp, Warning, TEXT("CONSTRUCTOR HEX GRAPHICS"));
 	if (_hexTileMesh) {
+		UE_LOG(LogTemp, Warning, TEXT("Defining HEX GRAPHICS meshsize radius"));
 		// Define hex tile mesh size and radius
 		MeshSize = _hexTileMesh->GetBounds().GetBox().GetSize();
 		Radius = _hexTileMesh->GetBounds().SphereRadius;
+		UE_LOG(LogTemp, Warning, TEXT("meshsize %f %f %f radius %f"), MeshSize.X, MeshSize.Y, MeshSize.Z, Radius);
 	}
 
 }

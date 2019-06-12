@@ -2,7 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "Node.h"
-#include "TestingTile.h" // (UPDATE) Test class
+#include "HexActor.h"
+#include <list>
 
 using namespace std;
 /**
@@ -14,23 +15,10 @@ class Pathfinding
 private:
 	vector<Node*> Open;										// Open nodes list
 	vector<Node*> Closed;									// Closed nodes list
-	vector<TestingTile*> Path;								// Nodes path list
-
-	/**
-	 * @brief Cost from the end node
-	 * 
-	 * @param node 
-	 * @param targetNode 
-	 * @return int 
-	 */
-	int HCost(Node* node, Node* targetNode);
-	/**
-	 * @brief Total cost for a node
-	 * 
-	 * @param node 
-	 * @return int 
-	 */
-	int FCost(Node* node);
+	list<AHexActor*> Path;								// Nodes path list
+	
+	int HCost(Node* node, Node* targetNode);				// Cost from the end node
+	int FCost(Node* node);									// Total cost for a node
 
 	/**
 	 * @brief Check if nodeA is equal to nodeB
@@ -79,22 +67,9 @@ private:
 
 public:
 	
-	/**
-	 * @brief A* Pathfinding: receives a start tile and an end tile and returns the path
-	 * 
-	 * @param startNode 
-	 * @param targetNode 
-	 * @return vector<TestingTile*> 
-	 */
-	vector<TestingTile*> AStarPathfinding(TestingTile* startNode, TestingTile* targetNode);
-	/**
-	 * @brief Construct a new Pathfinding object
-	 * 
-	 */
-	Pathfinding();
-	/**
-	 * @brief Destroy the Pathfinding object
-	 * 
-	 */
-	~Pathfinding();
+	// A* Pathfinding: receives a start tile and an end tile and returns the path
+	list<AHexActor*> AStarPathfinding(AHexActor* startNode, AHexActor* targetNode);
+
+	Pathfinding();		// Constructor
+	~Pathfinding();		// Destructor
 };

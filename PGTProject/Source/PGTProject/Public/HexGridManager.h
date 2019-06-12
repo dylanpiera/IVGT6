@@ -1,10 +1,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include <vector>
 #include "HexActor.h"
 #include "GameFramework/Actor.h"
 #include "HexGridManager.generated.h"
 
+using namespace std;
 
 UCLASS()
 /**
@@ -66,4 +68,10 @@ public:
 	 */
 	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
 
+	// List of references for all tiles in the grid
+	vector<AHexActor*> _tiles;
+	// Get AHexActor reference based on tile column/row
+	AHexActor* GetHexActorFromHex(AHexActor::Hex myHex);
+
+	//void TestPathfind();
 };

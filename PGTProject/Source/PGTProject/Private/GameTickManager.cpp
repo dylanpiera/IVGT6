@@ -69,10 +69,12 @@ void AGameTickManager::GameTick()
 {
 	GameTickHour();
 	
-	UE_LOG(LogTemp, Warning, TEXT("Energy: %d"), EconomyManager->resources._energy);
-	UE_LOG(LogTemp, Warning, TEXT("Minerals: %d"), EconomyManager->resources._minerals);
-	UE_LOG(LogTemp, Warning, TEXT("Money: %d"), EconomyManager->resources._money);
-	UE_LOG(LogTemp, Warning, TEXT("Population: %d"), EconomyManager->resources._population);
+	if (Debug) {
+		UE_LOG(LogTemp, Warning, TEXT("Energy: %d"), EconomyManager->resources._energy);
+		UE_LOG(LogTemp, Warning, TEXT("Minerals: %d"), EconomyManager->resources._minerals);
+		UE_LOG(LogTemp, Warning, TEXT("Money: %d"), EconomyManager->resources._money);
+		UE_LOG(LogTemp, Warning, TEXT("Population: %d"), EconomyManager->resources._population);
+	}
 }
 
 //managed the hourly tick
@@ -85,6 +87,8 @@ void AGameTickManager::GameTickHour()
 		hourNow++;
 
 		//Starts the timer
+		UE_LOG(LogTemp, Display, TEXT("%d"), hourNow);
+		UE_LOG(LogTemp, Display, TEXT("%d"), currentHour);
 		GetWorldTimerManager().SetTimer(GameTickTimerHandle, this, &AGameTickManager::ResetTimer, 0.005f, false);
 		currentHour = hourNow;
 

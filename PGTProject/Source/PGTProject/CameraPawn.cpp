@@ -238,7 +238,7 @@ void ACameraPawn::OnClickRayCast()
 						}
 						break;
 					}
-					case MoneyBuilding:
+					case HouseBuilding:
 					{
 						UHouseBuilding* building = NewObject<UHouseBuilding>(UHouseBuilding::StaticClass());
 						building->SetBuildingCost();

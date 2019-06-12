@@ -182,7 +182,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								[
 									SNew(SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
-									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MoneyBuilding)
+									.OnClicked(this, &ToolbarGraphics::SelectBuilding, HouseBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
 								]
 							]
@@ -192,7 +192,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								SNew(STextBlock)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
-								.Text(this, &ToolbarGraphics::GetOptionTitle, MoneyBuilding)
+								.Text(this, &ToolbarGraphics::GetOptionTitle, HouseBuilding)
 								.ColorAndOpacity(FLinearColor::White)
 							]
 							+ SVerticalBox::Slot()

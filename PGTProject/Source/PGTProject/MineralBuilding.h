@@ -33,7 +33,6 @@ public:
 	 * 
 	 */
 	void SetBuildingCost() override {
-		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 50"));
 		_buildingCost = 50;
 	}
 };

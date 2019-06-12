@@ -20,7 +20,7 @@ public:
 	 * @param resource 
 	 */
 	void BuildingFunction(Resources& resource) override {
-		if (resource._food == 0)
+		if (resource._food <= 0)
 		{
 			Disdain++;
 		}
@@ -35,7 +35,6 @@ public:
 	 * 
 	 */
 	void SetBuildingCost() override {
-		UE_LOG(LogTemp, Warning, TEXT("Setting cost to 25"));
 		_buildingCost = 25;
 	}
 };

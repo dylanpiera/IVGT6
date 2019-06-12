@@ -1,12 +1,8 @@
 #include "SSlateWidget.h"
 #include "SlateOptMacros.h"
 #include "Engine.h"
-#include "EconomyManager.h"
 #include "ToolbarActor.h"
 #include "GameTickManager.h"
-#include "Engine/World.h"
-#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
-#include "Runtime/Engine/Classes/Components/ActorComponent.h"
 #include <string>
 
 //Already given upon creation, needs to surround Construct
@@ -24,9 +20,6 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 	_ownerHUD = InArgs._OwnerHUDArg;
 	_toolbarActor = InArgs._ToolbarActorArg;
 
-	//temporary values
-	int gain = 0;
-
 	//Location reference to project files
 	const FString energyImagePath = FPaths::ProjectContentDir() / TEXT("Assets/energyIcon.png");
 	const FString mineralsImagePath = FPaths::ProjectContentDir() / TEXT("Assets/mineralIcon.png");
@@ -41,7 +34,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 		//Creates new overlay in slot, each + SOverlay adds a new slot that contains a component
 		SNew(SOverlay)
 		/*
-		 * \brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
+		 * @brief Shows resources in top left corner in the order of Name-currentValue-valueGain/Loss
 		 * 
 		 */
 

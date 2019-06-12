@@ -86,7 +86,7 @@ private:
 		{ RoughRoad, "Rough Road" },
 		{ EnergyBuilding, "Power Plancat"},
 		{ MineralsBuilding, "Minerawr Extractor"},
-		{ MoneyBuilding, "Intergalatic House"},
+		{ HouseBuilding, "Intergalatic House"},
 		{ FoodBuilding, "Cake is a Lie"}
 	};
 

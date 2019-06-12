@@ -36,7 +36,7 @@ enum OptionSections
 	RoughRoad,
 	EnergyBuilding,
 	MineralsBuilding,
-	MoneyBuilding,
+	HouseBuilding,
 	FoodBuilding,
 	DestroyTool
 };

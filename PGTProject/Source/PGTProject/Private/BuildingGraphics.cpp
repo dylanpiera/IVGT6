@@ -68,7 +68,7 @@ void ABuildingGraphics::SetBuildingGraphics(OptionSections buildingIndex, UStati
 			meshComp->SetWorldScale3D(FVector(45, 45, 0));
 			break;
 		}
-		case MoneyBuilding:
+		case HouseBuilding:
 		{
 			// Loads the proper mesh for the specific building type.
 			BuildingMesh = LoadObject<UStaticMesh>(nullptr, TEXT("StaticMesh'/Game/Meshes/house.house'"));

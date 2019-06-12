@@ -57,7 +57,7 @@ void AHexGridManager::LogGrid() const
 	{
 		for (int row = 0; row < mapsize; row++)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("q: %d - r: %d - s: %d"), hexes[column][row]->q, hexes[column][row]->r, hexes[column][row]->s);
+			UE_LOG(LogTemp, Display, TEXT("q: %d - r: %d - s: %d"), hexes[column][row]->q, hexes[column][row]->r, hexes[column][row]->s);
 		}
 	}
 }

@@ -2,7 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "Node.h"
-#include "TestingTile.h" // (UPDATE) Test class
+#include "HexActor.h"
+#include <list>
 
 using namespace std;
 /**
@@ -27,7 +28,7 @@ private:
 
 	vector<Node*> Open;	
 	vector<Node*> Closed;
-	vector<TestingTile*> Path;
+	list<AHexActor*> Path;
 
 	/**
 	 * @brief Calculate cost to go from the current node to the "end" node 
@@ -99,7 +100,7 @@ public:
 	 * @param targetNode 
 	 * @return vector<TestingTile*> 
 	 */
-	vector<TestingTile*> AStarPathfinding(TestingTile* startNode, TestingTile* targetNode);
+	list<AHexActor*> AStarPathfinding(AHexActor* startNode, AHexActor* targetNode);
 	/**
 	 * @brief Default constructor
 	 * 

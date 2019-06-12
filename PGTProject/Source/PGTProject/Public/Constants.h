@@ -62,6 +62,14 @@ enum class EMineralResources
 	NightGems
 };
 
+// Builders Availability Status
+enum class EWorkState
+{
+	Free,
+	Walking,
+	Working
+};
+
 /**
  * @brief Simple collection of constants
  * 

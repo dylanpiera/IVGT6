@@ -3,8 +3,9 @@
 #include "CoreMinimal.h"
 #include <iostream>
 #include <vector>
-#include "TestingTile.h"
 
+class AHexGridManager;
+class AHexActor;
 using std::vector;
 /**
  * @struct Node
@@ -14,11 +15,12 @@ using std::vector;
 struct Node
 {
 public:
-	/**
-	 * @var HexTile
-	 * @brief Reference to an existing tile in the game.
-	*/
-	TestingTile* HexTile;
+
+	// HexGrid Manager reference
+	AHexGridManager* _hexGridManager;
+
+	// Reference for hextile
+	AHexActor* HexTile;
 
 	/**
 	 * @var FCost
@@ -45,13 +47,13 @@ public:
 	 * 
 	 * @param hexTile 
 	 */
-	Node(TestingTile* hexTile);
+	Node(AHexActor* hexTile);
 	/**
 	 * @brief Get all neighbors from current hextile
 	 * 
 	 * @return vector<TestingTile> 
 	 */
-	vector<TestingTile> GetNeighbors();
+	vector<AHexActor*> GetNeighbors();
 	/**
 	 * @brief Get cost of visiting the node
 	 * 
@@ -65,6 +67,10 @@ public:
 	 * @return int 
 	 */
 	int GetDistanceFrom(Node* target);
+	// Get reference to HexGridManager
+	void FindHexGridManager();
+	// Check if two nodes reference the same HexActor
+	bool EqualNodes(Node* other);
 
 	/**
 	 * @brief Default destructor

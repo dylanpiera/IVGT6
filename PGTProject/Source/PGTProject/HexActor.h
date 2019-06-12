@@ -108,7 +108,7 @@ public:
 		 * @return _Hex<Number, W> 
 		 */
 		_Hex<Number, W> operator + (const _Hex<Number, W> other) const {
-			return { other.q + q, other.r + r, s + s };
+			return { other.q + q, other.r + r, other.s + s };
 		}
 
 		/**
@@ -156,6 +156,7 @@ public:
 	 * @return int The distance between two hexes
 	 */
 	int hex_distance(Hex a, Hex b) const;
+	bool hex_equal(const Hex a, const Hex b) const;
 
 	/**
 	 * @brief The 6 cardinal directions of a Hex Grid
@@ -221,8 +222,11 @@ public:
 	 * @return FVector 
 	 */
 	static FVector GetScreenSpaceLocation(Hex *hex);
+	FVector GetScreenSpaceLocationForHex(Hex *hex);
 	Hex* hex;
 
 	UBuilding* Building;
 	bool buildingBuilt = false;
+
+	int _aStarCost;
 };

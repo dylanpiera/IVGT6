@@ -67,6 +67,7 @@ void SSlateWidget::Construct(const FArguments& InArgs)
 			+ SHorizontalBox::Slot()
 			.AutoWidth()
 			[
+				//Retrieve ToolbarActor argument and use that to apply it here to the UI
 				SAssignNew(_energyValue, STextBlock)
 				.Margin(FMargin(10.0f, 0.0f, 20.0f, 0.0f))
 				.ColorAndOpacity(FLinearColor::White)

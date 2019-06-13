@@ -11,7 +11,12 @@ AToolbarActor::AToolbarActor()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-// Called when the game starts or when spawned
+/* Called when the game starts or when spawned
+ * 
+ *  @detail This class is used to pass the resource values 
+ *  from the economy manager to the slate widget as 
+ *  directly passing/calling it didn't work well with compound widgets. 
+ */
 void AToolbarActor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -35,6 +40,7 @@ void AToolbarActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+//Creating functions for each resource to be called in the widget
 int AToolbarActor::getEnergy()
 {
 	return _econ_manager->resources._energy;

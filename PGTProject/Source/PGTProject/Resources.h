@@ -2,7 +2,8 @@
 
 /**
  * @brief Stores the resources the game requires
- * 
+ * @detail The EconomyManager will take these variables
+ * to forward them to the SlateWidget so they can be displayed on the UI
  */
 struct Resources
 {

@@ -4,6 +4,7 @@
 
 #include "LayoutHelper.h"
 #include "IntPoint.h"
+#include "Constants.h"
 #include <vector>
 #include "MineralBuilding.h"
 #include "GameFramework/Actor.h"
@@ -108,6 +109,8 @@ public:
 	static FractionalHex pixel_to_hex(const LayoutHelper::Layout layout, const FIntPoint p);
 	FIntPoint hex_corner_offset(const LayoutHelper::Layout layout, const int corner) const;
 	std::vector<FIntPoint> polygon_corners(const LayoutHelper::Layout layout, const Hex h) const;
+
+	void SetGraphics(EMineralResources resource);
 
 	static FVector GetScreenSpaceLocation(Hex *hex);
 	Hex* hex;

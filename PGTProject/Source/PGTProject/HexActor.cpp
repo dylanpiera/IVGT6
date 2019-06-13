@@ -11,12 +11,18 @@
 // Graphics controller
 HexActorGraphics Graphic;
 
+void AHexActor::SetGraphics(EMineralResources resource) {
+	//HexActorGraphics Graphica;
+	//Graphica.AddResourceGraphics(resource, this);
+}
+
 // Sets default values
 AHexActor::AHexActor()
 {
 	hex = new Hex(1, 1);
 	// Create hexagon tile graphics
 	Graphic.CreateHexGraphics(this);
+	Graphic.AddResourceGraphics(EMineralResources::Catanium, this);
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

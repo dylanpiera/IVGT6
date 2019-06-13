@@ -26,10 +26,6 @@ void AHexGridManager::BeginPlay()
 	Super::BeginPlay();
 
 	//Testing
-	GenerateGrid();
-	LogGrid();
-
-
 	GenerateWithLudo();
 	FString data = ReadFile("out.txt");
 
@@ -44,10 +40,40 @@ void AHexGridManager::BeginPlay()
         result.push_back( substr );
     }
 
+	int x = 0;
+	int y = 0;
+	int z = 0;
 	for(std::string o : result) {
 		FString temp(o.c_str());
 		UE_LOG(LogTemp, Warning, TEXT("Loaded from Ludo: %s"), *temp);
+		if(o=="ResourceG" || o=="ResourceP") {
+			HasResource[x][y] = true;
+		}
+		else {
+			HasResource[x][y] = false;
+		}
+		
+		if(x == 32) {
+			if(y == 32)
+			{
+				if(z == 32) {
+					break;
+				}
+				x = ++z;
+				y = 0;
+			}
+			else 
+			{
+				y++;
+			}
+		}
+		else {
+			x++;
+		}
 	}
+
+	GenerateGrid();
+	LogGrid();
 }
 
 // Called every frame
@@ -69,6 +95,9 @@ void AHexGridManager::GenerateGrid()
 			FActorSpawnParameters SpawnInfo;
 			AHexActor* a = GetWorld()->SpawnActor<AHexActor>(AHexActor::GetScreenSpaceLocation(hex), Rotation, SpawnInfo);
 			a->hex = hex; // this is for getting grid position
+			if(HasResource[column][row]) {
+				a->SetGraphics(EMineralResources::Catanium);
+			}
 		}
 	}
 }
@@ -84,7 +113,7 @@ FString AHexGridManager::ReadFile(FString filename)
 {
     //Read file ini [project]/Content/Data/
     //you can change with other location
-    FString directory = FPaths::Combine(FPaths::ProjectContentDir(), "Data");
+    FString directory = "D:\\Dev\\test\\IVGT6\\PGTProject\\Data";//FPaths::Combine(FPaths::ProjectContentDir(), "Data");
     FString result;
     IPlatformFile& file = FPlatformFileManager::Get().GetPlatformFile();
     if (file.CreateDirectory(*directory)) {

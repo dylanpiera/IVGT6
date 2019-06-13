@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "HexActor.h"
+#include "Constants.h"
 #include "GameFramework/Actor.h"
 #include "HexGridManager.generated.h"
 
@@ -34,6 +35,7 @@ public:
 	const int mapsize = 32;
 
 	AHexActor::Hex *hexes[32][32];
+	bool HasResource[32][32];
 
 	AHexActor::Hex* GetHexAt(int x, int y) { return hexes[x][y]; }
 

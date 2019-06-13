@@ -2,6 +2,10 @@
 
 #include "HexGridManager.h"
 #include "HexActor.h"
+#include <vector>
+#include <string>
+#include <sstream>
+#include <iostream>
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include <EngineGlobals.h>
@@ -29,14 +33,21 @@ void AHexGridManager::BeginPlay()
 	GenerateWithLudo();
 	FString data = ReadFile("out.txt");
 
-    std::vector<string> result;
+    std::vector<std::string> result;
 
-    while( data.good() )
+	std::stringstream ss(std::string(TCHAR_TO_UTF8(*data)));
+
+    while(ss.good())
     {
-        string substr;
-        getline( ss, substr, ',' );
+        std::string substr;
+        std::getline( ss, substr, ',' );
         result.push_back( substr );
     }
+
+	for(std::string o : result) {
+		FString temp(o.c_str());
+		UE_LOG(LogTemp, Warning, TEXT("Loaded from Ludo: %s"), *temp);
+	}
 }
 
 // Called every frame
@@ -73,7 +84,7 @@ FString AHexGridManager::ReadFile(FString filename)
 {
     //Read file ini [project]/Content/Data/
     //you can change with other location
-    FString directory = FPaths::Combine(FPaths::GameContentDir(), "Data");
+    FString directory = FPaths::Combine(FPaths::ProjectContentDir(), "Data");
     FString result;
     IPlatformFile& file = FPlatformFileManager::Get().GetPlatformFile();
     if (file.CreateDirectory(*directory)) {

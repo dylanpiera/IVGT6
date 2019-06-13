@@ -11,6 +11,7 @@ int mineralBldEnergyCost = 50;
 int houseEnergyCost = 10;
 int foodBldEnergyCost = 5;
 
+//Sets initial values
 void AEconomyManager::InitResources()
 {
 	resources._energy = 0;
@@ -20,6 +21,7 @@ void AEconomyManager::InitResources()
 	resources._food = 0;
 }
 
+//For each resource
 void AEconomyManager::BeginPlay()
 {
 	for (int i = 0; i < EnergyBuildings; i++)

@@ -158,6 +158,8 @@ private:
 	 */
 	FReply SelectBuilding(OptionSections Index);
 
+	FReply HoverBuilding(OptionSections Index);
+
 	/**
 	 * @brief Define UI style settings. Ex: images, icons, fonts. 
 	 * 

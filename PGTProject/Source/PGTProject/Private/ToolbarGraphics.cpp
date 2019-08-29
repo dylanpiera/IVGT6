@@ -144,6 +144,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 									SNew(SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MineralsBuilding)
+									//.OnHovered(this, &ToolbarGraphics::HoverBuilding, MineralsBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
 								]
 							]
@@ -334,6 +335,11 @@ FReply ToolbarGraphics::SelectBuilding(OptionSections Index)
 {	
 	_dataHolder->SetBuilding(Index);
 	
+	return FReply::Handled();
+}
+
+FReply ToolbarGraphics::HoverBuilding(OptionSections Index)
+{
 	return FReply::Handled();
 }
 

@@ -141,7 +141,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 								+ SOverlay::Slot()
 								[
-									SNew(SButton)
+									SAssignNew(MineralButton, SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MineralsBuilding)
 									//.OnHovered(this, &ToolbarGraphics::HoverBuilding, MineralsBuilding)
@@ -313,6 +313,14 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 			]
 		]
 	];
+	MineralButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Hello")))
+		.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
 }
 //Already given upon creation, needs to go immediately after Construct
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

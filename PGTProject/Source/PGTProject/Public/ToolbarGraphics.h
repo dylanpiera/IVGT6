@@ -172,5 +172,7 @@ private:
 	 * @return FReply 
 	 */
 	FReply Destroy() const;
+
+	TSharedPtr<SButton> MineralButton;
 };
 

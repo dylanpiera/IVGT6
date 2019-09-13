@@ -173,6 +173,17 @@ private:
 	 */
 	FReply Destroy() const;
 
+	/**
+	 * @brief Declaring button of the buildings for the tooltips
+	 *
+	 */
+	TSharedPtr<SButton> EnergyButton;
 	TSharedPtr<SButton> MineralButton;
+	TSharedPtr<SButton> HouseButton;
+	TSharedPtr<SButton> FoodButton;
+	TSharedPtr<SButton> RoadButton;
+	TSharedPtr<SButton> RoughRoadButton;
+	TSharedPtr<SButton> BuildingButton;
+	TSharedPtr<SButton> DestroyButton;
 };
 

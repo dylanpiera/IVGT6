@@ -64,7 +64,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 								+ SOverlay::Slot()
 								[
-									SNew(SButton)
+									SAssignNew(RoughRoadButton, SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectRoad, RoughRoad)
 									.DesiredSizeScale(FVector2D(60, 60))
@@ -102,7 +102,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 								+ SOverlay::Slot()
 								[
-									SNew(SButton)
+									SAssignNew(EnergyButton, SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, EnergyBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
@@ -115,15 +115,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, EnergyBuilding)
-								.ColorAndOpacity(FLinearColor::White)
-							]
-							+ SVerticalBox::Slot()
-							.AutoHeight()
-							[
-								SNew(STextBlock)
-								.Font(ArialFont)
-								.Justification(ETextJustify::Center)
-								.Text(FText::FromString("100 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -144,7 +135,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 									SAssignNew(MineralButton, SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, MineralsBuilding)
-									//.OnHovered(this, &ToolbarGraphics::HoverBuilding, MineralsBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
 								]
 							]
@@ -155,15 +145,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, MineralsBuilding)
-								.ColorAndOpacity(FLinearColor::White)
-							]
-							+ SVerticalBox::Slot()
-							.AutoHeight()
-							[
-								SNew(STextBlock)
-								.Font(ArialFont)
-								.Justification(ETextJustify::Center)
-								.Text(FText::FromString("50 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -181,7 +162,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								]
 								+ SOverlay::Slot()
 								[
-									SNew(SButton)
+									SAssignNew(HouseButton, SButton)
 									.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 									.OnClicked(this, &ToolbarGraphics::SelectBuilding, HouseBuilding)
 									.DesiredSizeScale(FVector2D(60, 60))
@@ -194,15 +175,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, HouseBuilding)
-								.ColorAndOpacity(FLinearColor::White)
-							]
-							+ SVerticalBox::Slot()
-							.AutoHeight()
-							[
-								SNew(STextBlock)
-								.Font(ArialFont)
-								.Justification(ETextJustify::Center)
-								.Text(FText::FromString("25 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -220,7 +192,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 							]
 							+ SOverlay::Slot()
 							[
-								SNew(SButton)
+								SAssignNew(FoodButton, SButton)
 								.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0.1f))
 								.OnClicked(this, &ToolbarGraphics::SelectBuilding, FoodBuilding)
 								.DesiredSizeScale(FVector2D(60, 60))
@@ -233,15 +205,6 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 								.Font(ArialFont)
 								.Justification(ETextJustify::Center)
 								.Text(this, &ToolbarGraphics::GetOptionTitle, FoodBuilding)
-								.ColorAndOpacity(FLinearColor::White)
-							]
-							+ SVerticalBox::Slot()
-							.AutoHeight()
-							[
-								SNew(STextBlock)
-								.Font(ArialFont)
-								.Justification(ETextJustify::Center)
-								.Text(FText::FromString("20 Minerals"))
 								.ColorAndOpacity(FLinearColor::White)
 							]
 						]
@@ -273,7 +236,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					]
 					+ SOverlay::Slot()
 					[
-						SNew(SButton)
+						SAssignNew(RoadButton, SButton)
 						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
 						.OnClicked(this, &ToolbarGraphics::ChangeSection, RoadsSection)
 					]
@@ -289,7 +252,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					]
 					+ SOverlay::Slot()
 					[
-						SNew(SButton)
+						SAssignNew(BuildingButton, SButton)
 						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
 						.OnClicked(this, &ToolbarGraphics::ChangeSection, BuildingsSection)
 					]
@@ -305,7 +268,7 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 					]
 					+ SOverlay::Slot()
 					[
-						SNew(SButton)
+						SAssignNew(DestroyButton, SButton)
 						.ButtonColorAndOpacity(FLinearColor(1, 1, 1, 0))
 						.OnClicked(this, &ToolbarGraphics::SelectBuilding, DestroyTool)
 					]
@@ -313,12 +276,80 @@ void ToolbarGraphics::Construct(const FArguments& InArgs)
 			]
 		]
 	];
+
+	/**
+	 * @brief Text for each tooltip of the buttons
+	 *
+	 */
+	RoadButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Roads")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	RoughRoadButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Standard Road")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	EnergyButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("-100 Minerals + 50 Energy / Contant: -25 Credits")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
 	MineralButton->SetToolTip(
 		SNew(SToolTip)
 		[
 			SNew(STextBlock)
-			.Text(FText::FromString(TEXT("Hello")))
-		.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+			.Text(FText::FromString(TEXT("-50 Minerals -20 Energy / Constant: -10 Credits + 5 Minerals")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	HouseButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("-25 Minerals -10 Energy +10 Population")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	FoodButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("-20 Minerals -5 Energy / Constant: +15 Food")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	BuildingButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Buildings")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
+		]
+	);
+
+	DestroyButton->SetToolTip(
+		SNew(SToolTip)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Destroy")))
+			.Font(FSlateFontInfo(FPaths::ProjectContentDir() / TEXT("Assets/Raleway-Bold.ttf"), 42))
 		]
 	);
 }

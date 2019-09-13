@@ -14,7 +14,7 @@ int foodBldEnergyCost = 5;
 //Sets initial values
 void AEconomyManager::InitResources()
 {
-	resources._energy = 600;
+	resources._energy = 400;
 	resources._population = 11;
 	resources._minerals = 150;
 	resources._money = 200;
